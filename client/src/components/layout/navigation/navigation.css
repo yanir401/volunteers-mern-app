@@ -1,0 +1,22 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #fff;
+  opacity: 0.9;
+  width: 100%;
+  height: 8rem;
+  padding: 0 3rem;
+  position: fixed;
+
+  font-size: 2.25rem;
+}
+
+.navbar .links {
+  display: flex;
+}
+
+.navbar .links a {
+  padding: 1rem 2rem;
+  margin: 0 0.5rem;
+}

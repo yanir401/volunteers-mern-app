@@ -23,6 +23,7 @@ export const getUserEvents = async (req, res) => {
 
 export const createEvent = async (req, res) => {
   const eventBody = req.body;
+  console.log("bodyData", req.body);
   const author = req.body.author;
 
   try {

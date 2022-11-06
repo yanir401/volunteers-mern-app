@@ -1,0 +1,123 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+:root {
+  font-size: 10px;
+}
+
+/* Resets */
+
+h1 {
+  font-size: 5rem;
+}
+h2 {
+  font-size: 4rem;
+}
+h3 {
+  font-size: 3rem;
+}
+h4 {
+  font-size: 2rem;
+}
+h5 {
+  font-size: 1.5rem;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: #fff;
+}
+
+/* Global styling */
+
+.center {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.marginTb-1 {
+  margin: 1rem 0;
+}
+.marginTb-2 {
+  margin: 2rem 0;
+}
+
+.marginTb-3 {
+  margin: 3rem 0;
+}
+.marginTb-4 {
+  margin: 4rem 0;
+}
+
+.paddingTb-1 {
+  padding: 1rem 0;
+}
+.paddingTb-2 {
+  padding: 2rem 0;
+}
+
+.paddingTb-3 {
+  padding: 3rem 0;
+}
+
+.paddingTb-4 {
+  padding: 4rem 0;
+}
+
+.flex {
+  display: flex;
+}
+.flex-row-space-bt {
+  justify-content: space-between;
+}
+
+.flex-row-align-center {
+  align-items: center;
+}
+
+.gap-1 {
+  gap: 1rem;
+}
+.gap-2 {
+  gap: 2rem;
+}
+.gap-3 {
+  gap: 3rem;
+}
+.gap-4 {
+  gap: 4rem;
+}
+
+.font-12 {
+  font-size: 1.2rem;
+}
+.font-14 {
+  font-size: 1.4rem;
+}
+.font-16 {
+  font-size: 1.6rem;
+}
+.font-18 {
+  font-size: 1.8rem;
+}
+.font-20 {
+  font-size: 2rem;
+}
+
+.line-height {
+  line-height: 1.7;
+}

@@ -29,7 +29,7 @@ const eventSchema = mongoose.Schema(
     },
     time: {
       type: String,
-      required: true,
+      // required: true,
     },
 
     // volunteers: [{ type: mongoose.Schema.Types.ObjectId }],
