@@ -4,9 +4,7 @@ const Modal = (props) => {
   if (!props.show) return null;
   return (
     <div className="modal-overlay">
-      <div className="modal-background">
-        <div className="modal-container">{props.children}</div>
-      </div>
+      <div className="modal-container">{props.children}</div>
     </div>
   );
 };
