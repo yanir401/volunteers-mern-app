@@ -1,11 +1,15 @@
 import React from "react";
+import { useState } from "react";
 import EventList from "../../events/EventList";
 import Button from "../../formElements/buttons/Button";
+import Input from "../../formElements/input/Input";
 import Header from "../../layout/header/Header";
 import Newsletter from "../../layout/newsletter/Newsletter";
 import Section from "../../layout/section/Section";
+import Modal from "../../UIElements/modal/Modal";
 import "./home.css";
 const Home = () => {
+  const [openModal, setOpenModal] = useState(false);
   const exploreEvents = (
     <div className="explore-events">
       <div className="volunteer-statics">
@@ -25,7 +29,9 @@ const Home = () => {
         <div className="explore-events-img"></div>
       </div>
       <div className="join-us-container center">
-        <Button type="secondary">Join Us</Button>
+        <Button type="secondary" onClick={() => setOpenModal(true)}>
+          Join Us
+        </Button>
       </div>
     </div>
   );
@@ -44,6 +50,17 @@ const Home = () => {
       </div>
       {exploreEvents}
       <Newsletter />
+      <Modal show={openModal}>
+        {/* <Input type="text" placeholder="Full name" /> */}
+        <h2 style={{ color: "#fff" }}>Login</h2>
+        <Input type="text" placeholder="Email address" />
+        <Input type="text" placeholder="Password" />
+        <Button type="secondary">Sign In</Button>
+        <Button type="secondary">Continue as Guest</Button>
+        <p className="font-16" style={{ color: "#fff" }}>
+          Switch to Sign up
+        </p>
+      </Modal>
     </>
   );
 };
