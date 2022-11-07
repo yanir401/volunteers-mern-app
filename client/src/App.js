@@ -2,12 +2,13 @@ import { useEffect, useState } from "react";
 import { useFetch } from "./hooks/useFetch";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import axios from "axios";
-import Home from "./components/pages/Home";
 import Events from "./components/pages/Events";
 import CreateEvent from "./components/pages/CreateEvent";
 import Profile from "./components/pages/Profile";
 import Auth from "./components/pages/Auth";
 import Header from "./components/layout/header/Header";
+import Home from "./components/pages/home/Home";
+import Footer from "./components/layout/footer/Footer";
 
 function App() {
   const [dog, setDog] = useState("");
@@ -25,6 +26,7 @@ function App() {
           <Route path="/auth" element={<Auth />} />
         </Route>
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }

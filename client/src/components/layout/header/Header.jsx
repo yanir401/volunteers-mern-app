@@ -1,19 +1,23 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
+import Button from "../../formElements/buttons/Button";
 import Navigation from "../navigation/Navigation";
 import "./header.css";
 const Header = () => {
+  const { pathname } = useLocation();
+  console.log(pathname);
   return (
     <>
       <Navigation />
-      <div className="hero-image">
-        <div className="hero-text">
-          <h2>Volunteer For A Good Cause</h2>
+      {pathname === "/" && (
+        <div className="hero-image">
+          <div className="hero-text">
+            <h2>Volunteer For A Good Cause</h2>
 
-          <button>Start volunteering</button>
-          <button>Explore Volunteers</button>
+            <Button type="primary">Start volunteering</Button>
+          </div>
         </div>
-      </div>
+      )}
       <Outlet />
     </>
   );

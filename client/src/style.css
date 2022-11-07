@@ -9,6 +9,12 @@
   font-size: 10px;
 }
 
+body,
+html {
+  background: #f2ebe9;
+  color: #1b2430;
+}
+
 /* Resets */
 
 h1 {
@@ -38,6 +44,10 @@ a {
 
 /* Global styling */
 
+.container {
+  max-width: 1680px;
+  margin: 0 auto;
+}
 .center {
   text-align: center;
   display: flex;
@@ -45,8 +55,30 @@ a {
   align-items: center;
 }
 
+.full-width {
+  width: 100%;
+}
+.full-width-high {
+  width: 100%;
+  height: 100%;
+}
+
 .text-left {
   text-align: left;
+}
+
+.marginT-1 {
+  margin-top: 1rem;
+}
+.marginT-2 {
+  margin-top: 2rem;
+}
+
+.marginT-3 {
+  margin-top: 3rem;
+}
+.marginT-4 {
+  margin-top: 4rem;
 }
 
 .marginTb-1 {
@@ -77,6 +109,27 @@ a {
 .paddingTb-4 {
   padding: 4rem 0;
 }
+.paddingTb-5 {
+  padding: 5rem 0;
+}
+.paddingTb-6 {
+  padding: 6rem 0;
+}
+
+.paddingLR-1 {
+  padding: 0 1rem;
+}
+.paddingLR-2 {
+  padding: 0 2rem;
+}
+
+.paddingLR-3 {
+  padding: 0 3rem;
+}
+
+.paddingLR-4 {
+  padding: 0 4rem;
+}
 
 .flex {
   display: flex;
@@ -89,6 +142,10 @@ a {
   align-items: center;
 }
 
+.grid-col-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
 .gap-1 {
   gap: 1rem;
 }
@@ -120,4 +177,8 @@ a {
 
 .line-height {
   line-height: 1.7;
+}
+
+.icon {
+  font-size: 5rem;
 }
