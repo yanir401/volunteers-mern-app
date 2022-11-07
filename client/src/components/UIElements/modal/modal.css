@@ -12,18 +12,20 @@
 }
 
 .modal-background {
-  background: #1b2430;
+  /* background: #1b2430;
   width: 50%;
   min-width: 30rem;
   max-width: 50rem;
   height: 50%;
   border-radius: 6px;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
 }
 .modal-container {
-  min-width: 40rem;
-  max-width: 50rem;
-  height: 50%;
+  width: 90%;
+  background: #1b2430;
+  border-radius: 6px;
+  padding: 2rem 3rem;
+  max-width: 42rem;
   position: fixed;
   top: 50%;
   left: 50%;
