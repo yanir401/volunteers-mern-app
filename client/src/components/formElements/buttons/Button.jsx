@@ -9,7 +9,11 @@ const BUTTON_TYPE = {
 
 const Button = (props) => {
   const { children, onClick, type, className } = props;
-  return <button className={`button ${BUTTON_TYPE[type]}`}>{children}</button>;
+  return (
+    <button className={`button ${BUTTON_TYPE[type]}`} onClick={onClick}>
+      {children}
+    </button>
+  );
 };
 
 export default Button;

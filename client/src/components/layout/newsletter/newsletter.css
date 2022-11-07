@@ -1,6 +1,6 @@
 .newsletter-container {
   /* background: #f2ebe9; */
-  height: 25rem;
+  height: 28rem;
 }
 .newsletter-container > div {
   flex-direction: column;
