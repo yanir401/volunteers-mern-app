@@ -1,0 +1,17 @@
+.newsletter-container {
+  /* background: #f2ebe9; */
+  height: 25rem;
+}
+.newsletter-container > div {
+  flex-direction: column;
+  max-width: 100rem;
+  margin: 0 auto;
+  height: 100%;
+}
+
+.newsletter-container form {
+  width: 100%;
+}
+.newsletter-input {
+  width: 50%;
+}

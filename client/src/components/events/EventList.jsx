@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useFetch } from "../../hooks/useFetch";
 import EventItem from "./EventItem";
 
-const EventList = () => {
+const EventList = ({ limit = -1 }) => {
   const [error, loading, sendRequest] = useFetch();
 
   const [events, setEvents] = useState([]);
@@ -18,9 +18,9 @@ const EventList = () => {
     fetchData();
   }, [sendRequest]);
 
-  const renderEvents = events.map((event) => (
-    <EventItem key={event._id} event={event} />
-  ));
+  const renderEvents = events
+    .slice(0, limit)
+    .map((event) => <EventItem key={event._id} event={event} />);
 
   return <>{renderEvents}</>;
 };

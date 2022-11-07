@@ -1,0 +1,13 @@
+.footer-container {
+  height: 25rem;
+  background: #1b2430;
+  color: #fff;
+  width: 100%;
+  font-size: 2rem;
+}
+.footer-container img {
+  overflow: hidden;
+  object-fit: cover;
+  height: 25rem;
+  width: 100%;
+}
