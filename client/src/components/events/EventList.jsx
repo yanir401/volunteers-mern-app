@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useFetch } from "../../hooks/useFetch";
+import { fetchEvents } from "../../store/actions/eventsAction";
 import EventItem from "./EventItem";
 
 const EventList = ({ limit = -1 }) => {
+  const dispatch = useDispatch();
   const [error, loading, sendRequest] = useFetch();
 
   const [events, setEvents] = useState([]);
@@ -12,7 +15,7 @@ const EventList = ({ limit = -1 }) => {
       try {
         const res = await sendRequest("http://localhost:5000/events", "GET");
         setEvents(res.data);
-        console.log(res.data);
+        dispatch(fetchEvents(res.data));
       } catch (err) {}
     };
     fetchData();

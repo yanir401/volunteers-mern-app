@@ -31,7 +31,9 @@ const eventSchema = mongoose.Schema(
       type: String,
       // required: true,
     },
-
+    image: {
+      type: String,
+    },
     // volunteers: [{ type: mongoose.Schema.Types.ObjectId }],
 
     // author: { type: mongoose.Schema.Types.ObjectId, ref: "users" },
