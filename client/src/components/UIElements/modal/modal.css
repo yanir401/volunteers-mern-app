@@ -37,7 +37,7 @@
   justify-content: center;
   text-align: center;
   gap: 2rem;
-  animation: modalAnimation 0.3s ease-in;
+  animation: modalAnimation 0.3s all;
 }
 
 @keyframes modalAnimation {
