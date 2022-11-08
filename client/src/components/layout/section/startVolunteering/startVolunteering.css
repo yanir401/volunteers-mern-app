@@ -1,14 +1,3 @@
-.upcoming-events {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.5)),
-    url("../../../assets//images/upcoming-background.jpg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-
-  /* background-attachment: fixed; */
-  height: 45rem;
-}
-
 .explore-events {
   width: 100%;
   margin: 0 auto;
@@ -30,7 +19,7 @@
 
 .explore-events-img {
   background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)),
-    url("../../../assets//images/explore-events.jpg");
+    url("../../../../assets/images/explore-events.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

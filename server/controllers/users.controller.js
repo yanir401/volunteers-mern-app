@@ -33,18 +33,20 @@ export const signUp = async (req, res, next) => {
 //login , POST , /users/login
 export const login = async (req, res) => {
   const { email, password } = req.body;
-
+  console.log(req.body);
   let existingUser;
   try {
     existingUser = await User.findOne({ email });
     if (!existingUser) throw new Error("Something went wrong");
+    console.log("object");
 
     if (!(existingUser.password === password))
       throw new Error("Something went wrong");
 
     res.send(existingUser);
   } catch (error) {
-    res.send(error.message);
+    res.json(error.message);
+    // res.json("error");
   }
 };
 

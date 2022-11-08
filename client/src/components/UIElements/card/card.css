@@ -1,11 +1,26 @@
 .card {
+  cursor: pointer;
   margin: 2rem auto;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   border-radius: 6px;
-  padding: 2rem;
+  /* padding: 2rem; */
+  padding-bottom: 2rem;
+  height: 100%;
+  max-height: 30rem;
   /* overflow: hidden; */
   background: white;
   text-align: center;
-  min-width: 80%;
-  height: auto;
+  width: 90%;
+  max-width: 42rem;
+
+  /* height: auto; */
+  overflow: hidden;
+}
+
+.card img {
+  transition: all 0.4s;
+  margin-bottom: 1rem;
+}
+.card:hover img {
+  transform: scale(1.05);
 }

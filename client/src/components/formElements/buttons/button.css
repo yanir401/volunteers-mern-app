@@ -20,23 +20,28 @@
 }
 
 .primary {
-  background: #ea9a96;
-  color: #1b2430;
+  background: var(--primary-color);
+  color: var(--primary-text-color);
 }
 .primary:hover {
-  background: #1b2430;
-  color: #ea9a96;
+  background: var(--primary-dark-color);
 }
 
 .secondary {
-  background: #f8b24f;
-  color: #1b2430;
+  background: var(--secondary-color);
 }
 
 .secondary:hover {
-  background: #1b2430;
-  color: #f8b24f;
+  background: var(--secondary-dark-color);
 }
 
 .outline {
+  background: transparent;
+  color: var(--secondary-color);
+  border: 3px solid var(--secondary-color);
+}
+.outline:hover {
+  background: var(--secondary-color);
+  color: var(--primary-text-color);
+  border-color: var(--secondary-color);
 }

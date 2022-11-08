@@ -11,8 +11,6 @@ import Home from "./components/pages/home/Home";
 import Footer from "./components/layout/footer/Footer";
 
 function App() {
-  const [dog, setDog] = useState("");
-
   return (
     <BrowserRouter>
       <Routes>

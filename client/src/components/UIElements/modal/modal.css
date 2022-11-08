@@ -20,12 +20,14 @@
   border-radius: 6px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
 }
-.modal-container {
+.modal-overlay .modal-container {
+  animation-name: modalAnimation;
+  transition: all 2s;
   width: 90%;
+  max-width: 42rem;
   background: #1b2430;
   border-radius: 6px;
   padding: 2rem 3rem;
-  max-width: 42rem;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -35,4 +37,20 @@
   justify-content: center;
   text-align: center;
   gap: 2rem;
+  animation: modalAnimation 0.3s ease-in;
+}
+
+@keyframes modalAnimation {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 0%);
+  }
+  to {
+    opacity: 1;
+  }
+}
+.modal-overlay .modal-container .close-modal {
+  cursor: pointer;
+  color: var(--white);
+  align-self: flex-end;
 }
