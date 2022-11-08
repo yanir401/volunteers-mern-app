@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../../../store/actions/userActions";
 import Button from "../../formElements/buttons/Button";
 import Input from "../../formElements/input/Input";
@@ -12,6 +12,7 @@ import Modal from "../../UIElements/modal/Modal";
 
 const Home = () => {
   const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.user);
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [openModal, setOpenModal] = useState(false);
@@ -20,9 +21,13 @@ const Home = () => {
     dispatch(setUser({ email, password }));
   };
 
+  useEffect(() => {
+    if (user) setOpenModal(false);
+  }, [user]);
+
   const modalContent = (
     <>
-      <h2 style={{ color: "#fff" }}>Login</h2>
+      <h2 style={{ color: "#fff" }}>Sign in</h2>
       <Input
         type="text"
         placeholder="Email address"
