@@ -13,50 +13,13 @@ import Modal from "../../UIElements/modal/Modal";
 const Home = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-  const [openModal, setOpenModal] = useState(false);
-
-  const handleOnClick = () => {
-    dispatch(setUser({ email, password }));
-  };
-
-  useEffect(() => {
-    if (user) setOpenModal(false);
-  }, [user]);
-
-  const modalContent = (
-    <>
-      <h2 style={{ color: "#fff" }}>Sign in</h2>
-      <Input
-        type="text"
-        placeholder="Email address"
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <Input
-        type="text"
-        placeholder="Password"
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <Button type="secondary" onClick={handleOnClick}>
-        Sign In
-      </Button>
-      <Button type="outline">Continue as Guest</Button>
-      <p className="font-16" style={{ color: "#fff" }}>
-        Switch to Sign up
-      </p>
-    </>
-  );
 
   return (
     <>
       <LeadSection />
       <UpComingEvents />
-      <StartVolunteering setOpenModal={setOpenModal} />
+      <StartVolunteering />
       <Newsletter />
-      <Modal show={openModal} closeModal={setOpenModal}>
-        {modalContent}
-      </Modal>
     </>
   );
 };
