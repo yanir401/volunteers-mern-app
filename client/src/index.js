@@ -5,11 +5,17 @@ import "./style.css";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
+import { BrowserRouter } from "react-router-dom";
+import { ModalProvider } from "./context/modalContext";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <BrowserRouter>
+        <ModalProvider>
+          <App />
+        </ModalProvider>
+      </BrowserRouter>
     </Provider>
   </React.StrictMode>
 );

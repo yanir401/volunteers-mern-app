@@ -1,15 +1,31 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "./navigation.css";
+import { openModal } from "../../../store/actions/modalActions";
+import { ModalContext } from "../../../context/modalContext";
+import SignUp from "../../authentication/signUp/SignUp";
 const Navigation = () => {
+  const { openModal } = useContext(ModalContext);
+  const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
 
   // const authenticate = () => {
   //   return user ? <Link to="profile">Profile</Link> : <a> Sign in</a>;
   // };
+
+  const handleOnClick = () => {
+    // dispatch(openModal());
+    openModal(<SignUp />);
+  };
   const authenticate = (
-    <>{user ? <Link to="profile">Profile</Link> : <a> Sign in</a>}</>
+    <>
+      {user ? (
+        <Link to="profile">Profile</Link>
+      ) : (
+        <a onClick={handleOnClick}> Sign up</a>
+      )}
+    </>
   );
 
   return (

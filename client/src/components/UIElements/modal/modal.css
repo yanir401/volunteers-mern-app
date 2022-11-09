@@ -9,6 +9,7 @@
   transform: translate(-50%, -50%);
   align-items: center;
   justify-content: center;
+  z-index: 1;
 }
 
 .modal-background {
@@ -22,13 +23,15 @@
 }
 .modal-overlay .modal-container {
   animation-name: modalAnimation;
-  transition: all 2s;
+  animation-duration: 0.3s;
+  /* transition: all 2s; */
   width: 90%;
   max-width: 42rem;
   background: #1b2430;
   border-radius: 6px;
   padding: 2rem 3rem;
-  position: fixed;
+  /* position: fixed; */
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -37,7 +40,6 @@
   justify-content: center;
   text-align: center;
   gap: 2rem;
-  animation: modalAnimation 0.3s all;
 }
 
 @keyframes modalAnimation {

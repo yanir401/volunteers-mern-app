@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useFetch } from "./hooks/useFetch";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import axios from "axios";
 import Events from "./components/pages/Events";
 import CreateEvent from "./components/pages/CreateEvent";
@@ -9,10 +9,22 @@ import Auth from "./components/pages/Auth";
 import Header from "./components/layout/header/Header";
 import Home from "./components/pages/home/Home";
 import Footer from "./components/layout/footer/Footer";
+import { useDispatch } from "react-redux";
+import { closeModal } from "./store/actions/modalActions";
+import { ModalContext } from "./context/modalContext";
 
 function App() {
+  const dispatch = useDispatch();
+  const { closeModal } = useContext(ModalContext);
+
+  const location = useLocation();
+
+  useEffect(() => {
+    closeModal();
+  }, [location.pathname]);
+
   return (
-    <BrowserRouter>
+    <>
       <Routes>
         <Route path="/" element={<Header />}>
           <Route index element={<Home />} />
@@ -25,7 +37,7 @@ function App() {
         </Route>
       </Routes>
       <Footer />
-    </BrowserRouter>
+    </>
   );
 }
 
