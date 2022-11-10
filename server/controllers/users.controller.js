@@ -71,3 +71,5 @@ export const getUserProfile = async (req, res) => {
     res.send(error.message);
   }
 };
+
+//GET ALL USERS

@@ -1,6 +1,7 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useDispatch } from "react-redux";
+import { ModalContext } from "../../../context/modalContext";
 import { useFetch } from "../../../hooks/useFetch";
 import { setUser } from "../../../store/actions/userActions";
 import { isFormValid } from "../../../utils/formValidation/formValidation";
@@ -15,13 +16,16 @@ const defaultFormFields = {
 
 const SignUp = () => {
   const dispatch = useDispatch((state) => state.user);
+  const { openModal, closeModalTimeOut } = useContext(ModalContext);
   const [formFields, setFormFields] = useState(defaultFormFields);
-  const [error, loading, sendRequest] = useFetch();
+  const [error, loading, sendRequest, clearError] = useFetch();
   const [errors, setErrors] = useState({});
 
   const { name, email, password } = formFields;
 
   const handleOnChange = ({ target }) => {
+    setErrors({});
+    clearError();
     const { name, value } = target;
     setFormFields({ ...formFields, [name]: value });
   };
@@ -47,9 +51,8 @@ const SignUp = () => {
     //   .then((response) => response.json())
     //   .then((user) => console.log(user))
     //   .catch((error) => console.log(error.message.message));
-    console.log(errors);
-    console.log(isErrors);
-    if (Object.keys(isErrors).length == 0)
+
+    if (Object.keys(isErrors).length === 0)
       try {
         const response = await sendRequest(url, "POST", {
           name,
@@ -57,6 +60,18 @@ const SignUp = () => {
           password,
         });
         console.log(response);
+        dispatch(setUser({ email, password, name }));
+
+        // dispatch(openModal());
+        openModal(
+          <h3
+            style={{ color: "white", textAlign: "center", padding: "2rem" }}
+            className="center"
+          >
+            Welcome {name}!
+          </h3>
+        );
+        closeModalTimeOut(2000);
       } catch (err) {
         console.log(err);
         console.log(error);

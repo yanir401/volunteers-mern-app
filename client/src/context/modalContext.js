@@ -5,6 +5,7 @@ export const ModalContext = createContext({
   showModal: false,
   openModal: () => {},
   closeModal: () => {},
+  closeModalTimeOut: () => {},
 });
 
 export const ModalProvider = ({ children }) => {
@@ -17,9 +18,15 @@ export const ModalProvider = ({ children }) => {
   };
   const closeModal = () => setShowModal(false);
 
+  const closeModalTimeOut = (timeout) => {
+    setTimeout(() => {
+      setShowModal(false);
+    }, timeout);
+  };
+
   const modal = (content) => <Modal>{content}</Modal>;
 
-  const value = { showModal, openModal, closeModal };
+  const value = { showModal, openModal, closeModal, closeModalTimeOut };
 
   return (
     <ModalContext.Provider value={value}>

@@ -31,9 +31,11 @@ export const useFetch = () => {
     []
   );
 
+  const clearError = () => setError("");
+
   useEffect(() => {
     return () => controller && controller.abort();
   }, [controller]);
 
-  return [error, loading, sendRequest];
+  return [error, loading, sendRequest, clearError];
 };
