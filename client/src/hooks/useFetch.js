@@ -22,8 +22,8 @@ export const useFetch = () => {
 
         return res;
       } catch (err) {
-        setError(err.message);
-        console.log(err.message);
+        console.log(err);
+        setError(err.response.data.message);
       } finally {
         setLoading(false);
       }
@@ -31,9 +31,11 @@ export const useFetch = () => {
     []
   );
 
+  const clearError = () => setError("");
+
   useEffect(() => {
     return () => controller && controller.abort();
   }, [controller]);
 
-  return [error, loading, sendRequest];
+  return [error, loading, sendRequest, clearError];
 };

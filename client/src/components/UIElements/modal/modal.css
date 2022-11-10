@@ -35,11 +35,11 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   justify-content: center;
   text-align: center;
-  gap: 2rem;
+  gap: 2rem; */
 }
 
 @keyframes modalAnimation {
