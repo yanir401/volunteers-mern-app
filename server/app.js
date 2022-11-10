@@ -27,6 +27,6 @@ app.use(cors());
 // });
 app.use("/users", usersRouter);
 app.use("/events", eventsRouter);
-
 app.use(errorHandler);
+
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));

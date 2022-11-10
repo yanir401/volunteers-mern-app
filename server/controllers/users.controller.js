@@ -3,6 +3,7 @@ import { User } from "../model/user/user.model.js";
 
 //sign up , POST , /users/signup
 export const signUp = async (req, res, next) => {
+  console.log("object");
   console.log(req.body);
   const { name, email, password } = req.body;
 
@@ -12,21 +13,29 @@ export const signUp = async (req, res, next) => {
 
   try {
     existingUser = await User.findOne({ email });
-
+    console.log(existingUser);
     if (existingUser) {
+      console.log("sssssss");
+      res.status(400);
       const err = new Error("User already exists");
       return next(err);
     }
   } catch (error) {
     res.send(error.message);
   }
-
+  console.log("here");
   try {
-    const user = User(req.body);
-    await user.save();
+    const user = new User(req.body);
+    console.log(user, "ssa");
+    const isUserSaved = await user.save();
+    console.log("hi");
+    console.log();
+    console.log({ isUserSaved });
     res.send({ user });
   } catch (error) {
-    res.send(error);
+    // console.log(object);
+    // res.status(400).send(error);
+    res.status(403).send(error);
   }
 };
 
