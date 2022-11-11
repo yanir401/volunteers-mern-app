@@ -13,6 +13,7 @@ import { useDispatch } from "react-redux";
 import { closeModal } from "./store/actions/modalActions";
 import { ModalContext } from "./context/modalContext";
 import { fetchEvents } from "./store/actions/eventsAction";
+import SubscriptionEvents from "./components/pages/SubscriptionEvents";
 
 function App() {
   const dispatch = useDispatch();
@@ -47,7 +48,7 @@ function App() {
           <Route path="/events" element={<Events />} />
           <Route path="/new-event" element={<CreateEvent />} />
           {/*only if auth*/}
-          <Route path="/events" element={<Events />} />
+          <Route path="/subscriptions" element={<SubscriptionEvents />} />
           <Route path="/my-profile" element={<Profile />} />
           <Route path="/auth" element={<Auth />} />
         </Route>

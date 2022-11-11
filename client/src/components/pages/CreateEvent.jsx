@@ -25,6 +25,7 @@ const CreateEvent = ({ changeForm, text }) => {
     clearError();
     const { name, value } = target;
     setFormFields({ ...formFields, [name]: value });
+    console.log(formFields);
   };
 
   const handleAsGuest = (e) => {

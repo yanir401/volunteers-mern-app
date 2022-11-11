@@ -11,7 +11,6 @@ const Navigation = () => {
   const { openModal } = useContext(ModalContext);
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
-  console.log(user);
 
   // const authenticate = () => {
   //   return user ? <Link to="profile">Profile</Link> : <a> Sign in</a>;
@@ -26,12 +25,17 @@ const Navigation = () => {
       {user ? (
         <>
           <li>
+            <Link to="subscriptions" className="gap-0-5">
+              My Events
+            </Link>
+          </li>
+          <li>
             <Link to="new-event" className="gap-0-5">
               Create Event
             </Link>
           </li>
           <li>
-            <Link to="profile" className="gap-0-5">
+            <Link to="my-profile" className="gap-0-5">
               My Profile
               <CgProfile />
             </Link>
