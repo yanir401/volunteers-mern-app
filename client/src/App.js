@@ -12,6 +12,7 @@ import Footer from "./components/layout/footer/Footer";
 import { useDispatch } from "react-redux";
 import { closeModal } from "./store/actions/modalActions";
 import { ModalContext } from "./context/modalContext";
+import { fetchEvents } from "./store/actions/eventsAction";
 
 function App() {
   const dispatch = useDispatch();
@@ -23,13 +24,28 @@ function App() {
     closeModal();
   }, [location.pathname]);
 
+  const [error, loading, sendRequest] = useFetch();
+
+  const [events, setEvents] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await sendRequest("http://localhost:5000/events", "GET");
+        setEvents(res.data);
+        dispatch(fetchEvents(res.data));
+      } catch (err) {}
+    };
+    fetchData();
+  }, [sendRequest]);
+
   return (
     <>
       <Routes>
         <Route path="/" element={<Header />}>
           <Route index element={<Home />} />
           <Route path="/events" element={<Events />} />
-          <Route path="/new-event" element={<CreateEvent />} />{" "}
+          <Route path="/new-event" element={<CreateEvent />} />
           {/*only if auth*/}
           <Route path="/events" element={<Events />} />
           <Route path="/my-profile" element={<Profile />} />

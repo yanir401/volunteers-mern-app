@@ -1,9 +1,9 @@
 export const isFormValid = (fields) => {
   const errors = {};
-
-  if (!fields.name.trim()) errors.name = "Full name required";
-  else if (fields.name.trim().length < 2)
-    errors.name = "Full name must be at least 2 characters";
+  if ("name" in fields)
+    if (!fields.name.trim()) errors.name = "Full name required";
+    else if (fields.name.trim().length < 2)
+      errors.name = "Full name must be at least 2 characters";
 
   if (!fields.email) errors.email = "Email address required";
   //   else if (/^[a-z0-9.]{1,64}@[a-z0-9.]{1,64}$/i.test(fields.email))

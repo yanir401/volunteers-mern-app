@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { ModalContext } from "../../../context/modalContext";
 import { useFetch } from "../../../hooks/useFetch";
 import { setUser } from "../../../store/actions/userActions";
@@ -9,20 +9,21 @@ import Form from "../../formElements/form/Form";
 import Spinner from "../../UIElements/spinner/Spinner";
 
 const defaultFormFields = {
-  name: "",
   email: "",
   password: "",
 };
 
-const SignUp = ({ changeForm, text }) => {
+const SignIn = ({ changeForm, text }) => {
   const dispatch = useDispatch((state) => state.user);
+  const { user } = useSelector((state) => state.user);
+
   const { openModal, closeModalTimeOut } = useContext(ModalContext);
   const [formFields, setFormFields] = useState(defaultFormFields);
   const [error, loading, sendRequest, clearError] = useFetch();
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
 
-  const { name, email, password } = formFields;
+  const { email, password } = formFields;
 
   const handleOnChange = ({ target }) => {
     setErrors({});
@@ -31,37 +32,39 @@ const SignUp = ({ changeForm, text }) => {
     setFormFields({ ...formFields, [name]: value });
   };
 
-  const handleAsGuest = (e) => {
-    e.preventDefault();
-  };
-
   const handleOnSubmit = async (e) => {
     e.preventDefault();
-    console.log(loading);
 
     const isErrors = isFormValid(formFields);
     setErrors(isErrors);
-    console.log(isErrors);
-    const url = "http://localhost:5000/users/signup";
+    const url = "http://localhost:5000/users/login";
 
     if (Object.keys(isErrors).length === 0)
       try {
-        const { data } = await sendRequest(url, "POST", {
-          name,
+        const response = await sendRequest(url, "POST", {
           email,
           password,
         });
-
-        dispatch(setUser(data));
-        setSubmitted(true);
-        closeModalTimeOut(1500);
+        console.log(response);
+        if (response.statusText === "OK") {
+          console.log(response);
+          dispatch(setUser(response.data));
+          setSubmitted(true);
+          closeModalTimeOut(1500);
+        }
       } catch (err) {
         console.log(err);
         console.log(error);
       }
   };
 
-  const welcomeMsg = <p className="text-center font-20">Welcome {name}!</p>;
+  //   const welcomeMsg = (
+  //     <p className="text-center font-20">Welcome {user.name}.</p>
+  //   );
+
+  const welcomeMsg = () => (
+    <p className="text-center font-20">Welcome Back {user.name}!</p>
+  );
 
   // const welcomeMsg = () =>
   //   openModal(<p style={{ color: "white" }}>Welcome {name}!</p>);
@@ -109,7 +112,7 @@ const SignUp = ({ changeForm, text }) => {
   //   </form>
   // );
 
-  const signUpForm = (
+  const signInForm = (
     <div className="text-center">
       <h2 className="marginTb-1">{text}</h2>
       <Form
@@ -119,13 +122,11 @@ const SignUp = ({ changeForm, text }) => {
         errors={errors}
       >
         <Button type="secondary" onClick={handleOnSubmit}>
-          Sign Up
+          {text}
         </Button>
-        <Button type="outline" onClick={handleAsGuest}>
-          Continue as Guest
-        </Button>
+        {error && <p className="error-msg">{error}</p>}
         <span onClick={changeForm} className="font-16">
-          Switch to Sign In
+          Switch to Sign Up
         </span>
       </Form>
     </div>
@@ -133,7 +134,7 @@ const SignUp = ({ changeForm, text }) => {
 
   if (loading) return <Spinner />;
 
-  return <>{submitted ? welcomeMsg : signUpForm}</>;
+  return <>{submitted ? welcomeMsg() : signInForm}</>;
 };
 
-export default SignUp;
+export default SignIn;

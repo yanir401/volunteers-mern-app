@@ -10,7 +10,7 @@ const Header = () => {
       <Navigation />
       {pathname === "/" && (
         <div className="hero-image">
-          <div className="hero-text">
+          <div className="hero-text gap-1">
             <h2>Volunteer For A Good Cause</h2>
 
             <Link to="events">

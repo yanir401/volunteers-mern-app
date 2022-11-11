@@ -1,7 +1,10 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import EventList from "../../../events/EventList";
 import "./upComingEvents.css";
 const UpComingEvents = () => {
+  const { events } = useSelector((state) => state.events);
+
   return (
     <div className="paddingTb-2 upcoming-events">
       <div className="container">
@@ -9,7 +12,7 @@ const UpComingEvents = () => {
           Upcoming Events
         </h2>
         <div className="grid-col-3 font-16">
-          <EventList limit={3} />
+          <EventList events={events} limit={3} />
         </div>
       </div>
     </div>

@@ -11,6 +11,7 @@
   --secondary-color: #f8b24f;
   --primary-background-color: #1b2430;
   --primary-text-color: #1b2430;
+  --error-text-color: #ff0000;
   --white: #fff;
   --light-color: #f2ebe9;
   --primary-dark-color: #d38b87;
@@ -19,8 +20,8 @@
 
 body,
 html {
-  background: #f2ebe9;
-  color: #1b2430;
+  background: var(--light-color);
+  color: var(--primary-text-color);
 }
 
 /* Resets */
@@ -47,13 +48,17 @@ ul {
 
 a {
   text-decoration: none;
-  color: #fff;
+  color: var(--white);
 }
 
 /* Global styling */
 
 .container {
-  max-width: 1680px;
+  max-width: 168rem;
+  margin: 0 auto;
+}
+.form-container {
+  max-width: 60rem;
   margin: 0 auto;
 }
 .center {
@@ -80,7 +85,7 @@ a {
 }
 
 .error-msg {
-  color: red;
+  color: var(--error-text-color);
   font-size: 1.4rem;
   height: 0rem;
   margin-top: 0.5rem;
@@ -169,6 +174,9 @@ a {
 .grid-col-3 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+}
+.gap-0-5 {
+  gap: 0.5rem;
 }
 .gap-1 {
   gap: 1rem;

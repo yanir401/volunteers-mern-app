@@ -25,9 +25,10 @@
   animation-name: modalAnimation;
   animation-duration: 0.3s;
   /* transition: all 2s; */
+  color: var(--white);
   width: 90%;
   max-width: 42rem;
-  background: #1b2430;
+  background: var(--primary-background-color);
   border-radius: 6px;
   padding: 2rem 3rem;
   /* position: fixed; */
@@ -54,5 +55,5 @@
 .modal-overlay .modal-container .close-modal {
   cursor: pointer;
   color: var(--white);
-  align-self: flex-end;
+  text-align: right;
 }
