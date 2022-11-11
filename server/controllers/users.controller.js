@@ -15,7 +15,6 @@ export const signUp = async (req, res, next) => {
     existingUser = await User.findOne({ email });
     console.log(existingUser);
     if (existingUser) {
-      console.log("sssssss");
       res.status(400);
       const err = new Error("User already exists");
       return next(err);
@@ -23,14 +22,10 @@ export const signUp = async (req, res, next) => {
   } catch (error) {
     res.send(error.message);
   }
-  console.log("here");
   try {
     const user = new User(req.body);
-    console.log(user, "ssa");
     const isUserSaved = await user.save();
-    console.log("hi");
-    console.log();
-    console.log({ isUserSaved });
+
     res.send({ user });
   } catch (error) {
     // console.log(object);
@@ -40,7 +35,7 @@ export const signUp = async (req, res, next) => {
 };
 
 //login , POST , /users/login
-export const login = async (req, res) => {
+export const login = async (req, res, next) => {
   const { email, password } = req.body;
   console.log(req.body);
   let existingUser;
@@ -49,8 +44,11 @@ export const login = async (req, res) => {
     if (!existingUser) throw new Error("Something went wrong");
     console.log("object");
 
-    if (!(existingUser.password === password))
-      throw new Error("Something went wrong");
+    if (!(existingUser.password === password)) {
+      res.status(400);
+      const err = new Error("Something went wrong");
+      return next(err);
+    }
 
     res.send(existingUser);
   } catch (error) {
