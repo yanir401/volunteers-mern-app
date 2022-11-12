@@ -5,8 +5,9 @@ import Input from "../input/Input";
 const Form = ({ state, onChange, onSubmit, errors, children }) => {
   const renderInput = () => {
     return Object.keys(state).map((stateField) => (
-      <div className="flex flex-col">
+      <div className="flex flex-col" key={stateField}>
         <Input
+          value={state[stateField]}
           type={stateField || "text"}
           name={stateField}
           placeholder={stateField}
@@ -20,7 +21,7 @@ const Form = ({ state, onChange, onSubmit, errors, children }) => {
   };
 
   return (
-    <form className="flex flex-col gap-1-5 text-center">
+    <form className="flex flex-col gap-1-5 text-center" onSubmit={onSubmit}>
       {renderInput()}
       {/* <div className="flex flex-col">
         <Input

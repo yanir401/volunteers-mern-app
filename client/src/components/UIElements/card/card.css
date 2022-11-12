@@ -19,7 +19,6 @@
 
 .card img {
   transition: all 0.4s;
-  margin-bottom: 1rem;
 }
 .card:hover img {
   transform: scale(1.05);

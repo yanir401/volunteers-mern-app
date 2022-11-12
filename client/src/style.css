@@ -175,6 +175,10 @@ a {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
 }
+.grid-col-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
 .gap-0-5 {
   gap: 0.5rem;
 }

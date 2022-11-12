@@ -6,9 +6,10 @@ import Form from "../formElements/form/Form";
 const defaultFormFields = {
   title: "",
   description: "",
-  date: null,
-  time: "",
   address: "",
+  // file: "",
+  date: new Date(),
+  time: "",
 };
 
 const CreateEvent = ({ changeForm, text }) => {
@@ -32,6 +33,20 @@ const CreateEvent = ({ changeForm, text }) => {
     e.preventDefault();
   };
 
+  const handleOnSubmit = async (e) => {
+    e.preventDefault();
+
+    const url = "http://localhost:5000/events";
+
+    try {
+      const response = await sendRequest(url, "POST", formFields);
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+      console.log(error);
+    }
+  };
+
   // const welcomeMsg = <p className="text-center font-20">Welcome {name}!</p>;
 
   const eventForm = (
@@ -43,7 +58,7 @@ const CreateEvent = ({ changeForm, text }) => {
       <Form
         state={formFields}
         onChange={handleOnChange}
-        // onSubmit={handleOnSubmit}
+        onSubmit={handleOnSubmit}
         errors={errors}
       >
         <Button type="secondary">Create Event</Button>
