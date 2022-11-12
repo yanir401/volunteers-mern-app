@@ -3,7 +3,7 @@ import validator from "validator";
 
 const eventSchema = mongoose.Schema(
   {
-    eventName: {
+    title: {
       type: String,
       required: true,
       minLength: 2,

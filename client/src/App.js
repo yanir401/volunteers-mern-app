@@ -14,6 +14,7 @@ import { closeModal } from "./store/actions/modalActions";
 import { ModalContext } from "./context/modalContext";
 import { fetchEvents } from "./store/actions/eventsAction";
 import SubscriptionEvents from "./components/pages/SubscriptionEvents";
+import EventPreview from "./components/pages/EventPreview";
 
 function App() {
   const dispatch = useDispatch();
@@ -46,6 +47,7 @@ function App() {
         <Route path="/" element={<Header />}>
           <Route index element={<Home />} />
           <Route path="/events" element={<Events />} />
+          <Route path="event/:eventId" element={<EventPreview />} />
           <Route path="/new-event" element={<CreateEvent />} />
           {/*only if auth*/}
           <Route path="/subscriptions" element={<SubscriptionEvents />} />

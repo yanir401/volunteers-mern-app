@@ -5,6 +5,7 @@ const Input = (props) => {
   const { type, placeholder, value, name, className, onChange } = props;
   return (
     <input
+      value={value}
       type={type}
       placeholder={placeholder}
       name={name}

@@ -4,6 +4,7 @@ import {
   deleteEvent,
   getAllEvents,
   getUserEvents,
+  joinVolunteering,
 } from "../controllers/event.controller.js";
 import { login, signUp } from "../controllers/users.controller.js";
 
@@ -23,4 +24,4 @@ eventsRouter.post("/", createEvent);
 
 eventsRouter.delete("/:id", deleteEvent);
 
-// eventsRouter.patch("/profile", login);
+eventsRouter.post("/join-volunteering", joinVolunteering);
