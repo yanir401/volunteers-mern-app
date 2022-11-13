@@ -2,15 +2,16 @@ import { Router } from "express";
 import {
   getUserProfile,
   login,
-  signUp,
+  signup,
 } from "../controllers/users.controller.js";
+import { auth } from "../middleware/AuthMiddleware.js";
 
 export const usersRouter = Router();
 
-usersRouter.post("/signup", signUp);
+usersRouter.post("/signup", signup);
 
 usersRouter.post("/login", login);
 
-usersRouter.get("/profile", getUserProfile);
+usersRouter.get("/profile", auth, getUserProfile);
 
 usersRouter.patch("/profile", login);

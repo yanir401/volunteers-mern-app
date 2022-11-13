@@ -6,7 +6,7 @@ import {
   getUserEvents,
   joinVolunteering,
 } from "../controllers/event.controller.js";
-import { login, signUp } from "../controllers/users.controller.js";
+import { login } from "../controllers/users.controller.js";
 
 export const eventsRouter = Router();
 

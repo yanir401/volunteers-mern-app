@@ -50,14 +50,14 @@ const userSchema = mongoose.Schema(
     //   },
     //   volunteerLocations: { type: String, required: true },
 
-    //   tokens: [
-    //     {
-    //       token: {
-    //         type: String,
-    //         required: true,
-    //       },
-    //     },
-    //   ],
+    tokens: [
+      {
+        token: {
+          type: String,
+          required: true,
+        },
+      },
+    ],
   },
   { timestamps: true }
 );

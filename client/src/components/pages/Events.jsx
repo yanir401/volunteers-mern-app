@@ -8,6 +8,7 @@ const Events = () => {
   // const dispatch = useDispatch();
 
   const { events } = useSelector((state) => state.events);
+  console.log("🚀 ~ file: Events.jsx ~ line 11 ~ Events ~ events", events);
 
   // const [events, setEvents] = useState([]);
 
