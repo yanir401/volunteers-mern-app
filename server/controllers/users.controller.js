@@ -64,3 +64,7 @@ export const getUserProfile = (req, res) => {
 };
 
 //GET ALL USERS
+
+//POST user events
+
+//Delete user events

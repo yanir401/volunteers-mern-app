@@ -1,9 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useLocation, useParams } from "react-router-dom";
+import { ModalContext } from "../../context/modalContext";
+import { useFetch } from "../../hooks/useFetch";
+import AuthenticationWrapper from "../authentication/AuthenticationWrapper";
 import Button from "../formElements/buttons/Button";
 import Spinner from "../UIElements/spinner/Spinner";
 
 const EventPreview = () => {
+  const { openModal } = useContext(ModalContext);
+  const { user } = useSelector((state) => state.user);
+  const [error, loading, sendRequest, clearError] = useFetch();
   const [event, setEvent] = useState();
   const { state } = useLocation();
 
@@ -12,6 +19,20 @@ const EventPreview = () => {
     else {
     }
   }, []);
+
+  const handleOnClick = async () => {
+    if (!user) openModal(<AuthenticationWrapper />);
+    else {
+      const url = "http://localhost:5000/events/join-volunteering";
+      console.log("Subscribe to volunteering");
+
+      const response = await sendRequest(url, "PATCH", {
+        user,
+        event,
+      });
+      console.log(response);
+    }
+  };
 
   const { eventId } = useParams();
   console.log(state.event);
@@ -59,12 +80,19 @@ const EventPreview = () => {
                 {event.address}
               </p>
               <p>When: {event.time}</p>
-              <p>{event.date}</p>
-              {event?.date && <p>{event.date.toString}</p>}
+              {/* <p>{event.date}</p> */}
+              {event?.date && <p>{event.date}</p>}
+              <p>
+                {" "}
+                <span>Currently volunteering: </span>
+                {event.volunteers.length}
+              </p>
             </div>
           </div>
           <div className="center marginT-1">
-            <Button type="secondary">I want to volunteer</Button>
+            <Button type="secondary" onClick={handleOnClick}>
+              I want to volunteer
+            </Button>
           </div>
         </div>
       ) : (

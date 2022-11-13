@@ -61,18 +61,25 @@ export const deleteEvent = async (req, res, next) => {
 };
 
 export const joinVolunteering = async (req, res, next) => {
-  const { user, event } = red.body;
+  const { user, event } = req.body;
+  console.log(req.body);
 
   if (!mongoose.Types.ObjectId.isValid(event._id)) {
     const error = new Error("Event not found");
     return next(error);
   }
 
+  console.log(event._id, user._id);
   try {
-    const existingEvent = await Event.findById(event._id);
+    const existingEvent = await Event.findByIdAndUpdate(event._id, {
+      $push: { volunteers: user._id },
+    });
+    console.log(existingEvent);
     if (!existingEvent) throw new Error("Event not found");
 
-    res.send({ message: "The event was successfully deleted" });
+    await existingEvent.save();
+
+    res.send(existingEvent);
   } catch (error) {
     console.log(error);
     res.send(error.message);
