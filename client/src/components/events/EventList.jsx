@@ -31,17 +31,6 @@ const EventList = ({ events, limit = events.length }) => {
           .map((event) => <EventItem key={event._id} event={event} />)}
     </>
   );
-  // const renderEvents = (
-  //   <>
-  //     {events ? (
-  //       events
-  //         .slice(0, limit)
-  //         .map((event) => <EventItem key={event._id} event={event} />)
-  //     ) : (
-  //       <Spinner />
-  //     )}
-  //   </>
-  // );
 
   return <>{renderEvents}</>;
 };

@@ -24,4 +24,4 @@ eventsRouter.post("/", createEvent);
 
 eventsRouter.delete("/:id", deleteEvent);
 
-eventsRouter.post("/join-volunteering", joinVolunteering);
+eventsRouter.patch("/join-volunteering", joinVolunteering);

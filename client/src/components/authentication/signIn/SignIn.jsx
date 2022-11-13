@@ -48,7 +48,7 @@ const SignIn = ({ changeForm, text }) => {
         console.log(response);
         if (response.statusText === "OK") {
           console.log(response);
-          dispatch(setUser(response.data));
+          dispatch(setUser(response.data.user));
           setSubmitted(true);
           closeModalTimeOut(1500);
         }
