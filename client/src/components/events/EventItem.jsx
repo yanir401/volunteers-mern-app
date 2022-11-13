@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import Card from "../UIElements/card/Card";
 
 const EventItem = ({ event }) => {
-  console.log(event);
   return (
     <Link to={`/event/${event._id}`} state={{ event }}>
       <Card>

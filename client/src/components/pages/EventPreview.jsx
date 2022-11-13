@@ -24,6 +24,7 @@ const EventPreview = () => {
             maxWidth: "60%",
             margin: "auto",
             paddingTop: "10rem",
+            marginBottom: "2rem",
             height: "70rem",
           }}
           className="flex flex-col gap-3"

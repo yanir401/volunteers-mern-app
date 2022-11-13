@@ -2,72 +2,65 @@ import bcrypt from "bcrypt";
 import { User } from "../model/user/user.model.js";
 
 //sign up , POST , /users/signup
-export const signUp = async (req, res, next) => {
-  console.log("object");
+export const signup = async (req, res, next) => {
   console.log(req.body);
   const { name, email, password } = req.body;
 
-  if (!req.body) throw new Error("Invalid fields");
-
-  let existingUser;
-
   try {
-    existingUser = await User.findOne({ email });
-    console.log(existingUser);
-    if (existingUser) {
+    const userExists = await User.findOne({ email });
+    if (userExists) {
       res.status(400);
       const err = new Error("User already exists");
       return next(err);
     }
-  } catch (error) {
-    res.send(error.message);
-  }
-  try {
+
     const user = new User(req.body);
+    await user.generateToke();
+
     const isUserSaved = await user.save();
 
-    res.send({ user });
+    res.send({ isUserSaved });
+
+    // res.send(userExists);
   } catch (error) {
     // console.log(object);
     // res.status(400).send(error);
-    res.status(403).send(error);
+    res.status(400).send({ error: error.message });
   }
 };
 
 //login , POST , /users/login
 export const login = async (req, res, next) => {
   const { email, password } = req.body;
-  console.log(req.body);
-  let existingUser;
   try {
-    existingUser = await User.findOne({ email });
-    if (!existingUser) throw new Error("Something went wrong");
-    console.log("object");
+    const user = await User.findByCredentials(email, password);
 
-    if (!(existingUser.password === password)) {
+    if (user instanceof Error) {
       res.status(400);
-      const err = new Error("Something went wrong");
+      const err = new Error(user.message);
       return next(err);
     }
 
-    res.send(existingUser);
+    await user.generateToke();
+
+    res.send({ user });
   } catch (error) {
-    res.json(error.message);
-    // res.json("error");
+    res.status(400).send(error);
   }
 };
 
-export const getUserProfile = async (req, res) => {
-  const { uid } = req.body;
-  console.log(uid);
-  try {
-    const userProfile = await User.findById(uid);
-    if (!userProfile) throw new Error("Something went wrong");
+export const getUserProfile = (req, res) => {
+  // const user = req.user.getPublicProfile();
+  res.send(req.user);
 
-    res.send(userProfile);
-  } catch (error) {
-    res.send(error.message);
-  }
+  // try {
+  //   const userProfile = await User.findById(uid);
+  //   if (!userProfile) throw new Error("Something went wrong");
+
+  //   res.send(userProfile);
+  // } catch (error) {
+  //   res.send(error.message);
+  // }
 };
 
 //GET ALL USERS

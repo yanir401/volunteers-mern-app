@@ -5,7 +5,7 @@ import { fetchEvents } from "../../store/actions/eventsAction";
 import Spinner from "../UIElements/spinner/Spinner";
 import EventItem from "./EventItem";
 
-const EventList = ({ events, limit = -1 }) => {
+const EventList = ({ events, limit = events.length }) => {
   const dispatch = useDispatch();
   // const { events } = useSelector((state) => state.events);
   const [error, loading, sendRequest] = useFetch();
