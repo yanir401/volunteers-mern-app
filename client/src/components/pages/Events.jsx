@@ -8,7 +8,6 @@ const Events = () => {
   // const dispatch = useDispatch();
 
   const { events } = useSelector((state) => state.events);
-  console.log("🚀 ~ file: Events.jsx ~ line 11 ~ Events ~ events", events);
 
   // const [events, setEvents] = useState([]);
 
@@ -24,22 +23,13 @@ const Events = () => {
   // }, [sendRequest]);
 
   const eventsComponent = (
-    <div
-      className="center"
-      style={{
-        paddingTop: "10rem",
-        flexDirection: "column",
-      }}
-    >
+    <div className="events-container center flex flex-col">
       <h2>Chose your volunteering</h2>
-      <div style={{ minHeight: "80rem" }}>
+      <div>
         {!events ? (
           <Spinner />
         ) : (
-          <div
-            className="grid-col-3 gap-2 font-16"
-            style={{ padding: "4rem 0" }}
-          >
+          <div className="grid-col-3 gap-2 font-16">
             <EventsList events={events} />
           </div>
         )}

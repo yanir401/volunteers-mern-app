@@ -19,7 +19,7 @@ export const signup = async (req, res, next) => {
 
     const isUserSaved = await user.save();
 
-    res.send({ isUserSaved });
+    res.send(isUserSaved);
 
     // res.send(userExists);
   } catch (error) {

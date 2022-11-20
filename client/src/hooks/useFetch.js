@@ -10,6 +10,7 @@ export const useFetch = () => {
 
   const sendRequest = useCallback(
     async (url, method = "GET", body = null, headers = {}) => {
+      console.log(headers);
       setLoading(true);
       const controller = new AbortController();
       setController(controller);
@@ -17,9 +18,11 @@ export const useFetch = () => {
         const res = await axiosInstance({
           url,
           method,
+          headers,
           data: body,
         });
 
+        console.log(res);
         return res;
       } catch (err) {
         console.log(err);

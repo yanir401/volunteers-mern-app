@@ -42,7 +42,10 @@ const Navigation = () => {
           </li>
         </>
       ) : (
-        <a onClick={handleOnClick}> Sign up</a>
+        <a onClick={handleOnClick} className="pointer">
+          {" "}
+          Sign up
+        </a>
       )}
     </>
   );

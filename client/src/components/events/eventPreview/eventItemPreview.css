@@ -1,0 +1,13 @@
+.event-preview-inner-container {
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  border-radius: 5px;
+}
+.event-preview-inner-container .event-right-content {
+  background: #babfcc;
+  color: var(--white);
+
+  height: 100%;
+  width: 100%;
+  border-radius: 0 5px 5px 0;
+}

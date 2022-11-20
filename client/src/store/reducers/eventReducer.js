@@ -6,6 +6,24 @@ export const eventReducer = (state = {}, action) => {
     case EVENTS_ACTION_TYPE.SET_EVENTS:
       return { ...state, events: payload };
 
+    case EVENTS_ACTION_TYPE.UPDATE_EVENTS_LIST:
+      return {
+        ...state,
+        events: state.events.map((event) => {
+          if (event._id === payload._id) {
+            return payload;
+          }
+          return event;
+        }),
+      };
+    // return {
+    //   ...state,
+    //   events: [
+    //     ...state.events.filter((event) => event._id !== payload._id),
+    //     { ...payload },
+    //   ],
+    // };
+
     case EVENTS_ACTION_TYPE.GET_USER_EVENTS:
       return { ...state, subscriptionEvents: payload };
 

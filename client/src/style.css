@@ -57,6 +57,13 @@ a {
   max-width: 168rem;
   margin: 0 auto;
 }
+
+.events-container {
+  min-height: 90rem;
+  max-width: 60%;
+  margin: 0 auto;
+  padding-top: 10rem;
+}
 .form-container {
   max-width: 60rem;
   margin: 0 auto;
@@ -88,9 +95,22 @@ a {
   color: var(--error-text-color);
   font-size: 1.4rem;
   height: 0rem;
+
   margin-top: 0.5rem;
   margin-bottom: 1rem;
   letter-spacing: 0.2px;
+}
+
+.success-msg {
+  color: var(--primary-background-color);
+  font-size: 1.8rem;
+  font-weight: 600;
+  height: 0rem;
+  margin: 1rem 0;
+  letter-spacing: 0.2px;
+}
+.pointer {
+  cursor: pointer;
 }
 .marginT-1 {
   margin-top: 1rem;
@@ -104,6 +124,20 @@ a {
 }
 .marginT-4 {
   margin-top: 4rem;
+}
+
+.marginB-1 {
+  margin-bottom: 1rem;
+}
+.marginB-2 {
+  margin-bottom: 2rem;
+}
+
+.marginB-3 {
+  margin-bottom: 3rem;
+}
+.marginB-4 {
+  margin-bottom: 4rem;
 }
 
 .marginTb-1 {
@@ -212,6 +246,12 @@ a {
 }
 .font-20 {
   font-size: 2rem;
+}
+.font-22 {
+  font-size: 2.2rem;
+}
+.font-80 {
+  font-size: 8rem;
 }
 
 .line-height {

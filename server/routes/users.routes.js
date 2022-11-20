@@ -4,7 +4,7 @@ import {
   login,
   signup,
 } from "../controllers/users.controller.js";
-import { auth } from "../middleware/AuthMiddleware.js";
+import { auth } from "../middleware/authMiddleware.js";
 
 export const usersRouter = Router();
 

@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { useDispatch } from "react-redux";
 import { ModalContext } from "../../../../context/modalContext";
 import { openModal } from "../../../../store/actions/modalActions";
+import AuthenticationWrapper from "../../../authentication/AuthenticationWrapper";
 import SignUp from "../../../authentication/signUp/SignUp";
 import Button from "../../../formElements/buttons/Button";
 
@@ -11,7 +12,7 @@ const StartVolunteering = ({ setOpenModal }) => {
 
   const dispatch = useDispatch();
   const handleOnClick = () => {
-    openModal(<SignUp />);
+    openModal(<AuthenticationWrapper />);
   };
 
   return (

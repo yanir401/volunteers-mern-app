@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useFetch } from "../../hooks/useFetch";
+import { isCreateEventFormValid } from "../../utils/createEventValidation/eventFormValidation";
 import Button from "../formElements/buttons/Button";
 import Form from "../formElements/form/Form";
+import Spinner from "../UIElements/spinner/Spinner";
 
 const defaultFormFields = {
   title: "",
   description: "",
   address: "",
   // file: "",
-  date: new Date(),
+  date: "",
   time: "",
 };
 
@@ -25,11 +27,11 @@ const CreateEvent = ({ changeForm, text }) => {
   const { title, description, data, time, address } = formFields;
 
   const handleOnChange = ({ target }) => {
+    setSubmitted(false);
     setErrors({});
     clearError();
     const { name, value } = target;
     setFormFields({ ...formFields, [name]: value });
-    console.log(formFields);
   };
 
   const handleAsGuest = (e) => {
@@ -39,38 +41,54 @@ const CreateEvent = ({ changeForm, text }) => {
   const handleOnSubmit = async (e) => {
     e.preventDefault();
 
-    const url = "http://localhost:5000/events";
+    const isValidForm = isCreateEventFormValid(formFields);
 
-    try {
-      const response = await sendRequest(url, "POST", formFields);
-      console.log(response);
-    } catch (err) {
-      console.log(err);
-      console.log(error);
+    setErrors(isValidForm);
+
+    if (Object.keys(isValidForm).length === 0) {
+      const url = "http://localhost:5000/events";
+
+      try {
+        const response = await sendRequest(url, "POST", {
+          formFields,
+          author: user._id,
+        });
+        console.log(response);
+        if (response.status === 200) setSubmitted(true);
+      } catch (err) {
+        console.log(err);
+        console.log(error);
+      }
     }
   };
 
-  // const welcomeMsg = <p className="text-center font-20">Welcome {name}!</p>;
-
   const eventForm = (
-    <div
-      className="text-center form-container flex flex-col "
-      style={{ paddingTop: "10rem", minHeight: "80rem" }}
-    >
-      <h2 className="marginTb-3">New Event</h2>
-      <Form
-        state={formFields}
-        onChange={handleOnChange}
-        onSubmit={handleOnSubmit}
-        errors={errors}
-      >
-        <Button type="secondary">Create Event</Button>
-      </Form>
+    <div className="text-center form-container flex flex-col events-container">
+      {submitted ? (
+        <p className="success-msg">The event is created</p>
+      ) : (
+        <>
+          {loading ? (
+            <Spinner />
+          ) : (
+            <>
+              <h2 className="marginTb-3">New Event</h2>
+              <Form
+                state={formFields}
+                onChange={handleOnChange}
+                onSubmit={handleOnSubmit}
+                errors={errors}
+              >
+                <Button type="secondary">Create Event</Button>
+              </Form>
+            </>
+          )}
+        </>
+      )}
     </div>
   );
 
   // if (loading) return <Spinner />;
-
   return <>{eventForm}</>;
 };
 export default CreateEvent;

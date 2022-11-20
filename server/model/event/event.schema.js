@@ -34,10 +34,15 @@ const eventSchema = mongoose.Schema(
     image: {
       type: String,
     },
-    volunteers: [{ type: mongoose.Schema.Types.ObjectId }],
+    volunteers: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        // unique: true,
+      },
+    ],
 
-    // author: { type: mongoose.Schema.Types.ObjectId, ref: "users" },
-    author: { type: String },
+    author: { type: mongoose.Schema.Types.ObjectId, ref: "users" },
+    // author: { type: String },
   },
   { timestamps: true }
 );

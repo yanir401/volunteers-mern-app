@@ -9,15 +9,18 @@ import Auth from "./components/pages/Auth";
 import Header from "./components/layout/header/Header";
 import Home from "./components/pages/home/Home";
 import Footer from "./components/layout/footer/Footer";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { closeModal } from "./store/actions/modalActions";
 import { ModalContext } from "./context/modalContext";
 import { fetchEvents } from "./store/actions/eventsAction";
 import SubscriptionEvents from "./components/pages/SubscriptionEvents";
 import EventPreview from "./components/pages/EventPreview";
+import ProtectedRoutes from "./components/pages/routes/ProtectedRoutes";
+import NotFound from "./components/pages/NotFound";
 
 function App() {
   const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.user);
   const { closeModal } = useContext(ModalContext);
 
   const location = useLocation();
@@ -49,11 +52,16 @@ function App() {
           <Route index element={<Home />} />
           <Route path="/events" element={<Events />} />
           <Route path="event/:eventId" element={<EventPreview />} />
-          <Route path="/new-event" element={<CreateEvent />} />
           {/*only if auth*/}
-          <Route path="/subscriptions" element={<SubscriptionEvents />} />
-          <Route path="/my-profile" element={<Profile />} />
-          <Route path="/auth" element={<Auth />} />
+
+          <Route element={<ProtectedRoutes />}>
+            <Route path="/new-event" element={<CreateEvent />} />
+            <Route path="/subscriptions" element={<SubscriptionEvents />} />
+            <Route path="/my-profile" element={<Profile />} />
+          </Route>
+          <Route path="*" element={<NotFound />} />
+
+          {/* <Route path="/auth" element={<Auth />} /> */}
         </Route>
       </Routes>
       <Footer />

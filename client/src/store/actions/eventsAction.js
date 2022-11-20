@@ -7,6 +7,13 @@ export const fetchEvents = (events) => {
   };
 };
 
+export const updateEventsList = (event) => {
+  return {
+    type: EVENTS_ACTION_TYPE.UPDATE_EVENTS_LIST,
+    payload: event,
+  };
+};
+
 export const getUserEvents = (event) => {
   return {
     type: EVENTS_ACTION_TYPE.GET_USER_EVENTS,
