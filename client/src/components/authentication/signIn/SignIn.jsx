@@ -45,9 +45,7 @@ const SignIn = ({ changeForm, text }) => {
           email,
           password,
         });
-        console.log(response);
-        if (response.statusText === "OK") {
-          console.log(response);
+        if (response && response.statusText === "OK") {
           dispatch(setUser(response.data.user));
           setSubmitted(true);
           closeModalTimeOut(1500);
@@ -114,7 +112,7 @@ const SignIn = ({ changeForm, text }) => {
 
   const signInForm = (
     <div className="text-center">
-      <h2 className="marginTb-1">{text}</h2>
+      <h2 className="marginB-2">{text}</h2>
       <Form
         state={formFields}
         onChange={handleOnChange}
@@ -125,7 +123,7 @@ const SignIn = ({ changeForm, text }) => {
           {text}
         </Button>
         {error && <p className="error-msg">{error}</p>}
-        <span onClick={changeForm} className="font-16">
+        <span onClick={changeForm} className="font-16 pointer">
           Switch to Sign Up
         </span>
       </Form>

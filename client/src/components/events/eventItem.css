@@ -1,0 +1,22 @@
+.image-container {
+  max-width: 100%;
+  height: 60%;
+}
+
+.image-event {
+  border-radius: "5px 5px 0 0 ";
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+}
+
+.event-content {
+  background: #babfcc;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 40%;
+  max-width: 100%;
+
+  padding-top: 1rem;
+}

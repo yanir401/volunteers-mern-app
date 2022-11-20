@@ -12,6 +12,7 @@ const Form = ({ state, onChange, onSubmit, errors, children }) => {
           name={stateField}
           placeholder={stateField}
           onChange={onChange}
+          className={errors[stateField] && "input-error"}
         />
         <span className="error-msg">
           {errors[stateField] && errors[stateField]}

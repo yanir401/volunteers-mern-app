@@ -3,6 +3,7 @@ import { User } from "../model/user/user.model.js";
 
 export const auth = async (req, res, next) => {
   try {
+    console.log(req.header("Authorization"));
     const token = req.header("Authorization").replace("Bearer ", "");
 
     const decoded = jws.verify(token, "lookingForMyNewRole");
@@ -13,6 +14,7 @@ export const auth = async (req, res, next) => {
     req.user = user;
     next();
   } catch (error) {
+    console.log(error);
     res.status(401).send(error);
   }
 };

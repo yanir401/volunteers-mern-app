@@ -1,104 +1,95 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useParams } from "react-router-dom";
 import { ModalContext } from "../../context/modalContext";
 import { useFetch } from "../../hooks/useFetch";
+import { updateEventsList } from "../../store/actions/eventsAction";
 import AuthenticationWrapper from "../authentication/AuthenticationWrapper";
-import Button from "../formElements/buttons/Button";
+import EventItemPreview from "../events/eventPreview/EventItemPreview";
 import Spinner from "../UIElements/spinner/Spinner";
 
 const EventPreview = () => {
   const { openModal } = useContext(ModalContext);
   const { user } = useSelector((state) => state.user);
   const [error, loading, sendRequest, clearError] = useFetch();
+  const [submittedMsg, setSubmittedMsg] = useState("");
   const [event, setEvent] = useState();
+  const [buttonMode, setButtonMode] = useState("I want to volunteer");
   const { state } = useLocation();
+  const dispatch = useDispatch();
 
   useEffect(() => {
+    console.log(state);
     if (state.event) setEvent(state.event);
-    else {
-    }
-  }, []);
+    // else {
+    // }
+
+    if (user && isUserAlreadyVolunteering())
+      setButtonMode("Leave volunteering");
+
+    console.log({ error });
+  }, [error]);
+
+  const isUserAlreadyVolunteering = () => {
+    return !!state.event.volunteers.find((id) => id === user._id);
+  };
 
   const handleOnClick = async () => {
+    let url = "http://localhost:5000/events/join-volunteering";
+    if (buttonMode === "Leave volunteering")
+      url = "http://localhost:5000/events/leave-volunteering";
+
     if (!user) openModal(<AuthenticationWrapper />);
     else {
-      const url = "http://localhost:5000/events/join-volunteering";
-      console.log("Subscribe to volunteering");
+      try {
+        console.log(user.tokens[0].token);
 
-      const response = await sendRequest(url, "PATCH", {
-        user,
-        event,
-      });
-      console.log(response);
+        const response = await sendRequest(
+          url,
+          "PATCH",
+
+          {
+            user,
+            event,
+          },
+          { Authorization: `Bearer ${user.tokens[0].token}` }
+        );
+        console.log(response);
+        if (!error && response) {
+          setEvent(response.data);
+          dispatch(updateEventsList(response.data));
+          if (url.includes("join")) {
+            setButtonMode("Leave volunteering");
+            setSubmittedMsg("You have successfully joined volunteering");
+          } else {
+            setButtonMode("I want to volunteer");
+            setSubmittedMsg("You are no longer volunteering for this event");
+          }
+        }
+      } catch (err) {
+        console.log(err);
+        console.log(error);
+      }
     }
   };
 
-  const { eventId } = useParams();
-  console.log(state.event);
-
   return (
-    <>
+    <div className="flex flex-col gap-2 events-container marginB-3">
       {event ? (
-        <div
-          style={{
-            maxWidth: "60%",
-            margin: "auto",
-            paddingTop: "10rem",
-            marginBottom: "2rem",
-            height: "70rem",
-          }}
-          className="flex flex-col gap-3"
-        >
-          <h2 className="text-center marginTb-2">{event.eventName}</h2>
-          <div
-            className="grid-col-2  center"
-            style={{ alignItems: "center", color: "white" }}
-          >
-            <div style={{ width: "100%", color: "black", height: "100%" }}>
-              <img
-                src={event.image}
-                alt=""
-                width={"100%"}
-                height="100%"
-                style={{ borderRadius: "5px 0 0 5px " }}
-              />
-            </div>
-            <div
-              className="font-18 flex flex-col gap-2 center"
-              style={{
-                background: "#babfcc",
-                height: "100%",
-                borderRadius: "0 5px 5px 0 ",
-              }}
-            >
-              <p>
-                <span>Description:</span> {event.description}
-              </p>
-              <p>
-                <span>Where: </span>
-                {event.address}
-              </p>
-              <p>When: {event.time}</p>
-              {/* <p>{event.date}</p> */}
-              {event?.date && <p>{event.date}</p>}
-              <p>
-                {" "}
-                <span>Currently volunteering: </span>
-                {event.volunteers.length}
-              </p>
-            </div>
-          </div>
-          <div className="center marginT-1">
-            <Button type="secondary" onClick={handleOnClick}>
-              I want to volunteer
-            </Button>
-          </div>
-        </div>
+        <>
+          <EventItemPreview
+            event={event}
+            handleOnClick={handleOnClick}
+            buttonText={buttonMode}
+            loading={loading}
+            submittedMsg={submittedMsg}
+          />
+          {error && <p className="error-msg center font-16">{error}</p>}
+        </>
       ) : (
         <Spinner />
       )}
-    </>
+    </div>
   );
 };
 
