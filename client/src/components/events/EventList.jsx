@@ -6,7 +6,6 @@ import Spinner from "../UIElements/spinner/Spinner";
 import EventItem from "./EventItem";
 
 const EventList = ({ events, limit = events?.length }) => {
-  console.log(events);
   const dispatch = useDispatch();
   // const { events } = useSelector((state) => state.events);
   const [error, loading, sendRequest] = useFetch();
