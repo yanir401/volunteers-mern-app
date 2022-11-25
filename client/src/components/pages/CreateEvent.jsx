@@ -11,6 +11,7 @@ const defaultFormFields = {
   description: "",
   address: "",
   // file: "",
+  // coord: "",
   date: "",
   time: "",
 };
@@ -23,14 +24,21 @@ const CreateEvent = ({ changeForm, text }) => {
   const [error, loading, sendRequest, clearError] = useFetch();
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
+  const [coordinates, setCoordinates] = useState(null);
 
   const { title, description, data, time, address } = formFields;
 
-  const handleOnChange = ({ target }) => {
+  const handleOnChange = (e) => {
+    if (!e.target) {
+      setFormFields({ ...formFields, address: e });
+      return;
+    }
+    const {
+      target: { name, value },
+    } = e;
     setSubmitted(false);
     setErrors({});
     clearError();
-    const { name, value } = target;
     setFormFields({ ...formFields, [name]: value });
   };
 
@@ -51,9 +59,9 @@ const CreateEvent = ({ changeForm, text }) => {
       try {
         const response = await sendRequest(url, "POST", {
           formFields,
+          coordinates,
           author: user._id,
         });
-        console.log(response);
         if (response.status === 200) setSubmitted(true);
       } catch (err) {
         console.log(err);
@@ -78,6 +86,7 @@ const CreateEvent = ({ changeForm, text }) => {
                 onChange={handleOnChange}
                 onSubmit={handleOnSubmit}
                 errors={errors}
+                setCoordinates={setCoordinates}
               >
                 <Button type="secondary">Create Event</Button>
               </Form>

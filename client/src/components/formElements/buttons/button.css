@@ -35,6 +35,14 @@
   background: var(--secondary-dark-color);
 }
 
+.light {
+  background: var(--light-color);
+}
+
+.light:hover {
+  background: var(--primary-light);
+}
+
 .outline {
   background: transparent;
   color: var(--secondary-color);

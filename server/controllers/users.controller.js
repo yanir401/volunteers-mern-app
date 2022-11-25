@@ -1,4 +1,3 @@
-import bcrypt from "bcrypt";
 import { User } from "../model/user/user.model.js";
 
 //sign up , POST , /users/signup
@@ -25,7 +24,7 @@ export const signup = async (req, res, next) => {
   } catch (error) {
     // console.log(object);
     // res.status(400).send(error);
-    res.status(400).send({ error: error.message });
+    res.status(400).send({ error: "Something went wrong" });
   }
 };
 
@@ -38,6 +37,7 @@ export const login = async (req, res, next) => {
     if (user instanceof Error) {
       res.status(400);
       const err = new Error(user.message);
+      console.log({ err });
       return next(err);
     }
 
@@ -45,7 +45,7 @@ export const login = async (req, res, next) => {
 
     res.send({ user });
   } catch (error) {
-    res.status(400).send(error);
+    res.status(400).send({ error: "Something went wrong" });
   }
 };
 

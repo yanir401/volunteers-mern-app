@@ -38,10 +38,10 @@ const userSchema = mongoose.Schema(
       validate: [validator.isStrongPassword, "Please use a stronger password"],
     },
 
-    latLong: {
-      type: [Number],
-      // required: true,
-    },
+    // latLong: {
+    //   type: [Number],
+    //   // required: true,
+    // },
 
     //   address: {
     //     type: String,
@@ -49,6 +49,8 @@ const userSchema = mongoose.Schema(
     //     minLength: 3,
     //   },
     //   volunteerLocations: { type: String, required: true },
+    coordinates: { lat: { type: Number }, lng: { type: Number } },
+    volunteers: [{ type: mongoose.Types.ObjectId, ref: "Events" }],
 
     tokens: [
       {

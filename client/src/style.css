@@ -9,6 +9,7 @@
   font-size: 10px;
   --primary-color: #ea9a96;
   --secondary-color: #f8b24f;
+  --primary-light: #babfcc;
   --primary-background-color: #1b2430;
   --primary-text-color: #1b2430;
   --error-text-color: #ff0000;
@@ -56,6 +57,7 @@ a {
 .container {
   max-width: 168rem;
   margin: 0 auto;
+  /* min-height: 90rem; */
 }
 
 .events-container {
@@ -205,13 +207,22 @@ a {
   flex-direction: column;
 }
 
+.grid-col-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
 .grid-col-3 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
 }
-.grid-col-2 {
+.grid-col-4 {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(4, 1fr);
+}
+.grid-col-70-30 {
+  display: grid;
+  grid-template-columns: 0.8fr 0.2fr;
 }
 .gap-0-5 {
   gap: 0.5rem;
@@ -231,7 +242,9 @@ a {
 .gap-4 {
   gap: 4rem;
 }
-
+.bold {
+  font-weight: bold;
+}
 .font-12 {
   font-size: 1.2rem;
 }

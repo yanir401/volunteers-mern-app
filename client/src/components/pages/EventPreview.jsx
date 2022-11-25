@@ -19,15 +19,12 @@ const EventPreview = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log(state);
     if (state.event) setEvent(state.event);
     // else {
     // }
 
     if (user && isUserAlreadyVolunteering())
       setButtonMode("Leave volunteering");
-
-    console.log({ error });
   }, [error]);
 
   const isUserAlreadyVolunteering = () => {
@@ -42,8 +39,6 @@ const EventPreview = () => {
     if (!user) openModal(<AuthenticationWrapper />);
     else {
       try {
-        console.log(user.tokens[0].token);
-
         const response = await sendRequest(
           url,
           "PATCH",

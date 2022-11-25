@@ -37,11 +37,16 @@ const eventSchema = mongoose.Schema(
     volunteers: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        // unique: true,
+        ref: "Users",
       },
     ],
 
-    author: { type: mongoose.Schema.Types.ObjectId, ref: "users" },
+    coordinates: {
+      lat: { type: Number, required: true },
+      lng: { type: Number, required: true },
+    },
+    // coordinates: { type: Object },
+    author: { type: mongoose.Schema.Types.ObjectId, ref: "Users" },
     // author: { type: String },
   },
   { timestamps: true }
