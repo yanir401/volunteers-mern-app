@@ -6,6 +6,20 @@ export const setUser = (user) => {
     payload: user,
   };
 };
+
+export const setTempCoordinates = (coordinates) => {
+  return {
+    type: USER_ACTION_TYPE.TEMP_COORDINATES,
+    payload: coordinates,
+  };
+};
+
+export const setDistance = (distance) => {
+  return {
+    type: USER_ACTION_TYPE.SET_DISTANCE,
+    payload: distance,
+  };
+};
 // export const setUser = (user) => {
 //   const option = {
 //     method: "POST",

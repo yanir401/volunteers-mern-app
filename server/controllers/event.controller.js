@@ -17,29 +17,48 @@ export const getUserEvents = async (req, res) => {
     const userEvents = await Event.find({
       volunteers: mongoose.Types.ObjectId(req.user._id),
     })
-      .populate("author")
+      .populate("volunteers")
       .exec();
     // .exec();
     // .populate("Users")
     // .exec();
     // .execPopulate();
-    console.log(userEvents.author);
+    console.log("test mannnnnnn", userEvents.volunteers);
     res.send(userEvents);
   } catch (error) {
     res.send(error);
   }
 };
+// export const getUserEvents = async (req, res) => {
+//   const uid = req.params.uid;
+
+//   try {
+//     const userEvents = await Event.find({
+//       volunteers: mongoose.Types.ObjectId(req.user._id),
+//     })
+//       .populate("author")
+//       .exec();
+//     // .exec();
+//     // .populate("Users")
+//     // .exec();
+//     // .execPopulate();
+//     console.log(userEvents.author);
+//     res.send(userEvents);
+//   } catch (error) {
+//     res.send(error);
+//   }
+// };
 
 export const createEvent = async (req, res) => {
-  const eventBody = req.body.formFields;
-  if (!eventBody.image)
-    eventBody.image =
+  console.log(req.body);
+  const { formFields, author, coordinates } = req.body;
+  if (!formFields.image)
+    formFields.image =
       "https://img.freepik.com/free-vector/people-volunteering-donating-money_53876-66112.jpg?w=1060&t=st=1668262843~exp=1668263443~hmac=e6cda460e605c3719b497d5ea9e025eabefe3b3a9e42a3e104ab3d1f005476cb";
-  console.log("bodyData", req.body);
-  const author = req.body.author;
+  // const author = req.body.author;
 
   try {
-    const event = new Event({ ...eventBody, author });
+    const event = new Event({ ...formFields, author, coordinates });
     const newEvent = await event.save();
     console.log({ newEvent });
     res.send(newEvent);

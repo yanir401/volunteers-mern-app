@@ -5,13 +5,15 @@ const BUTTON_TYPE = {
   primary: "primary",
   secondary: "secondary",
   outline: "outline",
+  light: "light",
 };
 
 const Button = (props) => {
-  const { children, onClick, type, style } = props;
+  const { children, onClick, type, classStyle, style } = props;
   return (
     <button
-      className={`button ${BUTTON_TYPE[type]} ${style} `}
+      style={style}
+      className={`button ${BUTTON_TYPE[type]} ${classStyle} `}
       onClick={onClick}
     >
       {children}

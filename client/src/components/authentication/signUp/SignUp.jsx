@@ -49,7 +49,6 @@ const SignUp = ({ changeForm, text }) => {
           email,
           password,
         });
-        console.log(response);
         if (!response) throw new Error(error);
         dispatch(setUser(response.data));
         setSubmitted(true);

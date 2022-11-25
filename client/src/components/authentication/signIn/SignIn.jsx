@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ModalContext } from "../../../context/modalContext";
 import { useFetch } from "../../../hooks/useFetch";
@@ -45,15 +45,18 @@ const SignIn = ({ changeForm, text }) => {
           email,
           password,
         });
-        if (response && response.statusText === "OK") {
-          dispatch(setUser(response.data.user));
-          setSubmitted(true);
-          closeModalTimeOut(1500);
+        if (!response && !response?.statusText === "OK") {
+          throw new Error(error);
         }
+        dispatch(setUser(response.data.user));
+        setSubmitted(true);
+        closeModalTimeOut(1500);
       } catch (err) {
-        console.log(err);
+        console.log("object");
+        // console.log(err);
         console.log(error);
       }
+    console.log(error);
   };
 
   //   const welcomeMsg = (

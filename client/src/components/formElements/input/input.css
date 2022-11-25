@@ -7,6 +7,32 @@
   font-size: 2rem;
 }
 
+.input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+  width: 15rem;
+  padding: 1.5rem 0;
+  height: 0;
+}
+input[type="range"]::-webkit-slider-runnable-track {
+  background: #053a5f;
+  height: 1.5rem;
+  border-radius: 7px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  margin-top: -5px; /* Centers thumb on the track */
+  background-color: var(--secondary-color);
+  border-radius: 7px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  height: 2.5rem;
+  width: 1.25rem;
+}
 .input::placeholder {
   text-transform: capitalize;
 }

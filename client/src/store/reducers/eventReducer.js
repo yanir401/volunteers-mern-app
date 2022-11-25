@@ -26,6 +26,8 @@ export const eventReducer = (state = {}, action) => {
 
     case EVENTS_ACTION_TYPE.GET_USER_EVENTS:
       return { ...state, subscriptionEvents: payload };
+    case EVENTS_ACTION_TYPE.EVENT_QUERY:
+      return { ...state, query: payload };
 
     default:
       return state;

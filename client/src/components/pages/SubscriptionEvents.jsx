@@ -10,7 +10,6 @@ const SubscriptionEvents = () => {
   const [error, loading, sendRequest, clearError] = useFetch();
 
   useEffect(() => {
-    console.log("renderr");
     userEvents();
   }, []);
 
@@ -26,7 +25,6 @@ const SubscriptionEvents = () => {
           Authorization: `Bearer ${user.tokens[0].token}`,
         }
       );
-      console.log(response);
       setSubscriptionEvents(response.data);
       // if (response.status === 200) setSubmitted(true);
     } catch (err) {

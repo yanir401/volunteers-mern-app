@@ -38,7 +38,6 @@ function App() {
       try {
         const res = await sendRequest("http://localhost:5000/events", "GET");
         setEvents(res.data);
-        console.log(res.data);
         dispatch(fetchEvents(res.data));
       } catch (err) {}
     };

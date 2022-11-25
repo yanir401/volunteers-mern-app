@@ -20,3 +20,10 @@ export const getUserEvents = (event) => {
     payload: event,
   };
 };
+
+export const searchEvent = (query) => {
+  return {
+    type: EVENTS_ACTION_TYPE.EVENT_QUERY,
+    payload: query,
+  };
+};
