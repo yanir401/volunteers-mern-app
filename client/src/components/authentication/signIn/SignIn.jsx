@@ -52,8 +52,6 @@ const SignIn = ({ changeForm, text }) => {
         setSubmitted(true);
         closeModalTimeOut(1500);
       } catch (err) {
-        console.log("object");
-        // console.log(err);
         console.log(error);
       }
     console.log(error);

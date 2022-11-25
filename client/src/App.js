@@ -17,6 +17,9 @@ import SubscriptionEvents from "./components/pages/SubscriptionEvents";
 import EventPreview from "./components/pages/EventPreview";
 import ProtectedRoutes from "./components/pages/routes/ProtectedRoutes";
 import NotFound from "./components/pages/NotFound";
+import io from "socket.io-client";
+
+const socket = io.connect("http://localhost:5000");
 
 function App() {
   const dispatch = useDispatch();
@@ -24,6 +27,15 @@ function App() {
   const { closeModal } = useContext(ModalContext);
 
   const location = useLocation();
+
+  useEffect(() => {
+    console.log("send you mann...");
+    sendMessage();
+  }, []);
+
+  const sendMessage = () => {
+    socket.emit("sendMessage", "message");
+  };
 
   useEffect(() => {
     closeModal();

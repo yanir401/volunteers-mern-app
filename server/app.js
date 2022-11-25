@@ -1,7 +1,8 @@
 import express from "express";
+import { Server } from "socket.io";
+import { createServer } from "http";
 import "./config/db.js";
 import dotenv from "dotenv";
-import bodyParser from "body-parser";
 import cors from "cors";
 import { errorHandler } from "./middleware/errorMiddleware.js";
 import { usersRouter } from "./routes/users.routes.js";
@@ -11,6 +12,14 @@ dotenv.config({ path: "../.env" });
 const PORT = process.env.PORT || 5000;
 
 const app = express();
+const httpServer = createServer(app);
+const io = new Server(httpServer, {
+  cors: {
+    origin: "*",
+    methods: "*",
+  },
+});
+
 app.use(express.json());
 
 app.use(cors());
@@ -25,8 +34,22 @@ app.use(cors());
 
 //   next();
 // });
+
+// console.log({ io });
+
+io.on("connection", (socket) => {
+  console.log("new connection ", socket.id);
+
+  socket.on("sendMessage", (data) => {
+    console.log(data);
+  });
+  // ...
+});
+
+// io.on("sendMessage");
+
 app.use("/users", usersRouter);
 app.use("/events", eventsRouter);
 app.use(errorHandler);
 
-app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+httpServer.listen(PORT, () => console.log(`Server started on port ${PORT}`));

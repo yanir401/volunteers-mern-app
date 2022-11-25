@@ -11,6 +11,7 @@ import Spinner from "../UIElements/spinner/Spinner";
 const EventPreview = () => {
   const { openModal } = useContext(ModalContext);
   const { user } = useSelector((state) => state.user);
+  const { events } = useSelector((state) => state.events);
   const [error, loading, sendRequest, clearError] = useFetch();
   const [submittedMsg, setSubmittedMsg] = useState("");
   const [event, setEvent] = useState();
@@ -19,16 +20,20 @@ const EventPreview = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (state.event) setEvent(state.event);
+    // if (state.event) setEvent(state.event);
     // else {
     // }
 
-    if (user && isUserAlreadyVolunteering())
+    const eventToRender = events.find((event) => event.id === state.event.id);
+    setEvent(eventToRender);
+
+    if (user && isUserAlreadyVolunteering()) {
       setButtonMode("Leave volunteering");
-  }, [error]);
+    }
+  }, [error, event]);
 
   const isUserAlreadyVolunteering = () => {
-    return !!state.event.volunteers.find((id) => id === user._id);
+    return !!event?.volunteers.find((id) => id === user._id);
   };
 
   const handleOnClick = async () => {
@@ -49,7 +54,6 @@ const EventPreview = () => {
           },
           { Authorization: `Bearer ${user.tokens[0].token}` }
         );
-        console.log(response);
         if (!error && response) {
           setEvent(response.data);
           dispatch(updateEventsList(response.data));

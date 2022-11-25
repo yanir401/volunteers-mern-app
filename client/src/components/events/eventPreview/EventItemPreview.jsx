@@ -10,7 +10,6 @@ const EventItemPreview = ({
   loading,
   submittedMsg,
 }) => {
-  console.log(event);
   return (
     <>
       <h2 className="text-center marginTb-2">{event.title}</h2>
