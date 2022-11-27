@@ -40,8 +40,23 @@ app.use(cors());
 io.on("connection", (socket) => {
   console.log("new connection ", socket.id);
 
+  socket.on("userJoined", (data) => {
+    const { username, eventId } = data;
+    console.log(username);
+    socket.join(eventId);
+    // const joinMessage = `${username} has joined`;
+    // io.to(eventId).emit("message", { username, message: "has joined" });
+
+    socket.broadcast.to(eventId).emit("message", {
+      username: "Admin",
+      message: username + "  has joined!",
+    });
+  });
+
   socket.on("sendMessage", (data) => {
     console.log(data);
+    const { username, eventId, message } = data;
+    io.to(eventId).emit("message", { username, message });
   });
   // ...
 });

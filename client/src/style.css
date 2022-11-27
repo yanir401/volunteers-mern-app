@@ -96,8 +96,11 @@ a {
 .error-msg {
   color: var(--error-text-color);
   font-size: 1.4rem;
-  height: 0rem;
-
+  /* height: 0rem; */
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  display: flex;
   margin-top: 0.5rem;
   margin-bottom: 1rem;
   letter-spacing: 0.2px;

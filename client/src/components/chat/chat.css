@@ -1,0 +1,20 @@
+.chat-container {
+  position: absolute;
+  right: 0;
+  bottom: 5px;
+  background-color: var(--white);
+  height: 40rem;
+  justify-content: space-between;
+  border: 2px solid var(--primary-background-color);
+  max-width: 80%;
+}
+
+.chat-container .view-messages-container {
+  /* border: 1px solid red; */
+  height: 80%;
+}
+.chat-container .sending-message-container {
+  /* border: 1px solid red; */
+  border-top: 1px solid var(--primary-background-color);
+  height: 20%;
+}

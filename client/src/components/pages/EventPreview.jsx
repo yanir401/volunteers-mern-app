@@ -5,7 +5,9 @@ import { ModalContext } from "../../context/modalContext";
 import { useFetch } from "../../hooks/useFetch";
 import { updateEventsList } from "../../store/actions/eventsAction";
 import AuthenticationWrapper from "../authentication/AuthenticationWrapper";
+import Chat from "../chat/Chat";
 import EventItemPreview from "../events/eventPreview/EventItemPreview";
+import Button from "../formElements/buttons/Button";
 import Spinner from "../UIElements/spinner/Spinner";
 
 const EventPreview = () => {
@@ -16,24 +18,26 @@ const EventPreview = () => {
   const [submittedMsg, setSubmittedMsg] = useState("");
   const [event, setEvent] = useState();
   const [buttonMode, setButtonMode] = useState("I want to volunteer");
+  const [openChat, setOpenChat] = useState(false);
   const { state } = useLocation();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // if (state.event) setEvent(state.event);
-    // else {
-    // }
-
-    const eventToRender = events.find((event) => event.id === state.event.id);
+    console.log({ state });
+    const eventToRender = events?.find(
+      (event) => event._id === state.event._id
+    );
     setEvent(eventToRender);
+    console.log(eventToRender, buttonMode);
 
     if (user && isUserAlreadyVolunteering()) {
       setButtonMode("Leave volunteering");
+      console.log("here");
     }
-  }, [error, event]);
+  }, [event]);
 
   const isUserAlreadyVolunteering = () => {
-    return !!event?.volunteers.find((id) => id === user._id);
+    return !!event?.volunteers?.find((id) => id === user._id);
   };
 
   const handleOnClick = async () => {
@@ -72,6 +76,15 @@ const EventPreview = () => {
     }
   };
 
+  const chat =
+    buttonMode === "Leave volunteering" ? (
+      <div className="flex center">
+        <Button type="primary" onClick={() => setOpenChat(true)}>
+          Join to chat
+        </Button>
+      </div>
+    ) : null;
+
   return (
     <div className="flex flex-col gap-2 events-container marginB-3">
       {event ? (
@@ -82,7 +95,10 @@ const EventPreview = () => {
             buttonText={buttonMode}
             loading={loading}
             submittedMsg={submittedMsg}
-          />
+          ></EventItemPreview>
+          {chat}
+          {openChat && <Chat event={event} />}
+
           {error && <p className="error-msg center font-16">{error}</p>}
         </>
       ) : (
