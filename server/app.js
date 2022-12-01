@@ -24,6 +24,8 @@ app.use(express.json());
 
 app.use(cors());
 
+const users = {};
+
 // app.use((req, res, next) => {
 //   res.setHeader("Access-Control-Allow-Origin", "*");
 //   res.setHeader(
@@ -40,10 +42,60 @@ app.use(cors());
 io.on("connection", (socket) => {
   console.log("new connection ", socket.id);
 
-  socket.on("sendMessage", (data) => {
-    console.log(data);
+  let currentUser;
+  socket.on("userJoined", (data) => {
+    console.log("new user", data);
+    const { username, eventId, createdAt, userId } = data;
+    currentUser = data;
+    socket.join(eventId);
+
+    if (!users[eventId]) users[eventId] = [];
+
+    const isUserAlreadyInRoom = users[eventId].find(
+      (user) => user.userId === userId
+    );
+    if (!isUserAlreadyInRoom)
+      users[eventId] = [...users[eventId], { username, id: socket.id, userId }];
+    console.log("list of users", users);
+
+    socket.to(eventId).emit("roomData", {
+      data: users[eventId],
+    });
+    // const joinMessage = `${username} has joined`;
+    // io.to(eventId).emit("message", { username, message: "has joined" });
+
+    socket.broadcast.to(eventId).emit("message", {
+      username: "Admin",
+      message: username + "  has joined!",
+      createdAt,
+    });
+  });
+
+  socket.on("sendMessage", (data, callback) => {
+    const { username, eventId, message, createdAt } = data;
+    io.to(eventId).emit("message", { username, message, createdAt });
+    callback({
+      status: "ok",
+    });
   });
   // ...
+
+  socket.on("disconnect", () => {
+    if (currentUser) {
+      const { username, eventId, createdAt } = currentUser;
+
+      io.to(eventId).emit("message", {
+        username: "Admin",
+        message: username + "  has left!",
+        createdAt,
+      });
+    }
+
+    // io.to(user.room).emit("roomData", {
+    //   room: user.room,
+    //   users: getUsersInRoom(user.room),
+    // });
+  });
 });
 
 // io.on("sendMessage");

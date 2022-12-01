@@ -9,6 +9,7 @@ const Input = (props) => {
     name,
     className,
     onChange,
+    style,
     ...anotherProps
   } = props;
   return (
@@ -18,6 +19,7 @@ const Input = (props) => {
       placeholder={placeholder}
       name={name}
       className={`input ${className}`}
+      style={style}
       onChange={onChange}
       {...anotherProps}
     />

@@ -10,6 +10,7 @@ const EventItemPreview = ({
   loading,
   submittedMsg,
 }) => {
+  console.log(buttonText, event);
   return (
     <>
       <h2 className="text-center marginTb-2">{event.title}</h2>
@@ -31,11 +32,11 @@ const EventItemPreview = ({
             <span>Where: </span>
             {event.address}
           </p>
-          <p>When: {event.time}</p>
-          <p>{new Date(event.date).toLocaleDateString("en-IL")}</p>
+          <p>Date: {new Date(event.date).toLocaleDateString("en-IL")}</p>
+          <p>Time: {event.time}</p>
           <p>
             <span>Currently volunteering: </span>
-            {event.volunteers.length}
+            {event?.volunteers?.length}
           </p>
         </div>
       </div>

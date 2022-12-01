@@ -63,6 +63,31 @@ export const getUserProfile = (req, res) => {
   // }
 };
 
+//update profile , PATCH , /users/profile
+export const updateProfile = async (req, res) => {
+  const updates = Object.keys(req.body);
+  //maybe check if valid properties to update?
+
+  console.log({ updates });
+  if (!req.user) {
+    res.status(400);
+    const err = new Error("Something went wrong please try again later");
+    return next(err);
+  }
+
+  try {
+    updates.forEach((field) => {
+      req.user[field] = req.body[field];
+    });
+
+    const user = await req.user.save();
+    res.send(user);
+  } catch (error) {
+    console.log(error);
+    res.status(400).send({ error: "Something went wrong" });
+  }
+};
+
 //GET ALL USERS
 
 //POST user events

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { ModalContext } from "../../../context/modalContext";
 import { useFetch } from "../../../hooks/useFetch";
@@ -34,6 +34,10 @@ const SignUp = ({ changeForm, text }) => {
   const handleAsGuest = (e) => {
     e.preventDefault();
   };
+
+  useEffect(() => {
+    console.log(error);
+  }, [error]);
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();

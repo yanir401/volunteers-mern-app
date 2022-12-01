@@ -25,6 +25,7 @@ const SubscriptionEvents = () => {
           Authorization: `Bearer ${user.tokens[0].token}`,
         }
       );
+      console.log(response.data);
       setSubscriptionEvents(response.data);
       // if (response.status === 200) setSubmitted(true);
     } catch (err) {
