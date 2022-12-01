@@ -3,6 +3,7 @@ import {
   getUserProfile,
   login,
   signup,
+  updateProfile,
 } from "../controllers/users.controller.js";
 import { auth } from "../middleware/authMiddleware.js";
 
@@ -14,4 +15,4 @@ usersRouter.post("/login", login);
 
 usersRouter.get("/profile", auth, getUserProfile);
 
-usersRouter.patch("/profile", login);
+usersRouter.patch("/profile", auth, updateProfile);

@@ -9,14 +9,36 @@ import {
 import Input from "../formElements/input/Input";
 import { searchEvent } from "../../store/actions/eventsAction";
 import Button from "../formElements/buttons/Button";
+import { useFetch } from "../../hooks/useFetch";
 
 const FilteringAside = () => {
   const dispatch = useDispatch();
+  const [error, loading, sendRequest, clearError] = useFetch();
   const { user, tempCoordinates, distance } = useSelector(
     (state) => state.user
   );
 
   // const [distance, setDistance] = useState(0);
+
+  const updateUserCoordinates = async (coordinates) => {
+    console.log(coordinates);
+    const url = "http://localhost:5000/users/profile";
+
+    try {
+      const response = await sendRequest(url, "PATCH", coordinates, {
+        Authorization: `Bearer ${user.tokens[0].token}`,
+      });
+      console.log({ response });
+      if (!response && !response?.statusText === "OK") {
+        throw new Error(error);
+      }
+      // dispatch(setUser(response.data.user));
+      // setSubmitted(true);
+      // closeModalTimeOut(1500);
+    } catch (err) {
+      console.log(error);
+    }
+  };
 
   const getUserLocation = () => {
     const userLocation = navigator.geolocation.getCurrentPosition(
@@ -24,10 +46,16 @@ const FilteringAside = () => {
         const {
           coords: { latitude, longitude },
         } = success;
+
+        const lat = latitude;
+        const lng = longitude;
         if (!user) {
-          dispatch(setTempCoordinates({ lat: latitude, lng: longitude }));
-        } else if (!user.coordinates)
-          dispatch(setUser({ coordinates: { lat: latitude, lng: longitude } }));
+          dispatch(setTempCoordinates({ lat, lng }));
+        } else if (!user.coordinates) {
+          dispatch(setUser({ coordinates: { lat, lng } }));
+          updateUserCoordinates({ coordinates: { lat, lng } });
+          console.log("coords");
+        }
       },
       (error) => console.log(error)
     );

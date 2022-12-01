@@ -23,16 +23,13 @@ const EventPreview = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log({ state });
     const eventToRender = events?.find(
       (event) => event._id === state.event._id
     );
     setEvent(eventToRender);
-    console.log(eventToRender, buttonMode);
 
     if (user && isUserAlreadyVolunteering()) {
       setButtonMode("Leave volunteering");
-      console.log("here");
     }
   }, [event]);
 
