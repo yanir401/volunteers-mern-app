@@ -27,6 +27,7 @@ function App() {
 
   useEffect(() => {
     closeModal();
+    console.log(process.env);
   }, [location.pathname]);
 
   const [error, loading, sendRequest] = useFetch();
@@ -36,13 +37,26 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await sendRequest("http://localhost:5000/events", "GET");
+        const res = await sendRequest(
+          "http://localhost:5000/events/upcoming-events",
+          "GET"
+        );
         setEvents(res.data);
         dispatch(fetchEvents(res.data));
       } catch (err) {}
     };
     fetchData();
   }, [sendRequest]);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const res = await sendRequest("http://localhost:5000/events", "GET");
+  //       setEvents(res.data);
+  //       dispatch(fetchEvents(res.data));
+  //     } catch (err) {}
+  //   };
+  //   fetchData();
+  // }, [sendRequest]);
 
   return (
     <>

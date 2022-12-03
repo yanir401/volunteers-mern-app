@@ -3,6 +3,7 @@ import {
   createEvent,
   deleteEvent,
   getAllEvents,
+  getUpComingEvents,
   getUserEvents,
   joinVolunteering,
   leaveVolunteering,
@@ -13,6 +14,7 @@ import { auth } from "../middleware/authMiddleware.js";
 export const eventsRouter = Router();
 
 eventsRouter.get("/", getAllEvents);
+eventsRouter.get("/upcoming-events", getUpComingEvents);
 
 //events created by the user
 eventsRouter.get("/my-events", auth, getUserEvents);
@@ -20,7 +22,7 @@ eventsRouter.get("/my-events", auth, getUserEvents);
 //users attends events
 // eventsRouter.get("/attend-events", getUserEvents);
 
-eventsRouter.post("/", createEvent);
+eventsRouter.post("/", auth, createEvent);
 
 // eventsRouter.patch("/", updateEvent);
 

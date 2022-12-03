@@ -62,7 +62,7 @@ a {
 
 .events-container {
   min-height: 90rem;
-  max-width: 60%;
+  max-width: 80%;
   margin: 0 auto;
   padding-top: 10rem;
 }
@@ -150,13 +150,6 @@ a {
 }
 .marginTb-2 {
   margin: 2rem 0;
-}
-
-.marginTb-3 {
-  margin: 3rem 0;
-}
-.marginTb-4 {
-  margin: 4rem 0;
 }
 
 .paddingTb-1 {

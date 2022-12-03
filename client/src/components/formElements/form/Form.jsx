@@ -39,7 +39,7 @@ const Form = ({
 
   return (
     <form
-      className="flex flex-col gap-1-5 text-center order"
+      className="flex flex-col gap-1-5 text-center order "
       onSubmit={onSubmit}
     >
       {renderInput()}

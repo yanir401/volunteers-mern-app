@@ -9,6 +9,14 @@ export const getAllEvents = async (req, res) => {
     res.send(error.message);
   }
 };
+export const getUpComingEvents = async (req, res) => {
+  try {
+    const events = await Event.find().sort({ date: "asc" }).limit(6);
+    res.send(events);
+  } catch (error) {
+    res.send(error.message);
+  }
+};
 
 export const getUserEvents = async (req, res) => {
   const uid = req.params.uid;
@@ -59,6 +67,7 @@ export const createEvent = async (req, res) => {
 
   try {
     const event = new Event({ ...formFields, author, coordinates });
+    event.volunteers.push(req.user._id);
     const newEvent = await event.save();
     console.log({ newEvent });
     res.send(newEvent);
