@@ -61,8 +61,6 @@ io.on("connection", (socket) => {
     socket.to(eventId).emit("roomData", {
       data: users[eventId],
     });
-    // const joinMessage = `${username} has joined`;
-    // io.to(eventId).emit("message", { username, message: "has joined" });
 
     socket.broadcast.to(eventId).emit("message", {
       username: "Admin",

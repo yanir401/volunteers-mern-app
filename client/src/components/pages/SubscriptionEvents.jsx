@@ -35,14 +35,19 @@ const SubscriptionEvents = () => {
   };
   // req.header("Authorization").replace("Bearer ", "");
   return (
-    <div className="events-container text-center">
+    <div className="text-center events-container">
       <h2>Your upcoming volunteering</h2>
-      <div className="flex center gap-3 font-16 ">
-        {subscriptionEvents ? (
-          <EventsList events={subscriptionEvents} />
-        ) : (
-          <Spinner />
-        )}
+      <div className=" text-center">
+        <div
+          className="flex center gap-3 font-16 "
+          style={{ paddingTop: "10rem" }}
+        >
+          {subscriptionEvents ? (
+            <EventsList events={subscriptionEvents} />
+          ) : (
+            <Spinner />
+          )}
+        </div>
       </div>
     </div>
   );

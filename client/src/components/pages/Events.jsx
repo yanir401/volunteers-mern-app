@@ -1,14 +1,31 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useFetch } from "../../hooks/useFetch";
+import { fetchEvents } from "../../store/actions/eventsAction";
 import EventsList from "../events/EventList";
 import FilteringAside from "../filteringAside/FilteringAside";
 import Aside from "../layout/aside/Aside";
 import Spinner from "../UIElements/spinner/Spinner";
 const Events = () => {
-  const { events, query = "" } = useSelector((state) => state.events);
+  const [error, loading, sendRequest] = useFetch();
+  const dispatch = useDispatch();
+  const [events, setEvents] = useState([]);
+  const { query = "" } = useSelector((state) => state.events);
   const { user, tempCoordinates, distance } = useSelector(
     (state) => state.user
   );
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await sendRequest("http://localhost:5000/events", "GET");
+        setEvents(res.data);
+        dispatch(fetchEvents(res.data));
+      } catch (err) {}
+    };
+    fetchData();
+  }, [sendRequest]);
 
   const distanceCalc = (userCoordinates, eventCoordinates, event) => {
     if (userCoordinates && eventCoordinates) {
@@ -59,7 +76,7 @@ const Events = () => {
       >
         <h2>Chose your volunteering</h2>
 
-        {!filteredEvents ? (
+        {filteredEvents.length === 0 ? (
           <Spinner />
         ) : (
           <div className="grid-col-4 gap-2 font-16 events-container">

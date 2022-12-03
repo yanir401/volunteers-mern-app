@@ -83,7 +83,10 @@ const EventPreview = () => {
     ) : null;
 
   return (
-    <div className="flex flex-col gap-2 events-container marginB-3">
+    <div
+      className="flex flex-col gap-2 events-container marginB-3"
+      style={{ maxWidth: "60%" }}
+    >
       {event ? (
         <>
           <EventItemPreview

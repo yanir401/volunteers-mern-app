@@ -61,7 +61,11 @@ const PlacesAutoComplete = ({ onChange, error, setCoordinates }) => {
       } = suggestion;
 
       return (
-        <li key={place_id} onClick={handleSelect(suggestion)}>
+        <li
+          key={place_id}
+          onClick={handleSelect(suggestion)}
+          className="address-suggestion"
+        >
           <strong>{main_text}</strong> <small>{secondary_text}</small>
         </li>
       );
@@ -79,7 +83,7 @@ const PlacesAutoComplete = ({ onChange, error, setCoordinates }) => {
         onChange={handleInput}
         className={`${error && "input-error"} order-3`}
       />
-      <ul>{renderSuggestions()}</ul>
+      <ul style={{}}>{renderSuggestions()}</ul>
     </>
   );
 };

@@ -2,3 +2,27 @@
   /* order: -; */
   /* -ms-flex-order: -1; */
 }
+
+.address-suggestion {
+  background: var(--white);
+  padding: 1rem;
+  font-size: 1.5rem;
+  margin-top: 0.75rem;
+  transition: all 0.3s;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  border-radius: 6px;
+  /* -webkit-font-smoothing: subpixel-antialiased;
+  transform: translateZ(0) scale(1.05); */
+  transform: perspective(100px) scale(0.95);
+}
+
+.address-suggestion:hover {
+  /* transform: rotateY(-20.44deg);
+  
+   */
+
+  /* transform: translateZ(0) scale(1.05); */
+  transform: perspective(100px) scale(1);
+  background: var(--primary-light);
+}

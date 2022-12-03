@@ -57,12 +57,17 @@ const CreateEvent = ({ changeForm, text }) => {
       const url = "http://localhost:5000/events";
 
       try {
-        const response = await sendRequest(url, "POST", {
-          formFields,
-          coordinates,
-          author: user._id,
-        });
-        if (response.status === 200) setSubmitted(true);
+        const response = await sendRequest(
+          url,
+          "POST",
+          {
+            formFields,
+            coordinates,
+            author: user._id,
+          },
+          { Authorization: `Bearer ${user.tokens[0].token}` }
+        );
+        // if (response.status === 200) setSubmitted(true);
       } catch (err) {
         console.log(err);
         console.log(error);
@@ -71,7 +76,7 @@ const CreateEvent = ({ changeForm, text }) => {
   };
 
   const eventForm = (
-    <div className="text-center form-container flex flex-col events-container">
+    <div className="text-center form-container flex flex-col events-container  ">
       {submitted ? (
         <p className="success-msg">The event is created</p>
       ) : (
@@ -80,7 +85,7 @@ const CreateEvent = ({ changeForm, text }) => {
             <Spinner />
           ) : (
             <>
-              <h2 className="marginTb-3">New Event</h2>
+              <h2 className="marginTb-2">New Event</h2>
               <Form
                 state={formFields}
                 onChange={handleOnChange}
