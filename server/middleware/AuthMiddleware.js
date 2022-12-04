@@ -1,7 +1,7 @@
 import jws from "jsonwebtoken";
 import { User } from "../model/user/user.model.js";
 
-export const auth = async (req, res, next) => {
+export const authMiddleware = async (req, res, next) => {
   try {
     console.log(req.header("Authorization"));
     const token = req.header("Authorization").replace("Bearer ", "");
