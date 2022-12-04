@@ -1,5 +1,5 @@
 # Volunteering - MERN Stack application
-## ---- Still on development ----
+## ---- Under development ----
 
 An application to find and create Volunteering events
 
