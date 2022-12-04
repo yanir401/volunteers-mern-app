@@ -10,7 +10,7 @@ import {
   leaveVolunteering,
 } from "../controllers/event.controller.js";
 import { login } from "../controllers/users.controller.js";
-import { authMiddleware } from "../middleware/authMiddleware.js";
+// import { authMiddleware } from "../middleware/authMiddleware.js";
 
 export const eventsRouter = Router();
 
