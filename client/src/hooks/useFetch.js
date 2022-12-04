@@ -7,7 +7,10 @@ export const useFetch = () => {
   const [controller, setController] = useState();
 
   const axiosInstance = axios.create({
-    baseURL: "http://localhost:5000",
+    baseURL:
+      process.env.NODE_ENV === "development"
+        ? "http://localhost:5000"
+        : "https://volunteers-mern-app-backend.onrender.com",
   });
 
   const sendRequest = useCallback(
