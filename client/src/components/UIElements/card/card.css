@@ -5,16 +5,16 @@
   border-radius: 6px;
   /* padding: 2rem; */
   /* padding-bottom: 2rem; */
-
-  height: 100%;
-  width: 100%;
   height: 35rem;
-  max-height: 35rem;
+  max-height: 100%;
+  max-width: 100%;
+  /* height: 35rem; */
+  /* max-height: 35rem; */
   /* max-height: %; */
   /* overflow: hidden; */
   background: white;
   text-align: center;
-  max-width: 40rem;
+  max-width: 90%;
 
   /* height: auto; */
   overflow: hidden;

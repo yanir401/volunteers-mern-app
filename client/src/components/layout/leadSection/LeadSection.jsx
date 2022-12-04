@@ -1,11 +1,11 @@
 import React from "react";
 import { FaPrayingHands } from "react-icons/fa";
-
+import "./leadSection.css";
 const LeadSection = () => {
   return (
     <section>
       <div className="container">
-        <header className="center flex flex-row-align-center gap-4 paddingTb-6">
+        <header className="center flex flex-row-align-center gap-4 paddingTb-6 lead-section">
           <div className="flex center gap-3 ">
             <h2 className="text-left">
               <span style={{ color: "#F8B24F" }}>O</span>

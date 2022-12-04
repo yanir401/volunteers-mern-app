@@ -37,12 +37,9 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await sendRequest(
-          "http://localhost:5000/events/upcoming-events",
-          "GET"
-        );
+        const res = await sendRequest("/events/upcoming-events", "GET");
         setEvents(res.data);
-        dispatch(fetchEvents(res.data));
+        // dispatch(fetchEvents(res.data));
       } catch (err) {}
     };
     fetchData();
@@ -62,7 +59,7 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<Header />}>
-          <Route index element={<Home />} />
+          <Route index element={<Home upComingEvents={events} />} />
           <Route path="/events" element={<Events />} />
           <Route path="event/:eventId" element={<EventPreview />} />
           {/*only if auth*/}

@@ -44,7 +44,7 @@ const SignUp = ({ changeForm, text }) => {
 
     const isErrors = isFormValid(formFields);
     setErrors(isErrors);
-    const url = "http://localhost:5000/users/signup";
+    const url = "/users/signup";
 
     if (Object.keys(isErrors).length === 0)
       try {

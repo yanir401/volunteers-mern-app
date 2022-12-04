@@ -8,3 +8,14 @@
   /* background-attachment: fixed; */
   /* height: 45rem; */
 }
+
+.upcoming-events .upcoming-events-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 767px) {
+  .upcoming-events .upcoming-events-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

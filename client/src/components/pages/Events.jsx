@@ -11,20 +11,25 @@ const Events = () => {
   const [error, loading, sendRequest] = useFetch();
   const dispatch = useDispatch();
   const [events, setEvents] = useState([]);
-  const { query = "" } = useSelector((state) => state.events);
+  const { events: storedEvents } = useSelector((state) => state.events);
+  console.log(storedEvents);
   const { user, tempCoordinates, distance } = useSelector(
     (state) => state.user
   );
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await sendRequest("http://localhost:5000/events", "GET");
-        setEvents(res.data);
-        dispatch(fetchEvents(res.data));
-      } catch (err) {}
-    };
-    fetchData();
+    console.log(!storedEvents);
+    if (!storedEvents) {
+      console.log("run me me me");
+      const fetchData = async () => {
+        try {
+          const res = await sendRequest("/events", "GET");
+          setEvents(res.data);
+          dispatch(fetchEvents(res.data));
+        } catch (err) {}
+      };
+      fetchData();
+    } else setEvents(storedEvents);
   }, [sendRequest]);
 
   const distanceCalc = (userCoordinates, eventCoordinates, event) => {
@@ -46,19 +51,6 @@ const Events = () => {
     }
   };
 
-  // const filteredEventsBySearch = () =>
-  //   setFilteredEvents(
-  //     filteredEvents?.filter(
-  //       ({ title, description, address, coordinates }, index) => {
-  //         return (
-  //           title.toLowerCase().includes(query.toLowerCase()) ||
-  //           description.toLowerCase().includes(query.toLowerCase()) ||
-  //           address.toLowerCase().includes(query.toLowerCase())
-  //         );
-  //       }
-  //     )
-  //   );
-
   const filteredEvents = events?.filter((event) => {
     if (distance === 0) return event;
     const userCoordinates = tempCoordinates || user?.coordinates;
@@ -79,7 +71,7 @@ const Events = () => {
         {filteredEvents.length === 0 ? (
           <Spinner />
         ) : (
-          <div className="grid-col-4 gap-2 font-16 events-container">
+          <div className="grid-events-container gap-1 font-16 events-container">
             <EventsList events={filteredEvents} />
           </div>
         )}

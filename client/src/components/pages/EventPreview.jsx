@@ -3,7 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useParams } from "react-router-dom";
 import { ModalContext } from "../../context/modalContext";
 import { useFetch } from "../../hooks/useFetch";
-import { updateEventsList } from "../../store/actions/eventsAction";
+import {
+  fetchEvents,
+  updateEventsList,
+} from "../../store/actions/eventsAction";
 import AuthenticationWrapper from "../authentication/AuthenticationWrapper";
 import Chat from "../chat/Chat";
 import EventItemPreview from "../events/eventPreview/EventItemPreview";
@@ -19,28 +22,42 @@ const EventPreview = () => {
   const [event, setEvent] = useState();
   const [buttonMode, setButtonMode] = useState("I want to volunteer");
   const [openChat, setOpenChat] = useState(false);
-  const { state } = useLocation();
+  const { eventId } = useParams();
+
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const eventToRender = events?.find(
-      (event) => event._id === state.event._id
-    );
+    console.log(events);
+    const eventToRender = events?.find((event) => event._id === eventId);
+
+    console.log();
     setEvent(eventToRender);
+
+    if (!eventToRender) callEvent();
 
     if (user && isUserAlreadyVolunteering()) {
       setButtonMode("Leave volunteering");
     }
-  }, [event]);
+  }, []);
+
+  const callEvent = async () => {
+    try {
+      const response = await sendRequest(`/events/event/${eventId}`, "GET");
+      console.log(response);
+      if (response.status !== 200) throw Error;
+      setEvent(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const isUserAlreadyVolunteering = () => {
     return !!event?.volunteers?.find((id) => id === user._id);
   };
 
   const handleOnClick = async () => {
-    let url = "http://localhost:5000/events/join-volunteering";
-    if (buttonMode === "Leave volunteering")
-      url = "http://localhost:5000/events/leave-volunteering";
+    let url = "/events/join-volunteering";
+    if (buttonMode === "Leave volunteering") url = "/events/leave-volunteering";
 
     if (!user) openModal(<AuthenticationWrapper />);
     else {
@@ -85,7 +102,7 @@ const EventPreview = () => {
   return (
     <div
       className="flex flex-col gap-2 events-container marginB-3"
-      style={{ maxWidth: "60%" }}
+      style={{ maxWidth: "70%" }}
     >
       {event ? (
         <>

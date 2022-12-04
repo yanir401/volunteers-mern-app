@@ -6,7 +6,7 @@ import "./newsletter.css";
 const Newsletter = () => {
   return (
     <div className="newsletter-container">
-      <div className="container flex center paddingTb-3">
+      <div className="container flex center paddingTb-3 gap-2">
         <h2>Keep up to our latest news and events.</h2>
         <form>
           <div className="flex center gap-2">

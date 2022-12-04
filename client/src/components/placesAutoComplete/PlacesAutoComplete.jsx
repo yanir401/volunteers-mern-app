@@ -35,7 +35,6 @@ const PlacesAutoComplete = ({ onChange, error, setCoordinates }) => {
   };
   //
 
-  console.log(error);
   //
   const handleSelect =
     ({ description }) =>

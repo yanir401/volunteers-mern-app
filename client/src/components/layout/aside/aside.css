@@ -3,3 +3,9 @@
 
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
+
+@media (max-width: 550px) {
+  .aside-container {
+    grid-row: -1;
+  }
+}

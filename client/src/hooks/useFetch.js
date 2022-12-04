@@ -6,7 +6,9 @@ export const useFetch = () => {
   const [error, setError] = useState("");
   const [controller, setController] = useState();
 
-  const axiosInstance = axios.create();
+  const axiosInstance = axios.create({
+    baseURL: "http://localhost:5000",
+  });
 
   const sendRequest = useCallback(
     async (url, method = "GET", body = null, headers = {}) => {

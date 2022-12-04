@@ -3,6 +3,7 @@ import {
   createEvent,
   deleteEvent,
   getAllEvents,
+  getEvent,
   getUpComingEvents,
   getUserEvents,
   joinVolunteering,
@@ -18,6 +19,8 @@ eventsRouter.get("/upcoming-events", getUpComingEvents);
 
 //events created by the user
 eventsRouter.get("/my-events", auth, getUserEvents);
+
+eventsRouter.get("/event/:id", getEvent);
 
 //users attends events
 // eventsRouter.get("/attend-events", getUserEvents);

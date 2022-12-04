@@ -5,20 +5,20 @@ import { setUser } from "../../../store/actions/userActions";
 import Button from "../../formElements/buttons/Button";
 import Input from "../../formElements/input/Input";
 import Newsletter from "../../layout/newsletter/Newsletter";
-import LeadSection from "../../layout/section/LeadSection";
+import LeadSection from "../../layout/leadSection/LeadSection";
 import StartVolunteering from "../../layout/section/startVolunteering/StartVolunteering";
 import UpComingEvents from "../../layout/section/upComingEvents/UpComingEvents";
 import VolunteerStatics from "../../layout/section/volunteerStatistics/VolunteerStatistics";
 import Modal from "../../UIElements/modal/Modal";
 
-const Home = () => {
+const Home = ({ upComingEvents }) => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
 
   return (
     <>
       <LeadSection />
-      <UpComingEvents />
+      <UpComingEvents upComingEvents={upComingEvents} />
       {user ? <VolunteerStatics /> : <StartVolunteering />}
       <Newsletter />
     </>
