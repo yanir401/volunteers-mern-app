@@ -102,6 +102,6 @@ io.on("connection", (socket) => {
 app.use("/users", usersRouter);
 app.use("/events", eventsRouter);
 app.use(errorHandler);
-app.use(auth);
+// app.use(auth);
 
 httpServer.listen(PORT, () => console.log(`Server started on port ${PORT}`));
