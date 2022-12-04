@@ -1,0 +1,9 @@
+@media (max-width: 850px) {
+  .lead-section {
+    flex-direction: column;
+  }
+  .lead-section p {
+    padding: 0 2rem;
+    text-align: center;
+  }
+}

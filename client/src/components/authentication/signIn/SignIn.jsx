@@ -37,7 +37,7 @@ const SignIn = ({ changeForm, text }) => {
 
     const isErrors = isFormValid(formFields);
     setErrors(isErrors);
-    const url = "http://localhost:5000/users/login";
+    const url = "/users/login";
 
     if (Object.keys(isErrors).length === 0)
       try {

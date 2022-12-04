@@ -22,7 +22,7 @@ const FilteringAside = () => {
 
   const updateUserCoordinates = async (coordinates) => {
     console.log(coordinates);
-    const url = "http://localhost:5000/users/profile";
+    const url = "/users/profile";
 
     try {
       const response = await sendRequest(url, "PATCH", coordinates, {

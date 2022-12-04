@@ -14,7 +14,7 @@ const SubscriptionEvents = () => {
   }, []);
 
   const userEvents = async () => {
-    const url = "http://localhost:5000/events/my-events";
+    const url = "/events/my-events";
 
     try {
       const response = await sendRequest(
@@ -37,18 +37,19 @@ const SubscriptionEvents = () => {
   return (
     <div className="text-center events-container">
       <h2>Your upcoming volunteering</h2>
-      <div className=" text-center">
+      {subscriptionEvents ? (
         <div
-          className="flex center gap-3 font-16 "
+          className="grid-events-container center gap-1 font-16 text-center"
           style={{ paddingTop: "10rem" }}
         >
-          {subscriptionEvents ? (
-            <EventsList events={subscriptionEvents} />
-          ) : (
-            <Spinner />
-          )}
+          <EventsList events={subscriptionEvents} />
         </div>
-      </div>
+      ) : (
+        <div className="flex center">
+          {" "}
+          <Spinner />
+        </div>
+      )}
     </div>
   );
 };

@@ -1,8 +1,9 @@
 import React from "react";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import EventList from "../../../events/EventList";
 import "./upComingEvents.css";
-const UpComingEvents = () => {
+const UpComingEvents = ({ upComingEvents }) => {
   const { events } = useSelector((state) => state.events);
 
   return (
@@ -11,8 +12,8 @@ const UpComingEvents = () => {
         <h2 className="center paddingTb-2" style={{ color: "#F8B24F" }}>
           Upcoming Events
         </h2>
-        <div className="grid-col-3 font-16">
-          <EventList events={events} limit={3} />
+        <div className="upcoming-events-grid font-16">
+          <EventList events={upComingEvents} limit={4} />
         </div>
       </div>
     </div>

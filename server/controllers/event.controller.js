@@ -77,6 +77,28 @@ export const createEvent = async (req, res) => {
   }
 };
 
+export const getEvent = async (req, res, next) => {
+  console.log("hiii");
+  console.log("req,", req.params);
+  const eventId = req.params.id;
+
+  if (!mongoose.Types.ObjectId.isValid(eventId)) {
+    const error = new Error("Event not found");
+    return next(error);
+  }
+
+  try {
+    const existingEvent = await Event.findById(eventId);
+    if (!existingEvent) throw new Error("Event not found");
+
+    console.log(existingEvent);
+    res.send(existingEvent);
+  } catch (error) {
+    console.log(error);
+    res.send(error.message);
+  }
+};
+
 export const deleteEvent = async (req, res, next) => {
   const eventId = req.params.id;
 
