@@ -1,3 +1,8 @@
 import io from "socket.io-client";
 
-export const socket = io.connect("http://localhost:5000");
+const URL =
+  process.env.NODE_ENV === "development"
+    ? "http://localhost:5000"
+    : "https://volunteers-mern-app-backend.onrender.com";
+
+export const socket = io.connect(URL);
