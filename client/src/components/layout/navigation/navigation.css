@@ -15,9 +15,9 @@
   z-index: 1;
 }
 
-.navbar .links {
-  /* display: flex; */
-}
+/* .navbar .links {
+  display: flex;
+} */
 
 .navbar .links a {
   padding: 1rem 2rem;
