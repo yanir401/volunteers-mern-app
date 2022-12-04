@@ -7,7 +7,7 @@ import cors from "cors";
 import { errorHandler } from "./middleware/errorMiddleware.js";
 import { usersRouter } from "./routes/users.routes.js";
 import { eventsRouter } from "./routes/events.routes.js";
-import { authMiddleware } from "./middleware/authMiddleware.js";
+import { auth } from "./middleware/auth.js";
 dotenv.config({ path: "../.env" });
 
 const PORT = process.env.PORT || 5000;
@@ -102,6 +102,6 @@ io.on("connection", (socket) => {
 app.use("/users", usersRouter);
 app.use("/events", eventsRouter);
 app.use(errorHandler);
-app.use(authMiddleware);
+app.use(auth);
 
 httpServer.listen(PORT, () => console.log(`Server started on port ${PORT}`));
