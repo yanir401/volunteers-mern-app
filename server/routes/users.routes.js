@@ -5,7 +5,7 @@ import {
   signup,
   updateProfile,
 } from "../controllers/users.controller.js";
-import { authMiddleware } from "../../server/middleware/authMiddleware";
+import { authMiddleware } from "../../server/middleware/authMiddleware.js";
 
 export const usersRouter = Router();
 
