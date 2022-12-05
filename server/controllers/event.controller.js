@@ -31,7 +31,6 @@ export const getUserEvents = async (req, res) => {
     // .populate("Users")
     // .exec();
     // .execPopulate();
-    console.log("test mannnnnnn", userEvents.volunteers);
     res.send(userEvents);
   } catch (error) {
     res.send(error);
@@ -58,7 +57,6 @@ export const getUserEvents = async (req, res) => {
 // };
 
 export const createEvent = async (req, res) => {
-  console.log(req.body);
   const { formFields, author, coordinates } = req.body;
   if (!formFields.image)
     formFields.image =
@@ -69,7 +67,6 @@ export const createEvent = async (req, res) => {
     const event = new Event({ ...formFields, author, coordinates });
     event.volunteers.push(req.user._id);
     const newEvent = await event.save();
-    console.log({ newEvent });
     res.send(newEvent);
   } catch (error) {
     console.log({ error });
@@ -78,8 +75,6 @@ export const createEvent = async (req, res) => {
 };
 
 export const getEvent = async (req, res, next) => {
-  console.log("hiii");
-  console.log("req,", req.params);
   const eventId = req.params.id;
 
   if (!mongoose.Types.ObjectId.isValid(eventId)) {
@@ -91,7 +86,6 @@ export const getEvent = async (req, res, next) => {
     const existingEvent = await Event.findById(eventId);
     if (!existingEvent) throw new Error("Event not found");
 
-    console.log(existingEvent);
     res.send(existingEvent);
   } catch (error) {
     console.log(error);
@@ -178,7 +172,6 @@ export const leaveVolunteering = async (req, res, next) => {
     );
 
     let eventToUpdate;
-    console.log(!isVolunteering);
 
     if (!isVolunteering) {
       res.status(400);

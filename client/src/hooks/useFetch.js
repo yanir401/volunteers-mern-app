@@ -17,7 +17,6 @@ export const useFetch = () => {
 
   const sendRequest = useCallback(
     async (url, method = "GET", body = null, headers = {}) => {
-      console.log(headers);
       setLoading(true);
       const controller = new AbortController();
       setController(controller);

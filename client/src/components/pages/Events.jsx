@@ -12,7 +12,6 @@ const Events = () => {
   const dispatch = useDispatch();
   const [events, setEvents] = useState([]);
   const { events: storedEvents } = useSelector((state) => state.events);
-  console.log(storedEvents);
   const { user, tempCoordinates, distance } = useSelector(
     (state) => state.user
   );
@@ -20,7 +19,6 @@ const Events = () => {
   useEffect(() => {
     console.log(!storedEvents);
     if (!storedEvents) {
-      console.log("run me me me");
       const fetchData = async () => {
         try {
           const res = await sendRequest("/events", "GET");
@@ -49,7 +47,6 @@ const Events = () => {
       if (distance === 200) return event;
       if (d <= distance) {
         event["distance"] = d.toFixed();
-        console.log(event);
         return event;
       }
     }
@@ -75,7 +72,7 @@ const Events = () => {
         {filteredEvents.length === 0 ? (
           <Spinner />
         ) : (
-          <div className="grid-events-container gap-1 font-16 events-container">
+          <div className="grid-events-container gap-2 font-16 events-container">
             <EventsList events={filteredEvents} />
           </div>
         )}

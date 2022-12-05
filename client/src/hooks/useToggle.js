@@ -5,7 +5,6 @@ const useToggle = () => {
 
   const toggle = () => {
     setState((prev) => !prev);
-    console.log(state);
   };
 
   return [state, toggle];

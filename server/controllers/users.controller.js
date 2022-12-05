@@ -2,7 +2,6 @@ import { User } from "../model/user/user.model.js";
 
 //sign up , POST , /users/signup
 export const signup = async (req, res, next) => {
-  console.log(req.body);
   const { name, email, password } = req.body;
 
   try {
@@ -68,7 +67,6 @@ export const updateProfile = async (req, res) => {
   const updates = Object.keys(req.body);
   //maybe check if valid properties to update?
 
-  console.log({ updates });
   if (!req.user) {
     res.status(400);
     const err = new Error("Something went wrong please try again later");

@@ -1,4 +1,5 @@
 .input {
+  background: var(--white);
   border: none;
   min-width: 15rem;
   padding: 2rem 1rem;

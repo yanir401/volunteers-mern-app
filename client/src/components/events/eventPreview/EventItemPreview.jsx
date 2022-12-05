@@ -10,7 +10,8 @@ const EventItemPreview = ({
   loading,
   submittedMsg,
 }) => {
-  console.log(buttonText, event);
+  if (event.message) return event.message; // style
+
   return (
     <>
       <h2 className="text-center marginTb-2">{event.title}</h2>

@@ -58,7 +58,6 @@ const SignUp = ({ changeForm, text }) => {
         setSubmitted(true);
         closeModalTimeOut(1500);
       } catch (err) {
-        // console.log(err);
         console.log(error);
       }
   };

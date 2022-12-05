@@ -74,7 +74,6 @@ const Chat = ({ event }) => {
     });
 
     socket.on("roomData", (data) => {
-      console.log("data", data.data);
       // console.log("room data", data.users[event._id]);
       // dispatch(addUser({ username: data.username, eventId: event._id }));
       dispatch(setUsersInRoom({ users: data.data, eventId: event._id }));
@@ -94,20 +93,6 @@ const Chat = ({ event }) => {
     // });
     // socket.emit("userJoined", { username: user.name, eventId: event._id });
   }, [socket]);
-
-  // useEffect(() => {
-  //   console.log("user comeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
-  //   socket.on("roomData", (data) => {
-  //     console.log({ data });
-  //     // dispatch(addUser({ username: data.username, eventId: event._id }));
-
-  //     // setUsers([...users, data]);
-  //   });
-  // }, [socket]);
-
-  // useEffect(() => {
-
-  // }, [socket]);
 
   const sendMessage = () => {
     const data = {
