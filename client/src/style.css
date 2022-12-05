@@ -280,6 +280,9 @@ a {
   .grid-events-container {
     grid-template-columns: repeat(3, 1fr);
   }
+  .events-container {
+    max-width: 70%;
+  }
 }
 
 @media (max-width: 1024px) {
@@ -295,6 +298,9 @@ a {
   .grid-col-70-30 {
     grid-template-columns: 0.7fr 0.3fr;
   }
+  .events-container {
+    max-width: 80%;
+  }
 }
 
 @media (max-width: 767px) {
@@ -306,6 +312,9 @@ a {
   }
   .form-container {
     max-width: 80%;
+  }
+  .events-container {
+    max-width: 90%;
   }
 }
 

@@ -6,6 +6,9 @@
   height: 6rem;
   font-size: 2rem;
   text-align: left;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 100%;
 }
 
 .input[type="range"] {

@@ -1,6 +1,6 @@
 .card {
   cursor: pointer;
-  margin: 2rem auto;
+  margin: 1rem auto;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   border-radius: 6px;
   /* padding: 2rem; */
@@ -14,7 +14,7 @@
   /* overflow: hidden; */
   background: white;
   text-align: center;
-  max-width: 90%;
+  max-width: 95%;
 
   /* height: auto; */
   overflow: hidden;
