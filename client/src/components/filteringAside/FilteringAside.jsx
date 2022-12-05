@@ -21,14 +21,12 @@ const FilteringAside = () => {
   // const [distance, setDistance] = useState(0);
 
   const updateUserCoordinates = async (coordinates) => {
-    console.log(coordinates);
     const url = "/users/profile";
 
     try {
       const response = await sendRequest(url, "PATCH", coordinates, {
         Authorization: `Bearer ${user.tokens[0].token}`,
       });
-      console.log({ response });
       if (!response && !response?.statusText === "OK") {
         throw new Error(error);
       }

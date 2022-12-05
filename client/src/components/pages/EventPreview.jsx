@@ -27,7 +27,6 @@ const EventPreview = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log(events);
     const eventToRender = events?.find((event) => event._id === eventId);
 
     console.log();

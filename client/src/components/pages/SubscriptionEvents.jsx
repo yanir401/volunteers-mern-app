@@ -25,7 +25,6 @@ const SubscriptionEvents = () => {
           Authorization: `Bearer ${user.tokens[0].token}`,
         }
       );
-      console.log(response.data);
       setSubscriptionEvents(response.data);
       // if (response.status === 200) setSubmitted(true);
     } catch (err) {
@@ -39,7 +38,7 @@ const SubscriptionEvents = () => {
       <h2>Your upcoming volunteering</h2>
       {subscriptionEvents ? (
         <div
-          className="grid-events-container center gap-1 font-16 text-center"
+          className="grid-events-container center gap-2 font-16 text-center"
           style={{ paddingTop: "10rem" }}
         >
           <EventsList events={subscriptionEvents} />

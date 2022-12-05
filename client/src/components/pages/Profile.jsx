@@ -5,7 +5,6 @@ import io from "socket.io-client";
 const Profile = () => {
   const setEmit = () => {
     // console.log(socket);
-    console.log("first");
     // socket.emit("sendMessage", "test");
   };
   return (

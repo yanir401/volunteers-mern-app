@@ -27,7 +27,6 @@ function App() {
 
   useEffect(() => {
     closeModal();
-    console.log(process.env);
   }, [location.pathname]);
 
   const [error, loading, sendRequest] = useFetch();

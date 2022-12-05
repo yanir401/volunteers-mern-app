@@ -16,7 +16,6 @@ const Navigation = () => {
 
   const { pathname } = useLocation();
   useEffect(() => {
-    console.log(pathname);
     setIsNavExpanded(false);
   }, [pathname]);
   // const authenticate = () => {
