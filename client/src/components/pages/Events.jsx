@@ -47,7 +47,11 @@ const Events = () => {
 
       const d = (R * c) / 1000; // in km
       if (distance === 200) return event;
-      if (d <= distance) return event;
+      if (d <= distance) {
+        event["distance"] = d.toFixed();
+        console.log(event);
+        return event;
+      }
     }
   };
 

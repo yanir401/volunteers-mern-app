@@ -12,8 +12,9 @@ const EventItem = ({ event }) => {
         <div className="event-content">
           <p className="font-18">{event.title}</p>
           <p>{new Date(event.date).toLocaleDateString("en-IL")}</p>
-          <p>{event.description}</p>
-          <p>{event.time}</p> {event?.volunteers?.length}
+          <p>{event.time}</p>
+          <p>Currently volunteering: {event?.volunteers?.length}</p>
+          <p>{event.distance && event.distance + " Km from you"} </p>
         </div>
       </Card>
     </Link>
