@@ -1,10 +1,14 @@
 import { EVENTS_ACTION_TYPE } from "../types/eventsType";
 
 export const eventReducer = (state = {}, action) => {
+  console.log(state);
   const { type, payload } = action;
   switch (type) {
     case EVENTS_ACTION_TYPE.SET_EVENTS:
       return { ...state, events: payload };
+
+    case EVENTS_ACTION_TYPE.ADD_EVENT:
+      return { ...state, events: [...state.events, payload] };
 
     case EVENTS_ACTION_TYPE.UPDATE_EVENTS_LIST:
       return {

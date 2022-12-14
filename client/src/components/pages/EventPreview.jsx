@@ -27,30 +27,37 @@ const EventPreview = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    console.log("render");
     const eventToRender = events?.find((event) => event._id === eventId);
+    console.log({ eventToRender });
+    console.log({ events });
 
-    console.log();
+    console.log(eventToRender);
     setEvent(eventToRender);
 
     if (!eventToRender) callEvent();
-
-    if (user && isUserAlreadyVolunteering()) {
+    console.log({ user });
+    if (user && isUserAlreadyVolunteering(eventToRender)) {
+      console.log("here");
       setButtonMode("Leave volunteering");
     }
-  }, []);
+  }, [user]);
 
   const callEvent = async () => {
+    console.log("call to event");
     try {
       const response = await sendRequest(`/events/event/${eventId}`, "GET");
       console.log(response);
       if (response.status !== 200) throw Error;
       setEvent(response.data);
+      if (isUserAlreadyVolunteering(response.data))
+        setButtonMode("Leave volunteering");
     } catch (error) {
       console.log(error);
     }
   };
 
-  const isUserAlreadyVolunteering = () => {
+  const isUserAlreadyVolunteering = (event) => {
     return !!event?.volunteers?.find((id) => id === user._id);
   };
 

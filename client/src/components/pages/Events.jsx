@@ -10,18 +10,18 @@ import Spinner from "../UIElements/spinner/Spinner";
 const Events = () => {
   const [error, loading, sendRequest] = useFetch();
   const dispatch = useDispatch();
-  const [events, setEvents] = useState([]);
+  const [events, setEvents] = useState();
   const { events: storedEvents } = useSelector((state) => state.events);
   const { user, tempCoordinates, distance } = useSelector(
     (state) => state.user
   );
 
   useEffect(() => {
-    console.log(!storedEvents);
-    if (!storedEvents) {
+    if (!storedEvents || storedEvents.length === 0) {
       const fetchData = async () => {
         try {
           const res = await sendRequest("/events", "GET");
+          console.log(!res.data);
           setEvents(res.data);
           dispatch(fetchEvents(res.data));
         } catch (err) {}
@@ -69,11 +69,20 @@ const Events = () => {
       >
         <h2>Chose your volunteering</h2>
 
-        {filteredEvents.length === 0 ? (
+        {!filteredEvents ? (
           <Spinner />
         ) : (
-          <div className="grid-events-container gap-2 font-16 events-container">
-            <EventsList events={filteredEvents} />
+          <div className="events-container">
+            {filteredEvents.length === 0 ? (
+              <p className="font-20">
+                Currently we don't have events right now. <br />
+                Please try again later or create your own volunteer event.
+              </p>
+            ) : (
+              <div className="grid-events-container gap-2 font-16">
+                <EventsList events={filteredEvents} />
+              </div>
+            )}
           </div>
         )}
       </div>

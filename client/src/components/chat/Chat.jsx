@@ -74,6 +74,7 @@ const Chat = ({ event }) => {
     });
 
     socket.on("roomData", (data) => {
+      console.log(data);
       // console.log("room data", data.users[event._id]);
       // dispatch(addUser({ username: data.username, eventId: event._id }));
       dispatch(setUsersInRoom({ users: data.data, eventId: event._id }));

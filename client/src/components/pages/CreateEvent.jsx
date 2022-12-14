@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useFetch } from "../../hooks/useFetch";
 import { useNavigate, Link } from "react-router-dom";
 import { isCreateEventFormValid } from "../../utils/createEventValidation/eventFormValidation";
@@ -7,6 +7,7 @@ import { isCreateEventFormValid } from "../../utils/createEventValidation/eventF
 import Button from "../formElements/buttons/Button";
 import Form from "../formElements/form/Form";
 import Spinner from "../UIElements/spinner/Spinner";
+import { addEvent, updateEventsList } from "../../store/actions/eventsAction";
 
 const defaultFormFields = {
   title: "",
@@ -21,7 +22,7 @@ const defaultFormFields = {
 const CreateEvent = () => {
   // const dispatch = useDispatch((state) => state.user);
   const { user } = useSelector((state) => state.user);
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [formFields, setFormFields] = useState(defaultFormFields);
   const [error, loading, sendRequest, clearError] = useFetch();
   const [errors, setErrors] = useState({});
@@ -73,6 +74,8 @@ const CreateEvent = () => {
         if (response.status === 200) {
           setSubmitted(true);
           setEvent(response.data);
+          dispatch(addEvent(response.data));
+
           console.log(response.data);
         }
       } catch (err) {
