@@ -71,9 +71,7 @@ const Events = () => {
     if (query) {
       return queryIncludes;
     }
-
     if (distance === 0) return event;
-
     // // console.log(query);
     if (userCoordinates) return isEventInRange;
 
@@ -93,7 +91,8 @@ const Events = () => {
         ) : (
           <div className="events-container">
             {filteredEvents.length === 0 ? (
-              distance === 0 && (
+              distance === 0 &&
+              !query && (
                 <p className="font-20">
                   Currently we don't have events right now. <br />
                   Please try again later or create your own volunteer event.

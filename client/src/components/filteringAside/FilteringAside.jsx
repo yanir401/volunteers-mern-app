@@ -112,9 +112,9 @@ const FilteringAside = () => {
           >
             Clear filters
           </Button>
-          <div>
+          <div className="paddingLR-1">
             <Input
-              placeholder="Filter by..."
+              placeholder="Filter by keywords..."
               onChange={handleSearchEvent}
               value={inputSearch}
             />

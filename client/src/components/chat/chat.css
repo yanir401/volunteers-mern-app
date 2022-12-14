@@ -1,8 +1,7 @@
 .chat-container {
   position: fixed;
   right: 0;
-  bottom: 8rem;
-  background-color: var(--white);
+  bottom: 12rem;
   height: 40rem;
   justify-content: space-between;
   border: 1px solid var(--primary-background-color);
@@ -11,10 +10,18 @@
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
-.chat-container .users-messages-container {
-  height: 100%;
+.chat-container .event-room-title {
   /* background: var(--primary-light); */
 
+  background: var(--secondary-color);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+  padding: 0.5rem;
+}
+.chat-container .users-messages-container {
+  height: 40rem;
+  /* background: var(--primary-light); */
+  background-color: var(--white);
   display: grid;
   grid-template-columns: 0.3fr 0.7fr;
 }
@@ -24,9 +31,15 @@
   padding: 0.5rem;
   overflow-y: auto;
 }
+.chat-container .users-messages-container .users-list .users-list-title {
+  background: var(--primary-light);
+  color: black;
+  width: 100%;
+}
 
 .chat-container .users-messages-container .view-messages-container {
   overflow-y: auto;
+  height: 40rem;
   padding: 0.25rem;
 }
 .chat-container .users-messages-container .view-messages-container .meta {
