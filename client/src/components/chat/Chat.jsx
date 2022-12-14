@@ -55,14 +55,17 @@ const Chat = ({ event }) => {
   //   });
 
   //temp solution
-  useEffect(() => {
-    console.log("usersssssss");
-    socket.on("online_users", (onlineUsers) => {
-      console.log("onlineUsers", onlineUsers);
-      setUsers(onlineUsers);
-    });
+  // useEffect(() => {
+  //   console.log("usersssssss");
+  //   socket.on("online_users", (onlineUsers) => {
+  //     console.log("onlineUsers", onlineUsers);
+  //     setUsers(onlineUsers);
+  //   });
+  // });
+  socket.on("online_users", (onlineUsers) => {
+    console.log("onlineUsers", onlineUsers.data);
+    setUsers(onlineUsers.data);
   });
-
   useEffect(() => {
     console.log("socket on");
     socket.on("message", (data) => {
@@ -125,8 +128,14 @@ const Chat = ({ event }) => {
 
   return (
     <div className="flex flex-col chat-container">
+      <p className="text-center event-room-title font-22">
+        {event.title.length > 12 ? event.title.slice(0, 35) : event.title}
+      </p>
       <div className="users-messages-container">
         <div className="users-list">
+          <p className="text-center font-18 bold marginB-1 users-list-title">
+            Volunteers:{" "}
+          </p>
           {chat.users[event._id]?.map((user, i) => {
             return (
               <div className="font-14 marginB-1" key={user.id}>

@@ -58,18 +58,15 @@ io.on("connection", (socket) => {
     console.log({ isUserAlreadyInRoom }, !isUserAlreadyInRoom);
     if (!isUserAlreadyInRoom)
       users[eventId] = [...users[eventId], { username, id: socket.id, userId }];
-    console.log("list of users", users);
 
-    console.log("check", users[eventId]);
-
-    socket.to(eventId).emit("roomData", {
+    io.to(eventId).emit("roomData", {
       data: users[eventId],
     });
 
-    console.log({ eventId });
-    socket.to(eventId).emit("online_users", {
-      data: users[eventId],
-    });
+    // console.log({ eventId });
+    // socket.to(eventId).emit("online_users", {
+    //   data: users[eventId],
+    // });
 
     socket.broadcast.to(eventId).emit("message", {
       username: "Admin",
