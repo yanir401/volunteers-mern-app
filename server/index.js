@@ -55,9 +55,12 @@ io.on("connection", (socket) => {
     const isUserAlreadyInRoom = users[eventId].find(
       (user) => user.userId === userId
     );
+    console.log({ isUserAlreadyInRoom }, !isUserAlreadyInRoom);
     if (!isUserAlreadyInRoom)
       users[eventId] = [...users[eventId], { username, id: socket.id, userId }];
     console.log("list of users", users);
+
+    console.log("check", users[eventId]);
 
     socket.to(eventId).emit("roomData", {
       data: users[eventId],

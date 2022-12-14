@@ -69,8 +69,8 @@ export const createEvent = async (req, res) => {
     const newEvent = await event.save();
     res.send(newEvent);
   } catch (error) {
-    console.log({ error });
-    res.send(error);
+    console.log(error);
+    res.status(400).send({ error: "Something went wrong" });
   }
 };
 

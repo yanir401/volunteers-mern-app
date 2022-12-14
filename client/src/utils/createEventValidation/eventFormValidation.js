@@ -6,8 +6,8 @@ export const isCreateEventFormValid = (fields) => {
     errors.title = "Title must be at least 2 characters";
 
   if (!fields.description.trim()) errors.description = "Description required";
-  else if (fields.description.trim().length < 2)
-    errors.description = "Description must be at least 2 characters";
+  else if (fields.description.trim().length < 4)
+    errors.description = "Description must be at least 4 characters";
 
   if (!fields.address.trim()) errors.address = "Address required";
   else if (fields.address.trim().length < 2)
