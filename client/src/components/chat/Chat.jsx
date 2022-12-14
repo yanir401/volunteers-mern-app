@@ -55,8 +55,16 @@ const Chat = ({ event }) => {
   //   });
 
   //temp solution
+  useEffect(() => {
+    console.log("usersssssss");
+    socket.on("online_users", (onlineUsers) => {
+      console.log("onlineUsers", onlineUsers);
+      setUsers(onlineUsers);
+    });
+  });
 
   useEffect(() => {
+    console.log("socket on");
     socket.on("message", (data) => {
       //   store.dispatch(notTyping(data));
       const { username, message, createdAt } = data;
@@ -74,6 +82,7 @@ const Chat = ({ event }) => {
     });
 
     socket.on("roomData", (data) => {
+      console.log("room data");
       console.log(data);
       // console.log("room data", data.users[event._id]);
       // dispatch(addUser({ username: data.username, eventId: event._id }));
@@ -118,10 +127,9 @@ const Chat = ({ event }) => {
     <div className="flex flex-col chat-container">
       <div className="users-messages-container">
         <div className="users-list">
-          {" "}
           {chat.users[event._id]?.map((user, i) => {
             return (
-              <div className="font-14 marginB-1" key={i}>
+              <div className="font-14 marginB-1" key={user.id}>
                 <span className="">{user.username}</span>
               </div>
             );

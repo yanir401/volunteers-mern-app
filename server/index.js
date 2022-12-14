@@ -66,6 +66,11 @@ io.on("connection", (socket) => {
       data: users[eventId],
     });
 
+    console.log({ eventId });
+    socket.to(eventId).emit("online_users", {
+      data: users[eventId],
+    });
+
     socket.broadcast.to(eventId).emit("message", {
       username: "Admin",
       message: username + "  has joined!",

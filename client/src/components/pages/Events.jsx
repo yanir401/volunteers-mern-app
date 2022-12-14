@@ -11,7 +11,7 @@ const Events = () => {
   const [error, loading, sendRequest] = useFetch();
   const dispatch = useDispatch();
   const [events, setEvents] = useState();
-  const { events: storedEvents } = useSelector((state) => state.events);
+  const { events: storedEvents, query } = useSelector((state) => state.events);
   const { user, tempCoordinates, distance } = useSelector(
     (state) => state.user
   );
@@ -51,13 +51,32 @@ const Events = () => {
       }
     }
   };
-
   const filteredEvents = events?.filter((event) => {
-    if (distance === 0) return event;
     const userCoordinates = tempCoordinates || user?.coordinates;
+    let queryToLowerCase = query?.toLowerCase();
+
+    const queryIncludes =
+      event.title.toLowerCase().includes(queryToLowerCase) ||
+      event.description.toLowerCase().includes(queryToLowerCase);
+
+    const isEventInRange = distanceCalc(
+      userCoordinates,
+      event.coordinates,
+      event
+    );
+
+    if (query && userCoordinates) {
+      return queryIncludes && isEventInRange;
+    }
+    if (query) {
+      return queryIncludes;
+    }
+
+    if (distance === 0) return event;
+
     // // console.log(query);
-    if (userCoordinates)
-      return distanceCalc(userCoordinates, event.coordinates, event);
+    if (userCoordinates) return isEventInRange;
+
     return event;
   });
 
@@ -74,10 +93,12 @@ const Events = () => {
         ) : (
           <div className="events-container">
             {filteredEvents.length === 0 ? (
-              <p className="font-20">
-                Currently we don't have events right now. <br />
-                Please try again later or create your own volunteer event.
-              </p>
+              distance === 0 && (
+                <p className="font-20">
+                  Currently we don't have events right now. <br />
+                  Please try again later or create your own volunteer event.
+                </p>
+              )
             ) : (
               <div className="grid-events-container gap-2 font-16">
                 <EventsList events={filteredEvents} />

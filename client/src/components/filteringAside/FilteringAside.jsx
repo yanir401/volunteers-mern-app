@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./filteringAside.css";
 import {
@@ -13,6 +13,7 @@ import { useFetch } from "../../hooks/useFetch";
 
 const FilteringAside = () => {
   const dispatch = useDispatch();
+  const [inputSearch, setInputSearch] = useState("");
   const [error, loading, sendRequest, clearError] = useFetch();
   const { user, tempCoordinates, distance } = useSelector(
     (state) => state.user
@@ -52,12 +53,15 @@ const FilteringAside = () => {
         } else if (!user.coordinates) {
           dispatch(setUser({ coordinates: { lat, lng } }));
           updateUserCoordinates({ coordinates: { lat, lng } });
-          console.log("coords");
         }
       },
       (error) => console.log(error)
     );
   };
+
+  useEffect(() => {
+    console.log("component render");
+  }, []);
 
   const handleOnChange = (e) => {
     if (!tempCoordinates && !user?.coordinates) getUserLocation();
@@ -65,10 +69,15 @@ const FilteringAside = () => {
   };
 
   const handleSearchEvent = (e) => {
+    setInputSearch(e.target.value);
     dispatch(searchEvent(e.target.value));
   };
 
-  const handleOnClick = () => dispatch(setDistance(0));
+  const handleOnClick = () => {
+    dispatch(setDistance(0));
+    dispatch(searchEvent(""));
+    setInputSearch("");
+  };
 
   return (
     <div className="flex flex-col paddingTb-4 gap-4 text-center aside-inner-container">
@@ -97,18 +106,20 @@ const FilteringAside = () => {
               height: "2rem",
               padding: "2rem",
               fontSize: "1.8rem",
-              // color: "white",
-              // background: "#babfcc",
             }}
             type="light"
             onClick={handleOnClick}
           >
             Clear filters
           </Button>
+          <div>
+            <Input
+              placeholder="Filter by..."
+              onChange={handleSearchEvent}
+              value={inputSearch}
+            />
+          </div>
         </div>
-        {/* <div>
-          <Input placeholder="Filter by..." onChange={handleSearchEvent} />
-        </div> */}
       </div>
     </div>
   );
