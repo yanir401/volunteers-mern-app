@@ -27,6 +27,12 @@ export const getUserEvents = (event) => {
     payload: event,
   };
 };
+export const updateUserEvents = (event) => {
+  return {
+    type: EVENTS_ACTION_TYPE.UPDATE_USER_EVENTS,
+    payload: event,
+  };
+};
 
 export const searchEvent = (query) => {
   return {

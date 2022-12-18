@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./filteringAside.css";
 import {
@@ -19,8 +19,6 @@ const FilteringAside = () => {
     (state) => state.user
   );
 
-  // const [distance, setDistance] = useState(0);
-
   const updateUserCoordinates = async (coordinates) => {
     const url = "/users/profile";
 
@@ -31,9 +29,6 @@ const FilteringAside = () => {
       if (!response && !response?.statusText === "OK") {
         throw new Error(error);
       }
-      // dispatch(setUser(response.data.user));
-      // setSubmitted(true);
-      // closeModalTimeOut(1500);
     } catch (err) {
       console.log(error);
     }
@@ -58,10 +53,6 @@ const FilteringAside = () => {
       (error) => console.log(error)
     );
   };
-
-  useEffect(() => {
-    console.log("component render");
-  }, []);
 
   const handleOnChange = (e) => {
     if (!tempCoordinates && !user?.coordinates) getUserLocation();

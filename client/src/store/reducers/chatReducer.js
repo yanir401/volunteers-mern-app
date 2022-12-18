@@ -28,17 +28,6 @@ export const chatReducer = (state = initialState, action) => {
         { ...payload },
       ];
 
-      //   tempMessages[payload.eventId].push(payload);
-
-      //   state.messages[payload.eventId] = [
-      //     ...state.messages[payload.eventId],
-      //     { ...payload },
-      //   ];
-
-      //   state.messages[payload.eventId].push(payload.message);
-
-      //   console.log([...state.messages]);
-
       return {
         ...state,
         // messages: [...state.messages, state.messages[payload.eventId]],
@@ -59,8 +48,6 @@ export const chatReducer = (state = initialState, action) => {
         ...state.users[payload.eventId],
         { ...payload },
       ];
-
-      console.log(state.users);
 
       return { ...state, users: { ...state.users } };
 

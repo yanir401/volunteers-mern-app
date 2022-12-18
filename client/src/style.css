@@ -152,6 +152,9 @@ a {
   margin: 2rem 0;
 }
 
+.paddingT-1 {
+  padding-top: 1rem;
+}
 .paddingTb-1 {
   padding: 1rem 0;
 }
@@ -281,7 +284,7 @@ a {
     grid-template-columns: repeat(3, 1fr);
   }
   .events-container {
-    max-width: 70%;
+    max-width: 80%;
   }
 }
 

@@ -20,11 +20,6 @@ const VolunteerStatics = () => {
         <div className="full-width-high">
           <div className="volunteer-statics-img"></div>
         </div>
-        {/* <div className="join-us-container center">
-          <Button type="outline" onClick={handleOnClick}>
-            Join Us
-          </Button>
-        </div> */}
       </div>
     </div>
   );

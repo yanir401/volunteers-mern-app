@@ -23,6 +23,5 @@ export const isFormValid = (fields) => {
     errors.password =
       "Password Must contain at least one lower case, uppercase, number and special character";
 
-  console.log(fields.password);
   return errors;
 };

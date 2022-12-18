@@ -12,7 +12,6 @@ import VolunteerStatics from "../../layout/section/volunteerStatistics/Volunteer
 import Modal from "../../UIElements/modal/Modal";
 
 const Home = ({ upComingEvents }) => {
-  const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
 
   return (
