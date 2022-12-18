@@ -3,10 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useParams } from "react-router-dom";
 import { ModalContext } from "../../context/modalContext";
 import { useFetch } from "../../hooks/useFetch";
-import {
-  fetchEvents,
-  updateEventsList,
-} from "../../store/actions/eventsAction";
+import { updateUserEvents } from "../../store/actions/eventsAction";
 import AuthenticationWrapper from "../authentication/AuthenticationWrapper";
 import Chat from "../chat/Chat";
 import EventItemPreview from "../events/eventPreview/EventItemPreview";
@@ -27,30 +24,22 @@ const EventPreview = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("render");
     const eventToRender = events?.find((event) => event._id === eventId);
-    console.log({ eventToRender });
-    console.log({ events });
 
-    console.log(eventToRender);
     setEvent(eventToRender);
 
     if (!eventToRender) callEvent();
-    console.log({ user });
     if (user && isUserAlreadyVolunteering(eventToRender)) {
-      console.log("here");
       setButtonMode("Leave volunteering");
     }
   }, [user]);
 
   const callEvent = async () => {
-    console.log("call to event");
     try {
       const response = await sendRequest(`/events/event/${eventId}`, "GET");
-      console.log(response);
       if (response.status !== 200) throw Error;
       setEvent(response.data);
-      if (isUserAlreadyVolunteering(response.data))
+      if (user && isUserAlreadyVolunteering(response.data))
         setButtonMode("Leave volunteering");
     } catch (error) {
       console.log(error);
@@ -71,7 +60,6 @@ const EventPreview = () => {
         const response = await sendRequest(
           url,
           "PATCH",
-
           {
             user,
             event,
@@ -80,7 +68,8 @@ const EventPreview = () => {
         );
         if (!error && response) {
           setEvent(response.data);
-          dispatch(updateEventsList(response.data));
+          dispatch(updateUserEvents(response.data));
+
           if (url.includes("join")) {
             setButtonMode("Leave volunteering");
             setSubmittedMsg("You have successfully joined volunteering");

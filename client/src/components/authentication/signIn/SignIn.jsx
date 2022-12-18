@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ModalContext } from "../../../context/modalContext";
 import { useFetch } from "../../../hooks/useFetch";
@@ -16,8 +16,7 @@ const defaultFormFields = {
 const SignIn = ({ changeForm, text }) => {
   const dispatch = useDispatch((state) => state.user);
   const { user } = useSelector((state) => state.user);
-
-  const { openModal, closeModalTimeOut } = useContext(ModalContext);
+  const { closeModalTimeOut } = useContext(ModalContext);
   const [formFields, setFormFields] = useState(defaultFormFields);
   const [error, loading, sendRequest, clearError] = useFetch();
   const [errors, setErrors] = useState({});
@@ -54,62 +53,11 @@ const SignIn = ({ changeForm, text }) => {
       } catch (err) {
         console.log(error);
       }
-    console.log(error);
   };
-
-  //   const welcomeMsg = (
-  //     <p className="text-center font-20">Welcome {user.name}.</p>
-  //   );
 
   const welcomeMsg = () => (
     <p className="text-center font-20">Welcome Back {user.name}!</p>
   );
-
-  // const welcomeMsg = () =>
-  //   openModal(<p style={{ color: "white" }}>Welcome {name}!</p>);
-
-  // const signUpForm = (
-  //   <form className="flex flex-col gap-1-5 text-center">
-  //     <h2 style={{ color: "#fff" }}>Sign Up</h2>
-  //     <div className="flex flex-col">
-  //       <Input
-  //         type="text"
-  //         name="name"
-  //         placeholder="Full name"
-  //         onChange={handleOnChange}
-  //       />
-  //       <span className="error-msg">{errors.name && errors.name}</span>
-  //     </div>
-  //     <div className="flex flex-col">
-  //       <Input
-  //         type="text"
-  //         name="email"
-  //         placeholder="Email address"
-  //         onChange={handleOnChange}
-  //       />
-  //       <span className="error-msg">{errors.email && errors.email}</span>
-  //     </div>
-  //     <div className="flex flex-col">
-  //       <Input
-  //         type="password"
-  //         name="password"
-  //         placeholder="Password"
-  //         onChange={handleOnChange}
-  //       />
-  //       <span className="error-msg">{errors.password && errors.password}</span>
-  //     </div>
-  //     <p className="error-msg">{error}</p>
-  //     <Button type="secondary" onClick={handleOnSubmit}>
-  //       Sign Up
-  //     </Button>
-  //     <Button type="outline" onClick={handleAsGuest}>
-  //       Continue as Guest
-  //     </Button>
-  //     <p className="font-16" style={{ color: "#fff" }}>
-  //       Switch to Sign In
-  //     </p>
-  //   </form>
-  // );
 
   const signInForm = (
     <div className="text-center">

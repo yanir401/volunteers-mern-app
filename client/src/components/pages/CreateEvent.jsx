@@ -8,19 +8,18 @@ import Button from "../formElements/buttons/Button";
 import Form from "../formElements/form/Form";
 import Spinner from "../UIElements/spinner/Spinner";
 import { addEvent, updateEventsList } from "../../store/actions/eventsAction";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
 
 const defaultFormFields = {
   title: "",
   description: "",
   address: "",
-  // file: "",
-  // coord: "",
   date: "",
   time: "",
 };
 
 const CreateEvent = () => {
-  // const dispatch = useDispatch((state) => state.user);
+  const [setValue] = useLocalStorage("user-events", "");
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const [formFields, setFormFields] = useState(defaultFormFields);
@@ -29,8 +28,6 @@ const CreateEvent = () => {
   const [submitted, setSubmitted] = useState(false);
   const [coordinates, setCoordinates] = useState(null);
   const [event, setEvent] = useState(null);
-
-  // const { title, description, data, time, address } = formFields;
 
   const handleOnChange = (e) => {
     if (!e.target) {
@@ -75,8 +72,7 @@ const CreateEvent = () => {
           setSubmitted(true);
           setEvent(response.data);
           dispatch(addEvent(response.data));
-
-          console.log(response.data);
+          setValue(response.data);
         }
       } catch (err) {
         console.log(err);
@@ -127,7 +123,6 @@ const CreateEvent = () => {
     </div>
   );
 
-  // if (loading) return <Spinner />;
   return <>{eventForm}</>;
 };
 export default CreateEvent;

@@ -1,17 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useFetch } from "../../hooks/useFetch";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
+import { updateUserEvents } from "../../store/actions/eventsAction";
 import EventsList from "../events/EventList";
 import Spinner from "../UIElements/spinner/Spinner";
 const SubscriptionEvents = () => {
   const { user } = useSelector((state) => state.user);
   const [subscriptionEvents, setSubscriptionEvents] = useState();
+  const [value, setValue] = useLocalStorage("user-events", "");
+  const dispatch = useDispatch();
 
   const [error, loading, sendRequest, clearError] = useFetch();
 
   useEffect(() => {
-    userEvents();
-  }, []);
+    if (!value) userEvents();
+    else setSubscriptionEvents(value);
+  }, [subscriptionEvents]);
 
   const userEvents = async () => {
     const url = "/events/my-events";
@@ -26,29 +31,32 @@ const SubscriptionEvents = () => {
         }
       );
       setSubscriptionEvents(response.data);
-      // if (response.status === 200) setSubmitted(true);
+      setValue(response.data);
     } catch (err) {
       console.log(err);
       console.log(error);
     }
   };
-  // req.header("Authorization").replace("Bearer ", "");
+
+  const renderSubscriptionEvents = () => {
+    if (subscriptionEvents)
+      return (
+        <div className="grid-events-container center gap-2 font-16 text-center paddingT-1 ">
+          <EventsList events={subscriptionEvents} />
+        </div>
+      );
+    else
+      return (
+        <div className="flex center">
+          <Spinner />
+        </div>
+      );
+  };
+
   return (
     <div className="text-center events-container">
       <h2>Your upcoming volunteering</h2>
-      {subscriptionEvents ? (
-        <div
-          className="grid-events-container center gap-2 font-16 text-center"
-          style={{ paddingTop: "10rem" }}
-        >
-          <EventsList events={subscriptionEvents} />
-        </div>
-      ) : (
-        <div className="flex center">
-          {" "}
-          <Spinner />
-        </div>
-      )}
+      {renderSubscriptionEvents()}
     </div>
   );
 };

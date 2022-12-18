@@ -2,12 +2,14 @@
   position: fixed;
   right: 0;
   bottom: 12rem;
-  height: 40rem;
+  height: 50%;
+  max-height: 50rem;
   justify-content: space-between;
   border: 1px solid var(--primary-background-color);
   border-radius: 5px;
   max-width: 80%;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 5px;
 }
 
 .chat-container .event-room-title {
@@ -19,9 +21,7 @@
   padding: 0.5rem;
 }
 .chat-container .users-messages-container {
-  height: 40rem;
-  /* background: var(--primary-light); */
-  background-color: var(--white);
+  height: 100%;
   display: grid;
   grid-template-columns: 0.3fr 0.7fr;
 }
@@ -39,7 +39,9 @@
 
 .chat-container .users-messages-container .view-messages-container {
   overflow-y: auto;
-  height: 40rem;
+  background-color: var(--white);
+
+  /* height: 40rem; */
   padding: 0.25rem;
 }
 .chat-container .users-messages-container .view-messages-container .meta {
@@ -49,5 +51,6 @@
 .chat-container .sending-message-container {
   /* border: 1px solid red; */
   border-top: 1px solid var(--primary-background-color);
-  height: 20%;
+  background: var(--light-color);
+  /* height: 20%; */
 }

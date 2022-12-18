@@ -1,12 +1,8 @@
 import React from "react";
 import io from "socket.io-client";
 
-// const socket = io.connect("http://localhost:5000");
 const Profile = () => {
-  const setEmit = () => {
-    // console.log(socket);
-    // socket.emit("sendMessage", "test");
-  };
+  const setEmit = () => {};
   return (
     <div style={{ paddingTop: "10rem" }}>
       <input type="text" />

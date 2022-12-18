@@ -61,7 +61,6 @@ function App() {
           <Route index element={<Home upComingEvents={events} />} />
           <Route path="/events" element={<Events />} />
           <Route path="event/:eventId" element={<EventPreview />} />
-          {/*only if auth*/}
 
           <Route element={<ProtectedRoutes />}>
             <Route path="/new-event" element={<CreateEvent />} />
@@ -69,8 +68,6 @@ function App() {
             <Route path="/my-profile" element={<Profile />} />
           </Route>
           <Route path="*" element={<NotFound />} />
-
-          {/* <Route path="/auth" element={<Auth />} /> */}
         </Route>
       </Routes>
       <Footer />

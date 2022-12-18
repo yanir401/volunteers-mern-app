@@ -35,10 +35,6 @@ const SignUp = ({ changeForm, text }) => {
     e.preventDefault();
   };
 
-  useEffect(() => {
-    console.log(error);
-  }, [error]);
-
   const handleOnSubmit = async (e) => {
     e.preventDefault();
 

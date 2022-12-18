@@ -21,7 +21,6 @@ const Events = () => {
       const fetchData = async () => {
         try {
           const res = await sendRequest("/events", "GET");
-          console.log(!res.data);
           setEvents(res.data);
           dispatch(fetchEvents(res.data));
         } catch (err) {}

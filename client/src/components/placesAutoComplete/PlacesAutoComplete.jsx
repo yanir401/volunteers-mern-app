@@ -5,15 +5,9 @@ import usePlacesAutocomplete, {
   getLatLng,
 } from "use-places-autocomplete";
 import Input from "../formElements/input/Input";
-// import useOnclickOutside from "react-cool-onclickoutside";
 import "./placesAutoComplete.css";
 
 const PlacesAutoComplete = ({ onChange, error, setCoordinates }) => {
-  //
-
-  //
-
-  //
   const {
     ready,
     value,
@@ -33,9 +27,7 @@ const PlacesAutoComplete = ({ onChange, error, setCoordinates }) => {
     setValue(e.target.value);
     if (status === "OK") renderSuggestions();
   };
-  //
 
-  //
   const handleSelect =
     ({ description }) =>
     () => {
