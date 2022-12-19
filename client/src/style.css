@@ -303,6 +303,9 @@ a {
     font-size: 9px;
   }
 }
+.grid-events-container-one-less {
+  grid-template-columns: 1fr;
+}
 
 /* @media (max-width: 900px) {
   .grid-col-70-30 {
