@@ -1,22 +1,25 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useFetch } from "../../hooks/useFetch";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
-import { updateUserEvents } from "../../store/actions/eventsAction";
 import EventsList from "../events/EventList";
 import Spinner from "../UIElements/spinner/Spinner";
 const SubscriptionEvents = () => {
-  const { user } = useSelector((state) => state.user);
+  const {
+    user: { user },
+    events: { subscriptionEvents: subscriptionStateEvents },
+  } = useSelector((state) => state);
+
   const [subscriptionEvents, setSubscriptionEvents] = useState();
   const [value, setValue] = useLocalStorage("user-events", "");
-  const dispatch = useDispatch();
 
   const [error, loading, sendRequest, clearError] = useFetch();
 
   useEffect(() => {
-    if (!value) userEvents();
+    if (value?.length === 0 || subscriptionStateEvents?.length !== value.length)
+      userEvents();
     else setSubscriptionEvents(value);
-  }, [subscriptionEvents]);
+  }, []);
 
   const userEvents = async () => {
     const url = "/events/my-events";
@@ -41,7 +44,7 @@ const SubscriptionEvents = () => {
   const renderSubscriptionEvents = () => {
     if (subscriptionEvents)
       return (
-        <div className="grid-events-container center gap-2 font-16 text-center paddingT-1 ">
+        <div className="grid-events-container center gap-2 font-16 text-center paddingTb-5 ">
           <EventsList events={subscriptionEvents} />
         </div>
       );
@@ -54,7 +57,7 @@ const SubscriptionEvents = () => {
   };
 
   return (
-    <div className="text-center events-container">
+    <div className="text-center events-container  events-top-padding ">
       <h2>Your upcoming volunteering</h2>
       {renderSubscriptionEvents()}
     </div>

@@ -1,0 +1,59 @@
+.chat-container {
+  position: fixed;
+  right: 0;
+  bottom: 20rem;
+  /* height: 60%; */
+  /* height: 50rem; */
+  justify-content: space-between;
+  border: 1px solid var(--primary-background-color);
+  border-radius: 5px;
+  max-width: 80%;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 5px;
+  height: 40rem;
+}
+
+.chat-container .event-room-title {
+  /* background: var(--primary-light); */
+
+  background: var(--secondary-color);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+  padding: 0.5rem;
+}
+.chat-container .users-messages-container {
+  /* height: 100%; */
+  display: grid;
+  height: 100%;
+  grid-template-columns: 0.3fr 0.7fr;
+}
+.chat-container .users-messages-container .users-list {
+  background: var(--primary-background-color);
+  color: var(--white);
+  padding: 0.5rem;
+  height: 100%;
+}
+.chat-container .users-messages-container .users-list .users-list-title {
+  background: var(--primary-light);
+  color: black;
+  width: 100%;
+}
+
+.chat-container .users-messages-container .view-messages-container {
+  background-color: var(--white);
+  height: 100%;
+  overflow-y: scroll;
+
+  /* height: 40rem; */
+  padding: 0.25rem;
+}
+.chat-container .users-messages-container .view-messages-container .meta {
+  color: var(--primary-light);
+}
+
+.chat-container .sending-message-container {
+  /* border: 1px solid red; */
+  border-top: 1px solid var(--primary-background-color);
+  background: var(--light-color);
+  /* height: 20%; */
+}

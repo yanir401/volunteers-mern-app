@@ -1,56 +1,89 @@
 .chat-container {
-  position: fixed;
-  right: 0;
-  bottom: 12rem;
-  height: 50%;
+  /* background-color: aqua; */
+  /* height: 40rem; */
   max-height: 50rem;
-  justify-content: space-between;
-  border: 1px solid var(--primary-background-color);
+  /* width: 50%; */
+  max-width: 60rem;
+  margin: 0 auto;
+  position: fixed;
+  right: 1.5rem;
+  top: 40%;
+  border: 1.5px solid white;
   border-radius: 5px;
-  max-width: 80%;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  border-radius: 5px;
 }
-
+.chat-container-hidden {
+  display: none;
+}
 .chat-container .event-room-title {
-  /* background: var(--primary-light); */
+  background-color: var(--secondary-color);
+  height: 4rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  background: var(--secondary-color);
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-
-  padding: 0.5rem;
+  /* border-radius: 5px 5px 0 0; */
+}
+.chat-container .event-room-title .hide-chat {
+  cursor: pointer;
+  position: absolute;
+  right: 0.75rem;
+  /* top: 5px; */
 }
 .chat-container .users-messages-container {
-  height: 100%;
+  height: 40rem;
   display: grid;
   grid-template-columns: 0.3fr 0.7fr;
 }
-.chat-container .users-messages-container .users-list {
-  background: var(--primary-background-color);
+
+.chat-container .users-messages-container .users-list-title {
+  background-color: var(--primary-background-color);
+  height: 2rem;
   color: var(--white);
-  padding: 0.5rem;
-  overflow-y: auto;
-}
-.chat-container .users-messages-container .users-list .users-list-title {
-  background: var(--primary-light);
-  color: black;
-  width: 100%;
+  /* height: 40rem;
+  overflow-y: scroll;
+  border: 1px solid red; */
 }
 
+.chat-container .users-messages-container .users-list {
+  background-color: var(--primary-background-color);
+  padding: 1rem;
+  color: var(--white);
+
+  overflow-y: scroll;
+}
 .chat-container .users-messages-container .view-messages-container {
-  overflow-y: auto;
-  background-color: var(--white);
+  padding: 0.5rem 0.45rem;
 
-  /* height: 40rem; */
-  padding: 0.25rem;
+  height: 40rem;
+  overflow-y: scroll;
+  background-color: var(--white);
 }
 .chat-container .users-messages-container .view-messages-container .meta {
   color: var(--primary-light);
 }
 
 .chat-container .sending-message-container {
-  /* border: 1px solid red; */
-  border-top: 1px solid var(--primary-background-color);
-  background: var(--light-color);
-  /* height: 20%; */
+  border-top: 2px solid var(--primary-background-color);
+  background-color: var(--white);
+}
+
+.view-messages-container::-webkit-scrollbar {
+  width: 1rem;
+}
+
+/* Track */
+.view-messages-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+.view-messages-container::-webkit-scrollbar-thumb {
+  background: var(--primary-background-color);
+}
+
+/* Handle on hover */
+.view-messages-container::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }

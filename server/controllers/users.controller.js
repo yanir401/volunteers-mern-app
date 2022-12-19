@@ -2,6 +2,7 @@ import { User } from "../model/user/user.model.js";
 
 //sign up , POST , /users/signup
 export const signup = async (req, res, next) => {
+  console.log(req.body);
   const { name, email, password } = req.body;
 
   try {

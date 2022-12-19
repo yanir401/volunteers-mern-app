@@ -68,6 +68,7 @@ const FilteringAside = () => {
     dispatch(setDistance(0));
     dispatch(searchEvent(""));
     setInputSearch("");
+    dispatch(setTempCoordinates(null));
   };
 
   return (

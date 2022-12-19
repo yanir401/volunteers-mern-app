@@ -12,3 +12,11 @@
   border-radius: 0 5px 5px 0;
   padding: 1rem;
 }
+
+@media (max-width: 600px) {
+  .grid-col-mobile {
+    grid-template-columns: 1fr !important;
+    max-width: 90%;
+    margin: 0 auto;
+  }
+}

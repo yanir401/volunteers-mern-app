@@ -31,6 +31,7 @@ export const eventReducer = (state = {}, action) => {
       return { ...state, subscriptionEvents: payload };
 
     case EVENTS_ACTION_TYPE.UPDATE_USER_EVENTS:
+      console.log(state.subscriptionEvents, payload);
       return {
         ...state,
         subscriptionEvents: !state.subscriptionEvents

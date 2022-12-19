@@ -15,7 +15,7 @@ const EventItemPreview = ({
   return (
     <>
       <h2 className="text-center marginTb-2">{event.title}</h2>
-      <div className="grid-col-2 center event-preview-inner-container">
+      <div className="grid-col-2 center event-preview-inner-container grid-col-mobile">
         <div style={{ width: "100%", height: "100%" }}>
           <img
             src={event.image}

@@ -3,7 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useParams } from "react-router-dom";
 import { ModalContext } from "../../context/modalContext";
 import { useFetch } from "../../hooks/useFetch";
-import { updateUserEvents } from "../../store/actions/eventsAction";
+import {
+  updateEventsList,
+  updateUserEvents,
+} from "../../store/actions/eventsAction";
 import AuthenticationWrapper from "../authentication/AuthenticationWrapper";
 import Chat from "../chat/Chat";
 import EventItemPreview from "../events/eventPreview/EventItemPreview";
@@ -14,6 +17,7 @@ const EventPreview = () => {
   const { openModal } = useContext(ModalContext);
   const { user } = useSelector((state) => state.user);
   const { events } = useSelector((state) => state.events);
+  const { chat: chatState } = useSelector((state) => state);
   const [error, loading, sendRequest, clearError] = useFetch();
   const [submittedMsg, setSubmittedMsg] = useState("");
   const [event, setEvent] = useState();
@@ -29,6 +33,7 @@ const EventPreview = () => {
     setEvent(eventToRender);
 
     if (!eventToRender) callEvent();
+
     if (user && isUserAlreadyVolunteering(eventToRender)) {
       setButtonMode("Leave volunteering");
     }
@@ -39,6 +44,8 @@ const EventPreview = () => {
       const response = await sendRequest(`/events/event/${eventId}`, "GET");
       if (response.status !== 200) throw Error;
       setEvent(response.data);
+
+      console.log(user);
       if (user && isUserAlreadyVolunteering(response.data))
         setButtonMode("Leave volunteering");
     } catch (error) {
@@ -69,6 +76,7 @@ const EventPreview = () => {
         if (!error && response) {
           setEvent(response.data);
           dispatch(updateUserEvents(response.data));
+          dispatch(updateEventsList(response.data));
 
           if (url.includes("join")) {
             setButtonMode("Leave volunteering");
@@ -76,6 +84,7 @@ const EventPreview = () => {
           } else {
             setButtonMode("I want to volunteer");
             setSubmittedMsg("You are no longer volunteering for this event");
+            setOpenChat(false);
           }
         }
       } catch (err) {
@@ -88,9 +97,11 @@ const EventPreview = () => {
   const chat =
     buttonMode === "Leave volunteering" ? (
       <div className="flex center">
-        <Button type="primary" onClick={() => setOpenChat(true)}>
-          Join to chat
-        </Button>
+        {!openChat && (
+          <Button type="primary" onClick={() => setOpenChat(true)}>
+            Join to chat
+          </Button>
+        )}
       </div>
     ) : null;
 
@@ -106,7 +117,13 @@ const EventPreview = () => {
             submittedMsg={submittedMsg}
           ></EventItemPreview>
           {chat}
-          {openChat && <Chat event={event} />}
+          {openChat && (
+            <Chat
+              event={event}
+              visibility={openChat}
+              setVisibility={setOpenChat}
+            />
+          )}
 
           {error && <p className="error-msg center font-16">{error}</p>}
         </>

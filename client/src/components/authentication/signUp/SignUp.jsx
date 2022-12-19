@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { ModalContext } from "../../../context/modalContext";
@@ -31,31 +32,65 @@ const SignUp = ({ changeForm, text }) => {
     setFormFields({ ...formFields, [name]: value });
   };
 
-  const handleAsGuest = (e) => {
+  const handleAsGuest = async (e) => {
     e.preventDefault();
+    try {
+      const {
+        data: { results },
+      } = await axios.get("https://randomuser.me/api");
+
+      console.log(results);
+      console.log(results.email);
+      setFormFields({
+        name: results[0].name.first,
+        email: results[0].email,
+        password: "Volunteer051*",
+      });
+
+      signUp({
+        name: results[0].name.first,
+        email: results[0].email,
+        password: "Volunteer051*",
+      });
+      console.log(results);
+    } catch (error) {}
   };
 
-  const handleOnSubmit = async (e) => {
+  const handleOnSubmit = (e) => {
     e.preventDefault();
 
     const isErrors = isFormValid(formFields);
     setErrors(isErrors);
-    const url = "/users/signup";
 
-    if (Object.keys(isErrors).length === 0)
-      try {
-        const response = await sendRequest(url, "POST", {
-          name,
-          email,
-          password,
-        });
-        if (!response) throw new Error(error);
-        dispatch(setUser(response.data));
-        setSubmitted(true);
-        closeModalTimeOut(1500);
-      } catch (err) {
-        console.log(error);
-      }
+    if (Object.keys(isErrors).length === 0) signUp();
+    // try {
+    //   const response = await sendRequest(url, "POST", {
+    //     name,
+    //     email,
+    //     password,
+    //   });
+    //   if (!response) throw new Error(error);
+    //   dispatch(setUser(response.data));
+    //   setSubmitted(true);
+    //   closeModalTimeOut(1500);
+    // } catch (err) {
+    //   console.log(error);
+    // }
+  };
+
+  const signUp = async (form) => {
+    let registrationForm = form || { name, email, password };
+
+    const url = "/users/signup";
+    try {
+      const response = await sendRequest(url, "POST", registrationForm);
+      if (!response) throw new Error(error);
+      dispatch(setUser(response.data));
+      setSubmitted(true);
+      closeModalTimeOut(1300);
+    } catch (err) {
+      console.log(error);
+    }
   };
 
   const welcomeMsg = <p className="text-center font-20">Welcome {name}!</p>;
@@ -75,7 +110,7 @@ const SignUp = ({ changeForm, text }) => {
           Sign Up
         </Button>
         <Button type="outline" onClick={handleAsGuest}>
-          Continue as Guest
+          Generate a User
         </Button>
         <span onClick={changeForm} className="font-16 pointer">
           Switch to Sign In

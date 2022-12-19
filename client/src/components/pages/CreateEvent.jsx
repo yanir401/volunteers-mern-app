@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useFetch } from "../../hooks/useFetch";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { isCreateEventFormValid } from "../../utils/createEventValidation/eventFormValidation";
-
 import Button from "../formElements/buttons/Button";
 import Form from "../formElements/form/Form";
 import Spinner from "../UIElements/spinner/Spinner";
-import { addEvent, updateEventsList } from "../../store/actions/eventsAction";
+import { addEvent } from "../../store/actions/eventsAction";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 
 const defaultFormFields = {
