@@ -5,11 +5,8 @@ import { ModalContext } from "../../../context/modalContext";
 import { closeModal } from "../../../store/actions/modalActions";
 import "./modal.css";
 const Modal = (props) => {
-  const dispatch = useDispatch();
   const modalRef = useRef(null);
   const { closeModal } = useContext(ModalContext);
-
-  const { isOpen } = useSelector((state) => state.modal);
 
   useEffect(() => {
     const handler = (e) => {

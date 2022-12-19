@@ -65,12 +65,16 @@ const Events = () => {
     );
 
     if (query && userCoordinates) {
+      console.log("first");
       return queryIncludes && isEventInRange;
     }
     if (query) {
+      console.log("second");
+
       return queryIncludes;
     }
     if (distance === 0) return event;
+    console.log("fourth");
     // // console.log(query);
     if (userCoordinates) return isEventInRange;
 
@@ -79,10 +83,7 @@ const Events = () => {
 
   const eventsComponent = (
     <div className="grid grid-col-70-30">
-      <div
-        className="flex flex-col text-center "
-        style={{ paddingTop: "10rem" }}
-      >
+      <div className="flex flex-col text-center events-top-padding">
         <h2>Chose your volunteering</h2>
 
         {!filteredEvents ? (

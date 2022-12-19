@@ -64,6 +64,9 @@ a {
   min-height: 90rem;
   max-width: 80%;
   margin: 0 auto;
+  padding-top: 8rem;
+}
+.events-top-padding {
   padding-top: 10rem;
 }
 .form-container {
@@ -279,34 +282,38 @@ a {
   font-size: 5rem;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1700px) {
+  .grid-events-container {
+  }
+  .events-container {
+    max-width: 90%;
+  }
   .grid-events-container {
     grid-template-columns: repeat(3, 1fr);
   }
-  .events-container {
-    max-width: 80%;
-  }
 }
 
+@media (max-width: 1300px) {
+  .grid-events-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
 @media (max-width: 1024px) {
   :root {
     font-size: 9px;
   }
 }
 
-@media (max-width: 900px) {
-  .grid-events-container {
-    grid-template-columns: repeat(2, 1fr);
-  }
+/* @media (max-width: 900px) {
   .grid-col-70-30 {
     grid-template-columns: 0.7fr 0.3fr;
   }
   .events-container {
-    max-width: 80%;
+    margin: 0 3rem;
   }
-}
+} */
 
-@media (max-width: 767px) {
+@media (max-width: 900px) {
   :root {
     font-size: 8px;
   }
@@ -316,18 +323,19 @@ a {
   .form-container {
     max-width: 80%;
   }
-  .events-container {
-    max-width: 90%;
+
+  .grid-col-70-30 {
+    grid-template-columns: 0.7fr 0.3fr;
   }
 }
 
-@media (max-width: 550px) {
+@media (max-width: 720px) {
   .grid-col-70-30 {
     grid-template-columns: 1fr;
   }
 }
 
-@media (max-width: 450px) {
+@media (max-width: 500px) {
   .grid-events-container {
     grid-template-columns: 1fr;
   }

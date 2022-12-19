@@ -36,12 +36,6 @@ const Navigation = () => {
               Create Event
             </Link>
           </li>
-          {/* <li>
-            <Link to="my-profile" className="gap-0-5">
-              My Profile
-              <CgProfile />
-            </Link>
-          </li> */}
         </>
       ) : (
         <a onClick={handleOnClick} className="pointer">

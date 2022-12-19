@@ -6,10 +6,11 @@ import Button from "../formElements/buttons/Button";
 import Input from "../formElements/input/Input";
 import "./chat.css";
 
-const Chat = ({ event }) => {
+const Chat = ({ event, visibility, setVisibility }) => {
   const { user } = useSelector((state) => state.user);
   const { chat } = useSelector((state) => state);
   const [message, setMessage] = useState("");
+  const [chatVisible, setChatVisible] = useState(true);
   const [users, setUsers] = useState([]);
   const dispatch = useDispatch();
 
@@ -36,7 +37,10 @@ const Chat = ({ event }) => {
     });
   }, [socket]);
 
-  const sendMessage = () => {
+  const sendMessage = (e) => {
+    console.log(e);
+    e.preventDefault();
+    if (message.trim().length === 0) return;
     const data = {
       username: user.name,
       eventId: event._id,
@@ -52,10 +56,21 @@ const Chat = ({ event }) => {
     setMessage(target.value);
   };
 
+  const hideChat = () => {
+    setVisibility(false);
+  };
+
   return (
-    <div className="flex flex-col chat-container">
+    <div
+      className={
+        visibility ? "chat-container flex flex-col" : "chat-container-hidden"
+      }
+    >
       <p className="text-center event-room-title font-22">
         {event.title.length > 12 ? event.title.slice(0, 35) : event.title}
+        <span className="hide-chat" onClick={hideChat}>
+          X
+        </span>
       </p>
       <div className="users-messages-container">
         <div className="users-list">
@@ -82,18 +97,19 @@ const Chat = ({ event }) => {
           })}
         </div>
       </div>
-      <div className="flex center sending-message-container">
+      <form
+        className="flex center sending-message-container"
+        onSubmit={sendMessage}
+      >
+        {" "}
         <Input
           placeholder="Your message..."
           onChange={handleOnChange}
           style={{ outline: "none" }}
           value={message}
         />
-
-        <Button type="primary" onClick={sendMessage}>
-          Send
-        </Button>
-      </div>
+        <Button type="primary">Send</Button>
+      </form>
     </div>
   );
 };
