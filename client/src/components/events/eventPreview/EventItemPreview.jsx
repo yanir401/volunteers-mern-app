@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Button from "../../formElements/buttons/Button";
 import Spinner from "../../UIElements/spinner/Spinner";
 import "./eventItemPreview.css";
@@ -10,7 +11,15 @@ const EventItemPreview = ({
   loading,
   submittedMsg,
 }) => {
-  if (event.message) return event.message; // style
+  if (event.message)
+    return (
+      <div className="center marginT-2 flex-col gap-2">
+        <h2>{event.message}</h2>
+        <Link to="/events">
+          <Button type="secondary">Back to events</Button>
+        </Link>
+      </div>
+    ); // style
 
   return (
     <>
