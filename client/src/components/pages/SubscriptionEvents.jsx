@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { useFetch } from "../../hooks/useFetch";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 import EventsList from "../events/EventList";
@@ -16,7 +17,7 @@ const SubscriptionEvents = () => {
   const [error, loading, sendRequest, clearError] = useFetch();
 
   useEffect(() => {
-    if (value?.length === 0 || subscriptionStateEvents?.length !== value.length)
+    if (value.length === 0 || subscriptionStateEvents?.length !== value.length)
       userEvents();
     else setSubscriptionEvents(value);
   }, []);
@@ -44,8 +45,27 @@ const SubscriptionEvents = () => {
   const renderSubscriptionEvents = () => {
     if (subscriptionEvents)
       return (
-        <div className="grid-events-container center gap-2 font-16 text-center paddingTb-5 ">
-          <EventsList events={subscriptionEvents} />
+        <div
+          className={
+            (subscriptionEvents.length <= 1 &&
+              "grid-events-container-one-less") +
+            "grid-events-container center gap-2 font-16 text-center paddingTb-5"
+          }
+        >
+          {subscriptionEvents.length === 0 ? (
+            <p className="font-20">
+              You are not registered for volunteer events. <br /> Start
+              volunteer
+              <Link to="/events">
+                <span style={{ color: "#f8b24f" }} className="bold">
+                  {" "}
+                  here.
+                </span>
+              </Link>
+            </p>
+          ) : (
+            <EventsList events={subscriptionEvents} />
+          )}
         </div>
       );
     else
