@@ -1,6 +1,7 @@
 # Volunteering - MERN Stack application
 ## ---- Under development ----
 
+[Live Demo](https://volunteers-mern-app.onrender.com/)
 An application to find and create Volunteering events
 
 ## Technologies:
