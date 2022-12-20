@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Button from "../../formElements/buttons/Button";
 import Spinner from "../../UIElements/spinner/Spinner";
 import "./eventItemPreview.css";
+import { encode, decode } from "js-base64";
 
 const EventItemPreview = ({
   event,
@@ -11,6 +12,7 @@ const EventItemPreview = ({
   loading,
   submittedMsg,
 }) => {
+  console.log(event.file);
   if (event.message)
     return (
       <div className="center marginT-2 flex-col gap-2">
@@ -20,6 +22,10 @@ const EventItemPreview = ({
         </Link>
       </div>
     ); // style
+  console.log(
+    "🚀 ~ file: EventItemPreview.jsx:25 ~ base64String",
+    encode(event.file.data)
+  );
 
   return (
     <>
@@ -27,7 +33,7 @@ const EventItemPreview = ({
       <div className="grid-col-2 center event-preview-inner-container grid-col-mobile">
         <div style={{ width: "100%", height: "100%" }}>
           <img
-            src={event.image}
+            src={`data:image/png;base64,${encode(event.file.data)}`}
             alt=""
             width={"100%"}
             height="100%"

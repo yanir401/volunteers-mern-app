@@ -13,6 +13,7 @@ const defaultFormFields = {
   title: "",
   description: "",
   address: "",
+  file: "",
   date: "",
   time: "",
 };
@@ -28,7 +29,15 @@ const CreateEvent = () => {
   const [coordinates, setCoordinates] = useState(null);
   const [event, setEvent] = useState(null);
 
+  const { title, description, address, file, date, time } = formFields;
+
   const handleOnChange = (e) => {
+    console.log(e);
+    console.log(e.target);
+    if (e?.target?.files?.length > 0) {
+      setFormFields({ ...formFields, file: e.target.files[0] });
+      return;
+    }
     if (!e.target) {
       setFormFields({ ...formFields, address: e });
       return;
@@ -55,17 +64,30 @@ const CreateEvent = () => {
 
     if (Object.keys(isValidForm).length === 0) {
       const url = "/events";
+      const formData = new FormData();
+      console.log("ss", { formFields });
+      formData.append("eventImage", formFields.file);
+      // formData.append("test", "test it");
+      formData.append("formFields", JSON.stringify(formFields));
+      formData.append("coordinates", JSON.stringify(coordinates));
+      formData.append("author", user._id);
 
       try {
         const response = await sendRequest(
           url,
           "POST",
+          formData,
+          // {
+          //   formData,
+          //   author: user._id,
+          // },
           {
-            formFields,
-            coordinates,
-            author: user._id,
-          },
-          { Authorization: `Bearer ${user.tokens[0].token}` }
+            Authorization: `Bearer ${user.tokens[0].token}`,
+            // "Content-type": "multipart/form-data",
+            // "Content-Type": "multipart/form-data",
+
+            // "content-type": "image/png",
+          }
         );
         if (response.status === 200) {
           setSubmitted(true);
@@ -94,7 +116,7 @@ const CreateEvent = () => {
   );
 
   const eventForm = (
-    <div className="text-center form-container flex flex-col events-container">
+    <div className="text-center flex flex-col form-container">
       {submitted ? (
         submittedContent
       ) : (

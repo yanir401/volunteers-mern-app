@@ -2,6 +2,7 @@ import React from "react";
 import "./footer.css";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { AiOutlineGithub, AiFillLinkedin } from "react-icons/ai";
 const Footer = () => {
   const { user } = useSelector((state) => state.user);
   console.log(user);
@@ -23,8 +24,24 @@ const Footer = () => {
         <div className="links">
           <p>&copy; All rights reserved</p>
           <p>Yanir Ithzak </p>
-          <p>Follow me:</p>
-          Github,Linkedin
+          <p>Follow me on:</p>
+
+          <a
+            href="https://www.linkedin.com/in/yaniri/"
+            target="_blank"
+            className="flex center gap-1"
+          >
+            <AiFillLinkedin size={"3rem"} />
+            Linkedin
+          </a>
+          <a
+            href="https://github.com/yanir401"
+            target="_blank"
+            className="flex center gap-1"
+          >
+            <AiOutlineGithub size={"3rem"} />
+            Github
+          </a>
         </div>
       </div>
     </footer>

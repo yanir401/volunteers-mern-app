@@ -66,13 +66,18 @@ a {
   margin: 0 auto;
   padding-top: 8rem;
 }
+.form-container {
+  padding-top: 8rem;
+  padding-bottom: 2rem;
+  min-height: 90rem;
+  margin: 0 auto;
+  width: 65rem;
+  max-width: 70%;
+}
 .events-top-padding {
   padding-top: 10rem;
 }
-.form-container {
-  max-width: 60rem;
-  margin: 0 auto;
-}
+
 .center {
   text-align: center;
   display: flex;

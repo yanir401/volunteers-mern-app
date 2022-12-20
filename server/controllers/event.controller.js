@@ -36,35 +36,28 @@ export const getUserEvents = async (req, res) => {
     res.send(error);
   }
 };
-// export const getUserEvents = async (req, res) => {
-//   const uid = req.params.uid;
-
-//   try {
-//     const userEvents = await Event.find({
-//       volunteers: mongoose.Types.ObjectId(req.user._id),
-//     })
-//       .populate("author")
-//       .exec();
-//     // .exec();
-//     // .populate("Users")
-//     // .exec();
-//     // .execPopulate();
-//     console.log(userEvents.author);
-//     res.send(userEvents);
-//   } catch (error) {
-//     res.send(error);
-//   }
-// };
 
 export const createEvent = async (req, res) => {
+  console.log(req.file);
+
   const { formFields, author, coordinates } = req.body;
-  if (!formFields.image)
-    formFields.image =
-      "https://img.freepik.com/free-vector/people-volunteering-donating-money_53876-66112.jpg?w=1060&t=st=1668262843~exp=1668263443~hmac=e6cda460e605c3719b497d5ea9e025eabefe3b3a9e42a3e104ab3d1f005476cb";
-  // const author = req.body.author;
+  const fields = JSON.parse(formFields);
+  // fields.file = req.file.buffer;
+  // console.log("before", fields.file);
+  const coords = JSON.parse(coordinates);
+  fields.file = Buffer.from(req.file.buffer).toString("base64");
+  // console.log("after", fields.file);
+
+  // if (!formFields.image)
+  //   formFields.image =
+  //     "https://img.freepik.com/free-vector/people-volunteering-donating-money_53876-66112.jpg?w=1060&t=st=1668262843~exp=1668263443~hmac=e6cda460e605c3719b497d5ea9e025eabefe3b3a9e42a3e104ab3d1f005476cb";
 
   try {
-    const event = new Event({ ...formFields, author, coordinates });
+    const event = new Event({
+      ...fields,
+      author,
+      coordinates: coords,
+    });
     event.volunteers.push(req.user._id);
     const newEvent = await event.save();
     res.send(newEvent);
@@ -193,4 +186,8 @@ export const leaveVolunteering = async (req, res, next) => {
   } catch (error) {
     res.status(400).send(error);
   }
+};
+
+export const uploadImage = async (req, res) => {
+  res.send();
 };
