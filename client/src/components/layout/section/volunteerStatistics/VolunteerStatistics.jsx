@@ -8,7 +8,7 @@ const VolunteerStatics = () => {
           <h2 className="marginT-2">Your statistics</h2>
           <div className="statics">
             <div className="open-events ">
-              <p>Open events</p>
+              <p>Opened events</p>
               <p>50</p>
             </div>
             <div className="volunteers ">

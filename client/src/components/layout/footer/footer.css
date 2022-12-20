@@ -21,3 +21,11 @@
   justify-content: center;
   gap: 1.5rem;
 }
+
+.footer-container .links a {
+  transition: all 0.4s;
+}
+.footer-container .links a:hover {
+  color: var(--primary-color);
+  /* color: var(--secondary-color); */
+}

@@ -20,7 +20,7 @@ const StartVolunteering = ({ setOpenModal }) => {
           <h2 className="marginT-2">Start Volunteering</h2>
           <div className="statics">
             <div className="open-events ">
-              <p>Open events</p>
+              <p>Opened events</p>
               <p>50</p>
             </div>
             <div className="volunteers ">

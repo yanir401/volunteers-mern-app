@@ -20,7 +20,6 @@ const eventSchema = mongoose.Schema(
     },
     date: {
       type: Date,
-      //   required: true,
       minLength: 2,
       validate(value) {
         const today = new Date();
@@ -29,11 +28,10 @@ const eventSchema = mongoose.Schema(
     },
     time: {
       type: String,
-      // required: true,
     },
-    image: {
-      type: String,
-    },
+    // image: {
+    //   type: String,
+    // },
     volunteers: [
       {
         type: mongoose.Schema.Types.ObjectId,
@@ -45,9 +43,11 @@ const eventSchema = mongoose.Schema(
       lat: { type: Number, required: true },
       lng: { type: Number, required: true },
     },
-    // coordinates: { type: Object },
     author: { type: mongoose.Schema.Types.ObjectId, ref: "Users" },
-    // author: { type: String },
+
+    file: {
+      type: Buffer,
+    },
   },
   { timestamps: true }
 );

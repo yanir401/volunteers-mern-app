@@ -108,25 +108,27 @@ const EventPreview = () => {
   return (
     <div className="flex flex-col gap-2 events-container marginB-3">
       {event ? (
-        <>
-          <EventItemPreview
-            event={event}
-            handleOnClick={handleOnClick}
-            buttonText={buttonMode}
-            loading={loading}
-            submittedMsg={submittedMsg}
-          ></EventItemPreview>
-          {chat}
-          {openChat && (
-            <Chat
+        (console.log(event),
+        (
+          <>
+            <EventItemPreview
               event={event}
-              visibility={openChat}
-              setVisibility={setOpenChat}
-            />
-          )}
-
-          {error && <p className="error-msg center font-16">{error}</p>}
-        </>
+              handleOnClick={handleOnClick}
+              buttonText={buttonMode}
+              loading={loading}
+              submittedMsg={submittedMsg}
+            ></EventItemPreview>
+            {chat}
+            {openChat && (
+              <Chat
+                event={event}
+                visibility={openChat}
+                setVisibility={setOpenChat}
+              />
+            )}
+            {error && <p className="error-msg center font-16">{error}</p>}
+          </>
+        ))
       ) : (
         <Spinner />
       )}
