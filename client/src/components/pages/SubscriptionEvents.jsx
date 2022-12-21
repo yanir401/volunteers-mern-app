@@ -22,8 +22,6 @@ const SubscriptionEvents = () => {
   const [error, loading, sendRequest, clearError] = useFetch();
 
   useEffect(() => {
-    console.log(value);
-    console.log(subscriptionStateEvents);
     // if (value.length === 0 || subscriptionStateEvents?.length !== value.length)
     // if (value.length === 0 || subscriptionStateEvents?.length !== value.length)
     if (subscriptionStateEvents.length === 0) userEvents();
@@ -43,11 +41,7 @@ const SubscriptionEvents = () => {
         }
       );
       setSubscriptionEvents(response.data);
-      console.log(response.data);
       dispatch(setUserEvents(response.data));
-      // dispatch(updateUserEvents(response.data));
-
-      // setValue(response.data);
     } catch (err) {
       console.log(err);
       console.log(error);

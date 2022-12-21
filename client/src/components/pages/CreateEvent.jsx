@@ -83,18 +83,10 @@ const CreateEvent = () => {
           }
         );
         if (response.status === 200) {
-          console.log(response.data);
           setSubmitted(true);
           setEvent(response.data);
           dispatch(addEvent(response.data));
           dispatch(updateUserEvents(response.data));
-
-          // value?.length > 0
-          //   ? setValue([...value, response.data])
-          //   : setValue([value]);
-          // console.log([...value, response.data]);
-          console.log(value);
-          // setValue([...value, response.data]);
         }
       } catch (err) {
         console.log(err);
