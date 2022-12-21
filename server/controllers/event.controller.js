@@ -186,6 +186,4 @@ export const leaveVolunteering = async (req, res, next) => {
   }
 };
 
-export const uploadImage = async (req, res) => {
-  res.send();
-};
+export const countUsers = async (req, res) => {};
