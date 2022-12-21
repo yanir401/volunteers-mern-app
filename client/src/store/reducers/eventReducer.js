@@ -29,7 +29,9 @@ export const eventReducer = (state = {}, action) => {
     case EVENTS_ACTION_TYPE.UPDATE_USER_EVENTS:
       return {
         ...state,
-        subscriptionEvents: [...state.subscriptionEvents, { ...payload }],
+        subscriptionEvents: !state.subscriptionEvents
+          ? [payload]
+          : [...state.subscriptionEvents, { ...payload }],
       };
 
     case EVENTS_ACTION_TYPE.EVENT_QUERY:
