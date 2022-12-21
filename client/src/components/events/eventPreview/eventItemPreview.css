@@ -3,6 +3,14 @@
     rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
   border-radius: 5px;
 }
+.event-preview-inner-container .event-image {
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  object-fit: cover;
+  border-radius: 5px 0 0 5px;
+}
 .event-preview-inner-container .event-right-content {
   background: #babfcc;
   color: var(--white);
@@ -18,5 +26,12 @@
     grid-template-columns: 1fr !important;
     max-width: 90%;
     margin: 0 auto;
+  }
+  .event-preview-inner-container .event-image {
+    border-radius: 5px 5px 0 0;
+  }
+
+  .event-preview-inner-container .event-right-content {
+    border-radius: 0 0 5px 5px;
   }
 }

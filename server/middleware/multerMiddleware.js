@@ -9,7 +9,7 @@ const uploadFileFilter = function fileFilter(req, file, cb) {
 
 export const multerMiddleware = multer({
   limits: {
-    fileSize: 1000000,
+    fileSize: 2000000,
   },
   fileFilter: uploadFileFilter,
 });

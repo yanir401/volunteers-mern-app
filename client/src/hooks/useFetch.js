@@ -28,15 +28,13 @@ export const useFetch = () => {
           data: body,
         });
 
-        console.log(res);
         return res;
       } catch (err) {
+        console.log(error);
         console.log(err);
-        console.log(err.response.data.error);
         if (err?.response?.data?.error) setError(err.response.data.error);
         else setError(err.response?.data?.message);
       } finally {
-        console.log(error);
         setLoading(false);
       }
     },

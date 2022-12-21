@@ -38,7 +38,6 @@ const Chat = ({ event, visibility, setVisibility }) => {
   }, [socket]);
 
   const sendMessage = (e) => {
-    console.log(e);
     e.preventDefault();
     if (message.trim().length === 0) return;
     const data = {

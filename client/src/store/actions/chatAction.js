@@ -22,14 +22,12 @@ export const appendMessage = (payload) => {
 };
 
 export const addUser = (payload) => {
-  console.log(payload);
   return {
     type: CHAT_ACTION_TYPE.ADD_USER,
     payload,
   };
 };
 export const getUsersInRoom = (payload) => {
-  console.log(payload);
   return {
     type: CHAT_ACTION_TYPE.GET_USERS_IN_ROOM,
     payload,

@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import sharp from "sharp";
 import { Event } from "../model/event/event.modal.js";
 
 export const getAllEvents = async (req, res) => {
@@ -38,19 +39,17 @@ export const getUserEvents = async (req, res) => {
 };
 
 export const createEvent = async (req, res) => {
-  console.log(req.file);
-
   const { formFields, author, coordinates } = req.body;
   const fields = JSON.parse(formFields);
-  // fields.file = req.file.buffer;
-  // console.log("before", fields.file);
   const coords = JSON.parse(coordinates);
-  fields.file = Buffer.from(req.file.buffer).toString("base64");
-  // console.log("after", fields.file);
-
-  // if (!formFields.image)
-  //   formFields.image =
-  //     "https://img.freepik.com/free-vector/people-volunteering-donating-money_53876-66112.jpg?w=1060&t=st=1668262843~exp=1668263443~hmac=e6cda460e605c3719b497d5ea9e025eabefe3b3a9e42a3e104ab3d1f005476cb";
+  if (req.file) {
+    const buffer = await sharp(req.file.buffer)
+      .resize(750, 450, { fit: "cover" })
+      .withMetadata()
+      .png()
+      .toBuffer();
+    fields.file = buffer;
+  }
 
   try {
     const event = new Event({
@@ -107,16 +106,15 @@ export const deleteEvent = async (req, res, next) => {
 };
 
 export const joinVolunteering = async (req, res, next) => {
-  const { user, event } = req.body;
-
-  if (!mongoose.Types.ObjectId.isValid(event._id)) {
+  const { user, eventId } = req.body;
+  if (!mongoose.Types.ObjectId.isValid(eventId)) {
     //create static function
     const error = new Error("Event not found");
     return next(error);
   }
 
   try {
-    const existingEvent = await Event.findById(event._id);
+    const existingEvent = await Event.findById(eventId);
     if (!existingEvent) throw new Error("Event not found");
 
     const isAlreadyVolunteering = existingEvent.volunteers.find(
@@ -127,7 +125,7 @@ export const joinVolunteering = async (req, res, next) => {
 
     if (!isAlreadyVolunteering) {
       eventToUpdate = await Event.findByIdAndUpdate(
-        event._id,
+        eventId,
         {
           $addToSet: { volunteers: user._id },
         },

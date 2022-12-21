@@ -51,7 +51,7 @@
   padding: 1rem;
   color: var(--white);
 
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 .chat-container .users-messages-container .view-messages-container {
   padding: 0.5rem 0.45rem;

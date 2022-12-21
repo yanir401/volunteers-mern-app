@@ -2,7 +2,6 @@ import { User } from "../model/user/user.model.js";
 
 //sign up , POST , /users/signup
 export const signup = async (req, res, next) => {
-  console.log(req.body);
   const { name, email, password } = req.body;
 
   try {
@@ -19,11 +18,7 @@ export const signup = async (req, res, next) => {
     const isUserSaved = await user.save();
 
     res.send(isUserSaved);
-
-    // res.send(userExists);
   } catch (error) {
-    // console.log(object);
-    // res.status(400).send(error);
     res.status(400).send({ error: "Something went wrong" });
   }
 };
@@ -86,9 +81,3 @@ export const updateProfile = async (req, res) => {
     res.status(400).send({ error: "Something went wrong" });
   }
 };
-
-//GET ALL USERS
-
-//POST user events
-
-//Delete user events

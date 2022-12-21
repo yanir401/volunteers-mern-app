@@ -1,13 +1,23 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Buffer } from "buffer";
 import Card from "../UIElements/card/Card";
 import "./eventItem.css";
 const EventItem = ({ event }) => {
+  const img = new Buffer.from(event.file.data).toString("base64");
   return (
     <Link to={`/event/${event._id}`} state={{ event }}>
       <Card>
         <div className="image-container">
-          <img src={event.image} alt="" className="image-event" />
+          <img
+            src={
+              img
+                ? `data:image/png;base64,${img}`
+                : "https://img.freepik.com/free-vector/people-volunteering-donating-money-items_53876-64646.jpg?w=2000"
+            }
+            alt=""
+            className="image-event"
+          />
         </div>
         <div className="event-content font-18">
           <p className="font-20 bold">{event.title}</p>
