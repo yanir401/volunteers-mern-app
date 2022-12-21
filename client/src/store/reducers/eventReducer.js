@@ -27,21 +27,10 @@ export const eventReducer = (state = {}, action) => {
       return { ...state, subscriptionEvents: payload };
 
     case EVENTS_ACTION_TYPE.UPDATE_USER_EVENTS:
-      console.log(state.subscriptionEvents);
-      // return {
-      //   ...state,
-      //   subscriptionEvents: payload,
-      // };
       return {
         ...state,
         subscriptionEvents: [...state.subscriptionEvents, { ...payload }],
       };
-    // return {
-    //   ...state,
-    //   subscriptionEvents: !state.subscriptionEvents
-    //     ? [payload]
-    //     :
-    // };
 
     case EVENTS_ACTION_TYPE.EVENT_QUERY:
       return { ...state, query: payload };
@@ -50,7 +39,3 @@ export const eventReducer = (state = {}, action) => {
       return state;
   }
 };
-// state.messages[payload.eventId] = [
-//   ...state.messages[payload.eventId],
-//   { ...payload },
-// ];
