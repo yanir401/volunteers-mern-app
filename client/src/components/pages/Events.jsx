@@ -55,8 +55,8 @@ const Events = () => {
     let queryToLowerCase = query?.toLowerCase();
 
     const queryIncludes =
-      event.title.toLowerCase().includes(queryToLowerCase) ||
-      event.description.toLowerCase().includes(queryToLowerCase);
+      event.title?.toLowerCase().includes(queryToLowerCase) ||
+      event.description?.toLowerCase().includes(queryToLowerCase);
 
     const isEventInRange = distanceCalc(
       userCoordinates,
@@ -65,17 +65,12 @@ const Events = () => {
     );
 
     if (query && userCoordinates) {
-      console.log("first");
       return queryIncludes && isEventInRange;
     }
     if (query) {
-      console.log("second");
-
       return queryIncludes;
     }
     if (distance === 0) return event;
-    console.log("fourth");
-    // // console.log(query);
     if (userCoordinates) return isEventInRange;
 
     return event;
@@ -83,13 +78,13 @@ const Events = () => {
 
   const eventsComponent = (
     <div className="grid grid-col-70-30">
-      <div className="flex flex-col text-center events-top-padding">
+      <div className="flex flex-col text-center events-top-padding events-container">
         <h2>Chose your volunteering</h2>
 
         {!filteredEvents ? (
           <Spinner />
         ) : (
-          <div className="events-container">
+          <div className="events-top-padding">
             {filteredEvents.length === 0 ? (
               distance === 0 &&
               !query && (

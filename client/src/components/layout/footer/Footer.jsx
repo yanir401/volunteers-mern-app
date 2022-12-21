@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 import { AiOutlineGithub, AiFillLinkedin } from "react-icons/ai";
 const Footer = () => {
   const { user } = useSelector((state) => state.user);
-  console.log(user);
   return (
     <footer className="footer-container">
       <div className="grid-col-3 center">

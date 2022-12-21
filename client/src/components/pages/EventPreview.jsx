@@ -17,7 +17,6 @@ const EventPreview = () => {
   const { openModal } = useContext(ModalContext);
   const { user } = useSelector((state) => state.user);
   const { events } = useSelector((state) => state.events);
-  const { chat: chatState } = useSelector((state) => state);
   const [error, loading, sendRequest, clearError] = useFetch();
   const [submittedMsg, setSubmittedMsg] = useState("");
   const [event, setEvent] = useState();
@@ -29,7 +28,6 @@ const EventPreview = () => {
 
   useEffect(() => {
     const eventToRender = events?.find((event) => event._id === eventId);
-
     setEvent(eventToRender);
 
     if (!eventToRender) callEvent();
@@ -45,7 +43,6 @@ const EventPreview = () => {
       if (response.status !== 200) throw Error;
       setEvent(response.data);
 
-      console.log(user);
       if (user && isUserAlreadyVolunteering(response.data))
         setButtonMode("Leave volunteering");
     } catch (error) {
@@ -60,18 +57,16 @@ const EventPreview = () => {
   const handleOnClick = async () => {
     let url = "/events/join-volunteering";
     if (buttonMode === "Leave volunteering") url = "/events/leave-volunteering";
-
     if (!user) openModal(<AuthenticationWrapper />);
     else {
       try {
         const response = await sendRequest(
           url,
           "PATCH",
+          { user, eventId: event._id },
           {
-            user,
-            event,
-          },
-          { Authorization: `Bearer ${user.tokens[0].token}` }
+            Authorization: `Bearer ${user.tokens[0].token}`,
+          }
         );
         if (!error && response) {
           setEvent(response.data);
@@ -108,27 +103,24 @@ const EventPreview = () => {
   return (
     <div className="flex flex-col gap-2 events-container marginB-3">
       {event ? (
-        (console.log(event),
-        (
-          <>
-            <EventItemPreview
+        <>
+          <EventItemPreview
+            event={event}
+            handleOnClick={handleOnClick}
+            buttonText={buttonMode}
+            loading={loading}
+            submittedMsg={submittedMsg}
+          ></EventItemPreview>
+          {chat}
+          {openChat && (
+            <Chat
               event={event}
-              handleOnClick={handleOnClick}
-              buttonText={buttonMode}
-              loading={loading}
-              submittedMsg={submittedMsg}
-            ></EventItemPreview>
-            {chat}
-            {openChat && (
-              <Chat
-                event={event}
-                visibility={openChat}
-                setVisibility={setOpenChat}
-              />
-            )}
-            {error && <p className="error-msg center font-16">{error}</p>}
-          </>
-        ))
+              visibility={openChat}
+              setVisibility={setOpenChat}
+            />
+          )}
+          {error && <p className="error-msg center font-16">{error}</p>}
+        </>
       ) : (
         <Spinner />
       )}

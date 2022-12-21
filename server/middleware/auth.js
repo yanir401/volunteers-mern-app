@@ -4,7 +4,6 @@ import { User } from "../model/user/user.model.js";
 export const auth = async (req, res, next) => {
   try {
     let token = req.header("Authorization");
-    console.log(token);
     if (!token) throw new Error("Please authenticate");
 
     token = token.replace("Bearer ", "");

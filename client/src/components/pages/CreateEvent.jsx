@@ -6,7 +6,7 @@ import { isCreateEventFormValid } from "../../utils/createEventValidation/eventF
 import Button from "../formElements/buttons/Button";
 import Form from "../formElements/form/Form";
 import Spinner from "../UIElements/spinner/Spinner";
-import { addEvent } from "../../store/actions/eventsAction";
+import { addEvent, updateUserEvents } from "../../store/actions/eventsAction";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 
 const defaultFormFields = {
@@ -19,7 +19,7 @@ const defaultFormFields = {
 };
 
 const CreateEvent = () => {
-  const [setValue] = useLocalStorage("user-events", "");
+  const [value, setValue] = useLocalStorage("user-events", []);
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const [formFields, setFormFields] = useState(defaultFormFields);
@@ -32,8 +32,6 @@ const CreateEvent = () => {
   const { title, description, address, file, date, time } = formFields;
 
   const handleOnChange = (e) => {
-    console.log(e);
-    console.log(e.target);
     if (e?.target?.files?.length > 0) {
       setFormFields({ ...formFields, file: e.target.files[0] });
       return;
@@ -51,10 +49,6 @@ const CreateEvent = () => {
     setFormFields({ ...formFields, [name]: value });
   };
 
-  const handleAsGuest = (e) => {
-    e.preventDefault();
-  };
-
   const handleOnSubmit = async (e) => {
     e.preventDefault();
 
@@ -65,7 +59,6 @@ const CreateEvent = () => {
     if (Object.keys(isValidForm).length === 0) {
       const url = "/events";
       const formData = new FormData();
-      console.log("ss", { formFields });
       formData.append("eventImage", formFields.file);
       // formData.append("test", "test it");
       formData.append("formFields", JSON.stringify(formFields));
@@ -90,10 +83,18 @@ const CreateEvent = () => {
           }
         );
         if (response.status === 200) {
+          console.log(response.data);
           setSubmitted(true);
           setEvent(response.data);
           dispatch(addEvent(response.data));
-          setValue(response.data);
+          dispatch(updateUserEvents(response.data));
+
+          // value?.length > 0
+          //   ? setValue([...value, response.data])
+          //   : setValue([value]);
+          // console.log([...value, response.data]);
+          console.log(value);
+          // setValue([...value, response.data]);
         }
       } catch (err) {
         console.log(err);
@@ -102,15 +103,11 @@ const CreateEvent = () => {
     }
   };
 
-  const handleOnClick = () => {};
-
   const submittedContent = event && (
     <div className="flex flex-col center gap-4">
       <p className="success-msg">The event is created</p>
       <Link to={`/event/${event._id}`} state={{ event }}>
-        <Button type="primary" onClick={handleOnClick}>
-          View event
-        </Button>
+        <Button type="primary">View event</Button>
       </Link>
     </div>
   );

@@ -13,19 +13,16 @@ const Input = (props) => {
     ...anotherProps
   } = props;
   return (
-    console.log(value),
-    (
-      <input
-        value={type === "file" ? value.filename : value}
-        type={type}
-        placeholder={placeholder}
-        name={name}
-        className={`input ${className}`}
-        style={style}
-        onChange={onChange}
-        {...anotherProps}
-      />
-    )
+    <input
+      value={type === "file" ? value.filename : value}
+      type={type}
+      placeholder={placeholder}
+      name={name}
+      className={`input ${className}`}
+      style={style}
+      onChange={onChange}
+      {...anotherProps}
+    />
   );
 };
 

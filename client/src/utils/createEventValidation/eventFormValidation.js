@@ -18,5 +18,8 @@ export const isCreateEventFormValid = (fields) => {
 
   if (!fields.time) errors.time = "Time required";
 
+  if (fields.file && fields.file.size > 2000000)
+    errors.file = "Maximum file size 2mb";
+
   return errors;
 };

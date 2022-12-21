@@ -39,8 +39,6 @@ const SignUp = ({ changeForm, text }) => {
         data: { results },
       } = await axios.get("https://randomuser.me/api");
 
-      console.log(results);
-      console.log(results.email);
       setFormFields({
         name: results[0].name.first,
         email: results[0].email,
@@ -52,7 +50,6 @@ const SignUp = ({ changeForm, text }) => {
         email: results[0].email,
         password: "Volunteer051*",
       });
-      console.log(results);
     } catch (error) {}
   };
 

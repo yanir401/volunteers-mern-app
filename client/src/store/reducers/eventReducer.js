@@ -19,25 +19,29 @@ export const eventReducer = (state = {}, action) => {
           return event;
         }),
       };
-    // return {
-    //   ...state,
-    //   events: [
-    //     ...state.events.filter((event) => event._id !== payload._id),
-    //     { ...payload },
-    //   ],
-    // };
 
     case EVENTS_ACTION_TYPE.GET_USER_EVENTS:
       return { ...state, subscriptionEvents: payload };
 
+    case EVENTS_ACTION_TYPE.SET_USER_EVENTS:
+      return { ...state, subscriptionEvents: payload };
+
     case EVENTS_ACTION_TYPE.UPDATE_USER_EVENTS:
-      console.log(state.subscriptionEvents, payload);
+      console.log(state.subscriptionEvents);
+      // return {
+      //   ...state,
+      //   subscriptionEvents: payload,
+      // };
       return {
         ...state,
-        subscriptionEvents: !state.subscriptionEvents
-          ? [payload]
-          : [...state.subscriptionEvents, payload],
+        subscriptionEvents: [...state.subscriptionEvents, { ...payload }],
       };
+    // return {
+    //   ...state,
+    //   subscriptionEvents: !state.subscriptionEvents
+    //     ? [payload]
+    //     :
+    // };
 
     case EVENTS_ACTION_TYPE.EVENT_QUERY:
       return { ...state, query: payload };
