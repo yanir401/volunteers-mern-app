@@ -11,6 +11,7 @@ An application to find and create Volunteering events
 - Node.js
 - Express
 - MongoDB
+- AWS S3 Bucket (for image storing)
 - Socket.io
 
 ## Demo:
