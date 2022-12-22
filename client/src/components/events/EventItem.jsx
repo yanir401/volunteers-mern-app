@@ -4,17 +4,22 @@ import { Buffer } from "buffer";
 import Card from "../UIElements/card/Card";
 import "./eventItem.css";
 const EventItem = ({ event }) => {
-  const img = new Buffer.from(event.file.data).toString("base64");
+  console.log(event);
+  // const img = new Buffer.from(event.file.data).toString("base64");
   return (
     <Link to={`/event/${event._id}`} state={{ event }}>
       <Card>
         <div className="image-container">
           <img
             src={
-              img
-                ? `data:image/png;base64,${img}`
-                : "https://img.freepik.com/free-vector/people-volunteering-donating-money-items_53876-64646.jpg?w=2000"
+              event.file ||
+              "https://volunteering-images.s3.eu-central-1.amazonaws.com/pexels-rodnae-productions-6647060.jpg"
             }
+            // src={
+            //   img
+            //     ? `data:image/png;base64,${img}`
+            //     : "https://img.freepik.com/free-vector/people-volunteering-donating-money-items_53876-64646.jpg?w=2000"
+            // }
             alt=""
             className="image-event"
           />

@@ -46,7 +46,7 @@ const eventSchema = mongoose.Schema(
     author: { type: mongoose.Schema.Types.ObjectId, ref: "Users" },
 
     file: {
-      type: Buffer,
+      type: String,
     },
   },
   { timestamps: true }

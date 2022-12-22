@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import sharp from "sharp";
+import { uploadFile } from "../aws/s3.js";
 import { Event } from "../model/event/event.modal.js";
 
 export const getAllEvents = async (req, res) => {
@@ -42,14 +43,18 @@ export const createEvent = async (req, res) => {
   const { formFields, author, coordinates } = req.body;
   const fields = JSON.parse(formFields);
   const coords = JSON.parse(coordinates);
-  if (req.file) {
-    const buffer = await sharp(req.file.buffer)
-      .resize(750, 450, { fit: "cover" })
-      .withMetadata()
-      .png()
-      .toBuffer();
-    fields.file = buffer;
-  }
+  // if (req.file) {
+  //   const buffer = await sharp(req.file.buffer)
+  //     .resize(750, 450, { fit: "cover" })
+  //     .withMetadata()
+  //     .png()
+  //     .toBuffer();
+  // }
+  // console.log(req.file);
+  const result = await uploadFile(req.file);
+  console.log(result.Location);
+  fields.file = result.Location;
+  console.log(fields);
 
   try {
     const event = new Event({

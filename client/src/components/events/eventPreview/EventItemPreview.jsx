@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import Button from "../../formElements/buttons/Button";
 import Spinner from "../../UIElements/spinner/Spinner";
 import "./eventItemPreview.css";
-import { Buffer } from "buffer";
 
 const EventItemPreview = ({
   event,
@@ -21,7 +20,6 @@ const EventItemPreview = ({
         </Link>
       </div>
     );
-  const img = new Buffer.from(event.file.data).toString("base64");
   return (
     <>
       <h2 className="text-center marginTb-2">{event.title}</h2>
@@ -29,15 +27,10 @@ const EventItemPreview = ({
         <div style={{ width: "100%", height: "100%" }}>
           <img
             src={
-              img
-                ? `data:image/png;base64,${img}`
-                : "https://img.freepik.com/free-vector/people-volunteering-donating-money-items_53876-64646.jpg?w=2000"
+              event.file ||
+              "https://volunteering-images.s3.eu-central-1.amazonaws.com/pexels-rodnae-productions-6647060.jpg"
             }
-            alt=""
-            // width={"100%"}
-            // height="100%"
             className="event-image"
-            // style={{ borderRadius: "5px 0 0 5px " }}
           />
         </div>
         <div className="font-18 flex flex-col gap-2 center event-right-content">
