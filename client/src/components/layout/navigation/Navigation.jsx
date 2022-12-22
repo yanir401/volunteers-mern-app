@@ -62,7 +62,11 @@ const Navigation = () => {
         onClick={handleExpandedNavbar}
       />
 
-      <h2>Logo</h2>
+      <Link to="/">
+        {" "}
+        <h2>Logo</h2>
+      </Link>
+
       <nav>
         <ul
           className={`links + ${

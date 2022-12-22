@@ -31,6 +31,7 @@ const EventItemPreview = ({
               "https://volunteering-images.s3.eu-central-1.amazonaws.com/pexels-rodnae-productions-6647060.jpg"
             }
             className="event-image"
+            alt="event-image"
           />
         </div>
         <div className="font-18 flex flex-col gap-2 center event-right-content">

@@ -24,7 +24,11 @@ const SubscriptionEvents = () => {
   useEffect(() => {
     // if (value.length === 0 || subscriptionStateEvents?.length !== value.length)
     // if (value.length === 0 || subscriptionStateEvents?.length !== value.length)
-    if (subscriptionStateEvents.length === 0) userEvents();
+    if (
+      (!subscriptionStateEvents || subscriptionStateEvents.length === 0) &&
+      user
+    )
+      userEvents();
     else setSubscriptionEvents(subscriptionStateEvents);
   }, []);
 

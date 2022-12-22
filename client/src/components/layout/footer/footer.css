@@ -29,3 +29,9 @@
   color: var(--primary-color);
   /* color: var(--secondary-color); */
 }
+
+@media (max-width: 450px) {
+  .footer-container {
+    font-size: 1.8rem;
+  }
+}
