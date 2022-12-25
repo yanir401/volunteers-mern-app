@@ -60,19 +60,6 @@ const SignUp = ({ changeForm, text }) => {
     setErrors(isErrors);
 
     if (Object.keys(isErrors).length === 0) signUp();
-    // try {
-    //   const response = await sendRequest(url, "POST", {
-    //     name,
-    //     email,
-    //     password,
-    //   });
-    //   if (!response) throw new Error(error);
-    //   dispatch(setUser(response.data));
-    //   setSubmitted(true);
-    //   closeModalTimeOut(1500);
-    // } catch (err) {
-    //   console.log(error);
-    // }
   };
 
   const signUp = async (form) => {

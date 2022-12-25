@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ModalContext } from "../../../context/modalContext";
 import { useFetch } from "../../../hooks/useFetch";
+import { useLocalStorage } from "../../../hooks/useLocalStorage";
 import { setUser } from "../../../store/actions/userActions";
 import { isFormValid } from "../../../utils/formValidation/formValidation";
 import Button from "../../formElements/buttons/Button";
@@ -16,6 +17,8 @@ const defaultFormFields = {
 const SignIn = ({ changeForm, text }) => {
   const dispatch = useDispatch((state) => state.user);
   const { user } = useSelector((state) => state.user);
+  const [storedUser, setStoredUser] = useLocalStorage("user", null);
+
   const { closeModalTimeOut } = useContext(ModalContext);
   const [formFields, setFormFields] = useState(defaultFormFields);
   const [error, loading, sendRequest, clearError] = useFetch();
@@ -48,6 +51,7 @@ const SignIn = ({ changeForm, text }) => {
           throw new Error(error);
         }
         dispatch(setUser(response.data.user));
+        setStoredUser(response.data.user);
         setSubmitted(true);
         closeModalTimeOut(1500);
       } catch (err) {

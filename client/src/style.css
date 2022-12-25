@@ -288,8 +288,6 @@ a {
 }
 
 @media (max-width: 1700px) {
-  .grid-events-container {
-  }
   .events-container {
     max-width: 90%;
   }

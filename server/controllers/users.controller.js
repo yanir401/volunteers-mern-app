@@ -44,24 +44,9 @@ export const login = async (req, res, next) => {
   }
 };
 
-export const getUserProfile = (req, res) => {
-  // const user = req.user.getPublicProfile();
-  res.send(req.user);
-
-  // try {
-  //   const userProfile = await User.findById(uid);
-  //   if (!userProfile) throw new Error("Something went wrong");
-
-  //   res.send(userProfile);
-  // } catch (error) {
-  //   res.send(error.message);
-  // }
-};
-
 //update profile , PATCH , /users/profile
 export const updateProfile = async (req, res) => {
   const updates = Object.keys(req.body);
-  //maybe check if valid properties to update?
 
   if (!req.user) {
     res.status(400);
