@@ -1,6 +1,4 @@
-// import S3Client from "aws-sdk";
 import aws from "aws-sdk";
-import fs from "fs";
 import dotenv from "dotenv";
 dotenv.config({ path: "../.env" });
 
@@ -16,17 +14,14 @@ const s3 = new aws.S3({
   secretAccessKey,
 });
 
-export const uploadFile = async (file) => {
-  console.log("s3", file.path);
-  console.log("s3 tty", typeof file.path);
-
-  const fileStream = fs.createReadStream(file.path);
-
+export const uploadFile = async (file, bufferedFile) => {
+  console.log("s3", { file });
   const uploadParams = {
     Bucket: bucketName,
-    Body: fileStream,
+    Body: bufferedFile,
     Key: file.originalname,
   };
+
   return s3
     .upload(uploadParams, function (err, data) {
       if (err) {
@@ -38,9 +33,3 @@ export const uploadFile = async (file) => {
     })
     .promise();
 };
-
-// Create S3 service object
-
-// call S3 to retrieve upload file to specified bucket
-
-// Configure the file stream and obtain the upload parameters

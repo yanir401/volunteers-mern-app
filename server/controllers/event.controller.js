@@ -21,18 +21,13 @@ export const getUpComingEvents = async (req, res) => {
 };
 
 export const getUserEvents = async (req, res) => {
-  const uid = req.params.uid;
-
   try {
     const userEvents = await Event.find({
       volunteers: mongoose.Types.ObjectId(req.user._id),
     })
       .populate("volunteers")
       .exec();
-    // .exec();
-    // .populate("Users")
-    // .exec();
-    // .execPopulate();
+
     res.send(userEvents);
   } catch (error) {
     res.send(error);
@@ -43,15 +38,15 @@ export const createEvent = async (req, res) => {
   const { formFields, author, coordinates } = req.body;
   const fields = JSON.parse(formFields);
   const coords = JSON.parse(coordinates);
-  // if (req.file) {
-  //   const buffer = await sharp(req.file.buffer)
-  //     .resize(750, 450, { fit: "cover" })
-  //     .withMetadata()
-  //     .png()
-  //     .toBuffer();
-  // }
-  // console.log(req.file);
-  const result = await uploadFile(req.file);
+  let buffer;
+  if (req.file) {
+    buffer = await sharp(req.file.buffer)
+      .resize({ width: 750, height: 450, fit: "cover" })
+      .withMetadata()
+      .png()
+      .toBuffer();
+  }
+  const result = await uploadFile(req.file, buffer);
   console.log(result.Location);
   fields.file = result.Location;
   console.log(fields);
@@ -113,7 +108,6 @@ export const deleteEvent = async (req, res, next) => {
 export const joinVolunteering = async (req, res, next) => {
   const { user, eventId } = req.body;
   if (!mongoose.Types.ObjectId.isValid(eventId)) {
-    //create static function
     const error = new Error("Event not found");
     return next(error);
   }
@@ -154,7 +148,6 @@ export const leaveVolunteering = async (req, res, next) => {
   const { user, event } = req.body;
 
   if (!mongoose.Types.ObjectId.isValid(event._id)) {
-    //create static function
     const error = new Error("Event not found");
     return next(error);
   }
